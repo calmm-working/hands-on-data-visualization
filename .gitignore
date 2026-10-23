@@ -1,0 +1,18 @@
+# TeX / LaTeX auxiliary build artifacts
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.xdv
+
+# Temporary previews, drafts and tests
+preview*/
+sample_page_*.png
+slide_1_preview.png
+test_*
+custom_theme/
