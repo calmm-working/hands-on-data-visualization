@@ -1,11 +1,9 @@
 \documentclass[aspectratio=169, 10pt]{beamer}
 
 % =========================================================================
-% MINIMALIST BEIGE & NAVY THEME (MARP / PROJECT PROPOSAL STYLE)
-% Custom crafted to match the user's visual identity:
-% Background: #F3EBE1 (Warm Cream Beige)
-% Typography & Elements: #262E5B (Deep Indigo Navy)
-% Signature: Right-edge vertical Navy bar with rounded inner corners
+% MINIMALIST BEIGE & NAVY THEME
+% Background: #F3EBE1 (Warm Cream Beige) | Typography: #262E5B (Deep Indigo Navy)
+% Biên dịch bằng XeLaTeX hoặc LuaLaTeX (KHÔNG dùng pdfLaTeX vì có fontspec)
 % =========================================================================
 
 \usetheme{default}
@@ -14,8 +12,11 @@
 \setbeamertemplate{footline}{}
 
 \usepackage{fontspec}
-\setsansfont{Segoe UI}
-\setmainfont{Segoe UI}
+% [SỬA LỖI 1] Segoe UI chỉ có trên Windows -> máy khác/Overleaf báo "font not found".
+% Tự động dùng font dự phòng nếu không có Segoe UI.
+\IfFontExistsTF{Segoe UI}{\setsansfont{Segoe UI}\setmainfont{Segoe UI}}{%
+  \IfFontExistsTF{Carlito}{\setsansfont{Carlito}\setmainfont{Carlito}}{%
+    \setsansfont{DejaVu Sans Condensed}\setmainfont{DejaVu Sans Condensed}}}
 
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -25,38 +26,37 @@
 \usetikzlibrary{calc,positioning,shapes.geometric,arrows.meta}
 
 % --- COLOR DEFINITIONS ---
-\definecolor{bgBeige}{RGB}{243, 235, 225}    % #F3EBE1 - Warm Beige Canvas
-\definecolor{navyMain}{RGB}{38, 46, 91}      % #262E5B - Deep Indigo Navy
-\definecolor{navyMuted}{RGB}{85, 95, 140}    % Muted Navy for subtext/metadata
-\definecolor{navyLight}{RGB}{228, 225, 235}  % Soft tinted fill
-\definecolor{accentDark}{RGB}{185, 28, 28}   % Alert crimson
+\definecolor{bgBeige}{RGB}{243, 235, 225}
+\definecolor{navyMain}{RGB}{38, 46, 91}
+\definecolor{navyMuted}{RGB}{85, 95, 140}
+\definecolor{navyLight}{RGB}{228, 225, 235}
+\definecolor{accentDark}{RGB}{185, 28, 28}
+\definecolor{boxBg}{RGB}{230, 221, 208}
+\definecolor{accentRed}{RGB}{185, 28, 28}
 
 \setbeamercolor{background canvas}{bg=bgBeige}
 \setbeamercolor{normal text}{fg=navyMain}
 \setbeamercolor{structure}{fg=navyMain}
 
-% Set margins so text never touches the right navy bar
 \setbeamersize{text margin left=1.0cm, text margin right=1.8cm}
 
-% --- SIGNATURE BACKGROUND WITH RIGHT NAVY ACCENT BAR ---
+% --- BACKGROUND WITH RIGHT NAVY ACCENT BAR ---
 \setbeamertemplate{background}{
     \begin{tikzpicture}[remember picture,overlay]
-        % Base Beige Canvas
         \fill[bgBeige] (current page.south west) rectangle (current page.north east);
-        % Right vertical navy bar with 2 rounded inside corners (top-left & bottom-left)
-        \fill[navyMain, rounded corners=16pt] 
+        \fill[navyMain, rounded corners=16pt]
             ($(current page.north east)+(-1.05cm, 0)$) rectangle ($(current page.south east)+(1.0cm, 0)$);
     \end{tikzpicture}
 }
 
-% --- CUSTOM SLIDE HEADER ---
+% --- SLIDE HEADER ---
 \newcommand{\slideheader}[2]{%
     \vspace*{-0.15cm}%
     {\fontsize{7.5pt}{9pt}\selectfont \textbf{\color{navyMuted}\MakeUppercase{#1}}}\\[0.03cm]
     {\fontsize{13.5pt}{16pt}\selectfont \textbf{\color{navyMain}\MakeUppercase{#2}}}\\[0.08cm]
 }
 
-% --- CUSTOM FOOTER NUMBER ---
+% --- FOOTER + SỐ TRANG ---
 \newcommand{\slidenumber}[1]{%
     \begin{tikzpicture}[remember picture,overlay]
         \node[anchor=south east] at ($(current page.south east)+(-1.4cm, 0.35cm)$) {
@@ -68,53 +68,51 @@
     \end{tikzpicture}%
 }
 
-% --- PILL BOX MACRO ---
-
-\definecolor{boxBg}{RGB}{230, 221, 208}      % Tinted card bg #E6DDD0
-\definecolor{accentRed}{RGB}{185, 28, 28}    % Alert crimson #B91C1C
-
+% --- CALLOUT BOX ---
 \newcommand{\calloutbox}[3][\textwidth]{%
     \begin{tikzpicture}
-        \node[
-            fill=boxBg,
-            draw=navyMain,
-            line width=0.8pt,
-            rounded corners=4pt,
-            inner sep=5pt,
-            text width=#1-14pt,
-            align=left
-        ] {
+        \node[fill=boxBg, draw=navyMain, line width=0.8pt, rounded corners=4pt,
+              inner sep=5pt, text width=#1-14pt, align=left] {
             {\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{navyMain}#2}}\\[0.03cm]
             {\fontsize{7.5pt}{9.5pt}\selectfont \color{navyMain}#3}
         };
     \end{tikzpicture}%
 }
 
+% --- PILL BOX ---
 \newcommand{\pillbox}[2][]{%
     \begin{tikzpicture}
-        \node[
-            draw=navyMain,
-            rounded corners=10pt,
-            line width=1.1pt,
-            inner xsep=12pt,
-            inner ysep=4pt,
-            text=navyMain,
-            #1
-        ] {\textbf{#2}};
+        \node[draw=navyMain, rounded corners=10pt, line width=1.1pt,
+              inner xsep=12pt, inner ysep=4pt, text=navyMain, #1] {\textbf{#2}};
     \end{tikzpicture}%
 }
 
+% [SỬA LỖI 2] Thiếu file ảnh trong images/ -> lỗi "File not found" và dừng biên dịch.
+% Nếu ảnh có thật: chèn bình thường. Nếu chưa có: vẽ khung giữ chỗ cùng kích thước.
+\pgfkeys{/ph/.is family, /ph,
+  width/.store in=\phw, height/.store in=\phh, .unknown/.code={}}
+\let\origincludegraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{%
+  \IfFileExists{#2}{\origincludegraphics[#1]{#2}}{%
+    \begingroup
+    \pgfkeys{/ph, width=\linewidth, height=0.4\textheight, #1}%
+    \begin{tikzpicture}
+      \node[draw=navyMuted, dashed, line width=0.7pt, fill=white!55!bgBeige, rounded corners=3pt,
+            minimum width=\phw, minimum height={0.8*(\phh)}, text width={\phw-8pt}, align=center,
+            font=\fontsize{6pt}{7.5pt}\selectfont, text=navyMuted]
+        {\textbf{[Chèn ảnh]}\\\detokenize{#2}};
+    \end{tikzpicture}%
+    \endgroup}}
+
 \begin{document}
 
-
+% ==================== SLIDE 1: TRANG BÌA ====================
 \begin{frame}[plain, c]
-
-
 \begin{tikzpicture}[remember picture,overlay]
     \node[anchor=north west] at ($(current page.north west)+(1.0cm, -0.8cm)$) {
         \textcolor{navyMuted}{\fontsize{8.5pt}{10.5pt}\selectfont Tháng 10, 2026}
     };
-    \node[anchor=west, text width=0.76\textwidth] at ($(current page.west)+(1.0cm, 0.3cm)$) {
+    \node[anchor=west, text width=0.84\textwidth] at ($(current page.west)+(1.0cm, 0.3cm)$) {
         {\fontsize{13pt}{15pt}\selectfont \textbf{\color{navyMuted} PHẦN 1 • BÁO CÁO CHUYÊN ĐỀ}}\\[0.25cm]
         {\fontsize{29pt}{33pt}\selectfont \textbf{\color{navyMain} NỀN TẢNG DỮ LIỆU}}\\[0.12cm]
         {\fontsize{20pt}{24pt}\selectfont \textbf{\color{navyMain} THU THẬP, LÀM SẠCH \& CHUẨN HÓA}}\\[0.35cm]
@@ -124,88 +122,13 @@
 \end{tikzpicture}
 \slidenumber{01}
 \end{frame}
-
-% ==================== SLIDE 2: MỤC LỤC PHẦN 1 ====================
-
-
-\begin{frame}[plain, t]
-
-
-\slideheader{Phần 1 • Tổng Quan}{Nội Dung Trình Bày (Our Contents)}
-\begin{columns}[T]
-\begin{column}{0.31\textwidth}
-\begin{tikzpicture}
-    \node[draw=navyMain, fill=boxBg, rounded corners=6pt, line width=0.9pt, inner sep=7pt, text width=\textwidth-16pt, align=left] {
-        {\fontsize{9.5pt}{11.5pt}\selectfont \textbf{\color{navyMain} 01. CHƯƠNG 3}}\\[0.05cm]
-        {\fontsize{8pt}{9.5pt}\selectfont \textbf{\color{navyMuted} Tìm Kiếm \& Phản Biện}}\\[0.15cm]
-        {\fontsize{7.2pt}{9pt}\selectfont \color{navyMain}
-        • Triết lý: Dữ liệu không trung lập\\
-        • 5 câu hỏi định hướng nghiên cứu\\
-        • Ranh giới Public vs. Private\\
-        • Kỹ thuật Masking \& Aggregating\\
-        • Quản trị nguồn \& Bẫy Null Island}
-    };
-\end{tikzpicture}
-\end{column}
-\begin{column}{0.31\textwidth}
-\begin{tikzpicture}
-    \node[draw=navyMain, fill=boxBg, rounded corners=6pt, line width=0.9pt, inner sep=7pt, text width=\textwidth-16pt, align=left] {
-        {\fontsize{9.5pt}{11.5pt}\selectfont \textbf{\color{navyMain} 02. CHƯƠNG 4}}\\[0.05cm]
-        {\fontsize{8pt}{9.5pt}\selectfont \textbf{\color{navyMuted} Làm Sạch Dữ Liệu Bẩn}}\\[0.15cm]
-        {\fontsize{7.2pt}{9pt}\selectfont \color{navyMain}
-        • Thực trạng phũ phàng dữ liệu thô\\
-        • Khoảng trắng \& Bẫy `` town''\\
-        • Tái cấu trúc bảng (Transpose)\\
-        • Tách cột (Split) \& Gộp cột\\
-        • Gom cụm (Clustering) tên gọi}
-    };
-\end{tikzpicture}
-\end{column}
-\begin{column}{0.31\textwidth}
-\begin{tikzpicture}
-    \node[draw=navyMain, fill=boxBg, rounded corners=6pt, line width=0.9pt, inner sep=7pt, text width=\textwidth-16pt, align=left] {
-        {\fontsize{9.5pt}{11.5pt}\selectfont \textbf{\color{navyMain} 03. CHƯƠNG 5}}\\[0.05cm]
-        {\fontsize{8pt}{9.5pt}\selectfont \textbf{\color{navyMuted} Tạo Phép So Sánh}}\\[0.15cm]
-        {\fontsize{7.2pt}{9pt}\selectfont \color{navyMain}
-        • Ngôn từ: Mean vs. Median\\
-        • \% Thay đổi vs. Điểm \%\\
-        • Tương quan $\neq$ Quan hệ nhân quả\\
-        • Chuẩn hóa dữ liệu (VMT rate)\\
-        • Cảnh giác 3 bẫy thiên vị mẫu}
-    };
-\end{tikzpicture}
-\end{column}
-\end{columns}
-\slidenumber{02}
-\end{frame}
-
-% ==================== SLIDE 3: CHUYỂN TIẾP CHƯƠNG 3 ====================
-
-
-\begin{frame}[plain, c]
-
-
-\begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=west, text width=0.76\textwidth] at ($(current page.west)+(1.0cm, 0.2cm)$) {
-        {\fontsize{13pt}{15pt}\selectfont \textbf{\color{navyMuted} PHẦN 1 • MỤC 01}}\\[0.25cm]
-        {\fontsize{28pt}{32pt}\selectfont \textbf{\color{navyMain} TÌM KIẾM \& PHẢN BIỆN}}\\[0.12cm]
-        {\fontsize{22pt}{26pt}\selectfont \textbf{\color{navyMain} DỮ LIỆU}}\\[0.35cm]
-        \pillbox{\fontsize{10pt}{12pt}\selectfont Chương 3: Find and Question Your Data}\\[0.45cm]
-        {\normalsize \color{navyMuted} \textit{``Dữ liệu không tự nhiên sinh ra từ hư không,\\và những con số không bao giờ hoàn toàn trung lập.''}}
-    };
-\end{tikzpicture}
-\slidenumber{03}
-\end{frame}
-
 % ==================== SLIDE 4: TRIẾT LÝ DỮ LIỆU KHÔNG TRUNG LẬP ====================
-
-
 \begin{frame}[plain, t]
-\slideheader{Chương 3 • Triết Lý Cốt Lõi}{Dữ Liệu Không Bao Giờ Trung Lập}
+\slideheader{Chương 3 • Triết Lý Cốt Lõi và Tìm Kiếm Dữ Liệu}{Dữ Liệu Không Bao Giờ Trung Lập}
 \begin{columns}[T]
 \begin{column}{0.54\textwidth}
 {\fontsize{8pt}{10.2pt}\selectfont
-\textbf{1. Sự ngộ nhận về ``Tính khách quan'' (Data Objectivity)}
+\textbf{1. Sự ngộ nhận về ``Tính khách quan''}
 \begin{itemize}\setlength{\itemsep}{1pt}
     \item Nhiều người lầm tưởng \textit{``con số không biết nói dối''}.
     \item Thực tế: Dữ liệu luôn do con người thu thập vì mục đích cụ thể.
@@ -213,235 +136,75 @@
 \end{itemize}
 
 \vspace{0.06cm}
-\textbf{2. Góc nhìn từ \textit{Data Feminism} (D'Ignazio \& Klein, 2020)}
+\textbf{2. 5 câu hỏi định hướng cốt lõi}
 \begin{itemize}\setlength{\itemsep}{1pt}
-    \item Khi tiếp cận bộ dữ liệu, hãy luôn tự hỏi:
-    \begin{enumerate}\setlength{\itemsep}{0.5pt}
-        \item \textit{Câu chuyện của ai đang được kể lại?} (Whose stories?)
-        \item \textit{Góc nhìn của ai đang bị bỏ qua hoặc im lặng?}
-    \end{enumerate}
+    \item Mình muốn trả lời câu hỏi gì?
+     \item Ai có thể đã thu thập?
+ \item Dữ liệu chi tiết đến đâu?
+\item Ai từng dùng dữ liệu này?
+\item  Nếu chưa ai thu thập?
 \end{itemize}
 }
 \end{column}
 \begin{column}{0.42\textwidth}
 \centering
 \begin{tikzpicture}[scale=0.76]
-    % Sky & Water
     \fill[navyLight!50] (-3, 1.8) rectangle (3, 0);
     \fill[navyMain!15] (-3, 0) rectangle (3, -2.4);
-    \draw[thick, navyMain] (-3, 0) -- (3, 0) node[right, font=\tiny\bfseries] {MẶT NƯỚC};
-    % Iceberg
-    \draw[draw=navyMain, fill=white, line width=1.1pt] 
-        (-0.8, 0) -- (-0.3, 1.4) -- (0.4, 1.5) -- (0.9, 0) -- 
-        (1.8, -1.7) -- (-0.2, -2.3) -- (-1.7, -1.4) -- cycle;
-    % Labels
-    \node[font=\scriptsize\bfseries, color=navyMain, align=center] at (0, 0.7) {CON SỐ \& BẢNG BIỂU\\{\tiny (Phần nổi nhìn thấy)}};
-    \node[font=\tiny\bfseries, color=navyMain, align=center] at (0, -0.6) {Mục đích thu thập};
-    \node[font=\tiny\bfseries, color=navyMain, align=center] at (0, -1.1) {Cấu trúc quyền lực \& Bối cảnh};
-    \node[font=\tiny\bfseries, color=accentRed, align=center] at (0, -1.7) {Những góc nhìn bị bỏ sót\\(Unspoken Perspectives)};
+    \draw[thick, navyMain] (-3, 0) -- (3, 0);
+    \node[anchor=south east, font=\tiny\bfseries, color=navyMain] at (3, 0) {MẶT NƯỚC};
+    \draw[draw=navyMain, fill=white, line width=1.1pt]
+        (-1.0, 0) -- (-0.6, 1.4) -- (0.7, 1.5) -- (1.1, 0) --
+        (1.9, -1.7) -- (-0.2, -2.3) -- (-1.9, -1.4) -- cycle;
+    \node[font=\scriptsize\bfseries, color=navyMain, align=center] at (0.05, 0.7) {CON SỐ \& BẢNG BIỂU\\{\tiny (Phần nổi nhìn thấy)}};
+    \node[font=\tiny\bfseries, color=navyMain, align=center] at (0, -0.5) {Mục đích thu thập};
+    \node[font=\tiny\bfseries, color=navyMain, align=center] at (0, -1.0) {Cấu trúc quyền lực \& Bối cảnh};
+    \node[font=\tiny\bfseries, color=accentRed, align=center] at (0, -1.6) {Những góc nhìn bị bỏ sót};
 \end{tikzpicture}\\[0.05cm]
 {\fontsize{6.5pt}{7.5pt}\selectfont \textcolor{navyMuted}{\textit{Sơ đồ Tảng băng trôi: Dữ liệu luôn có phần chìm chi phối.}}}
 \end{column}
 \end{columns}
 \slidenumber{04}
 \end{frame}
-
-
-
+% ==================== SLIDE 8: PUBLIC VS PRIVATE ====================
 \begin{frame}[plain, t]
-
-
-\slideheader{Chương 3 • Tìm Kiếm Dữ Liệu}{5 Câu Hỏi Định Hướng: Câu Hỏi Cốt Lõi}
-\begin{columns}[T]
-\begin{column}{0.51\textwidth}
-{\fontsize{8.5pt}{11pt}\selectfont
-\textbf{1. Câu hỏi chính xác bạn muốn trả lời là gì?}
-\begin{itemize}\setlength{\itemsep}{2pt}
-    \item Đừng gõ từ khóa ngẫu nhiên lên Google.
-    \item \textbf{Quy tắc:} Viết thành một câu hỏi rõ ràng có dấu \textbf{?} ở cuối để định hình tư duy, tránh não bộ nhảy cóc sang kết luận có sẵn.
-\end{itemize}
-
-\vspace{0.15cm}
-\textbf{2. Sẵn sàng điều chỉnh câu hỏi khi nghiên cứu}
-\begin{itemize}\setlength{\itemsep}{2pt}
-    \item Từ câu hỏi ngây thơ: \textit{``Điểm thi trường công Connecticut thập niên 1960 là bao nhiêu?''} ($\rightarrow$ thời đó chưa có thi chuẩn hóa).
-    \item Đổi thành câu hỏi sâu sắc: \textit{``Khi nào người mua nhà bắt đầu biết điểm thi và nó tác động thế nào đến giá bất động sản?''}
-\end{itemize}
-}
-\end{column}
-\begin{column}{0.45\textwidth}
-\calloutbox[\textwidth]{Case Study: Đại Dịch Opioid (Washington Post, 2019)}{
-    \textbf{Câu hỏi điều tra:} Có bao nhiêu viên thuốc giảm đau kê đơn gửi tới từng quận của Mỹ (theo đầu người)? Tập đoàn nào chịu trách nhiệm?\\[0.1cm]
-    \textbf{Phát hiện từ cơ sở dữ liệu DEA ARCOS:}
-    \begin{itemize}\setlength{\itemsep}{1pt}
-        \item Phân phối hơn \textbf{100 tỷ viên thuốc} (2006--2014).
-        \item Quận nông thôn Appalachia nhận \textbf{$> 150$ viên/người/năm}.
-        \item Chỉ \textbf{6 tập đoàn} chiếm $> 75\%$ tổng lượng cung ứng.
-    \end{itemize}
-}
-\end{column}
-\end{columns}
-\slidenumber{05}
-\end{frame}
-
-% ==================== SLIDE 6: 5 CÂU HỎI ĐỊNH HƯỚNG (PHẦN 2 - Q2 & Q3 CENSUS) ====================
-
-
-\begin{frame}[plain, t]
-
-
-\slideheader{Chương 3 • Tìm Kiếm Dữ Liệu}{Tổ Chức Công Bố \& Cấp Độ Phân Giải (Census)}
-\begin{columns}[T]
-\begin{column}{0.52\textwidth}
-{\fontsize{8.2pt}{10.5pt}\selectfont
-\textbf{2. Tổ chức nào có khả năng thu thập dữ liệu này?}
-\begin{itemize}\setlength{\itemsep}{1.5pt}
-    \item Cơ quan công quyền: Cấp địa phương, bang, liên bang.
-    \item Phi chính phủ: Viện hàn lâm, cơ quan báo chí, NGO, tập đoàn.
-\end{itemize}
-
-\vspace{0.12cm}
-\textbf{3. Dữ liệu có sẵn ở cấp độ phân giải nào?}
-\begin{itemize}\setlength{\itemsep}{1.5pt}
-    \item \textbf{Cá nhân (Disaggregated):} Chi tiết cao nhưng chạm giới hạn quyền riêng tư (Luật liên bang Census bảo mật hồ sơ cá nhân \textbf{72 năm}, ví dụ sổ viết tay 1940).
-    \item \textbf{Tổng hợp (Aggregated):} Phân cấp địa lý Census:
-    $$\text{State} \rightarrow \text{County} \rightarrow \text{Town} \rightarrow \text{Census Tract} \rightarrow \text{Block Group}$$
-\end{itemize}
-}
-\end{column}
-\begin{column}{0.44\textwidth}
-\centering
-\includegraphics[width=0.48\textwidth, height=0.42\textheight, keepaspectratio]{images/fig_3_1_census.png}
-\includegraphics[width=0.48\textwidth, height=0.42\textheight, keepaspectratio]{images/fig_3_2_census_geographies.png}\\[0.1cm]
-{\fontsize{6.5pt}{7.8pt}\selectfont \textcolor{navyMuted}{\textit{Hình 3.1: Sổ Census cá nhân 1940 \& Hình 3.2: Lớp phân cấp Hartford.}}}
-\end{column}
-\end{columns}
-\slidenumber{06}
-\end{frame}
-
-% ==================== SLIDE 7: 5 CÂU HỎI ĐỊNH HƯỚNG (PHẦN 3 - Q4 & Q5 SERENA WILLIAMS) ====================
-
-
-\begin{frame}[plain, t]
-
-
-\slideheader{Chương 3 • Tìm Kiếm Dữ Liệu}{Lần Dấu Footnotes \& Khoảng Trống Dữ Liệu}
-\begin{columns}[T]
-\begin{column}{0.52\textwidth}
-{\fontsize{8.2pt}{10.5pt}\selectfont
-\textbf{4. Các ấn phẩm trước đây đã dùng dữ liệu tương tự chưa?}
-\begin{itemize}\setlength{\itemsep}{2pt}
-    \item Lần theo \textbf{chú thích chân trang (Footnotes)} để tìm kho lưu trữ gốc, cập nhật số liệu mới nhằm so sánh theo thời gian.
-\end{itemize}
-
-\vspace{0.15cm}
-\textbf{5. Điều gì xảy ra nếu CHƯA AI từng thu thập dữ liệu?}
-\begin{itemize}\setlength{\itemsep}{2pt}
-    \item Sự vắng mặt của dữ liệu không phải vô tình, mà phản ánh \textbf{bất bình đẳng quyền lực}.
-    \item Cấu trúc quyền lực thường \textbf{chỉ đếm những gì họ coi trọng}.
-    \item \textbf{Bài học:} Nếu dữ liệu chưa tồn tại, việc chỉ ra \textit{khoảng trống dữ liệu (Missing Dataset)} là đóng góp lớn.
-\end{itemize}
-}
-\end{column}
-\begin{column}{0.44\textwidth}
-\calloutbox[\textwidth]{Case Study: Serena Williams \& Tử Vong Thai Sản (2017)}{
-    Sau biến chứng nguy hiểm tính mạng khi sinh nở, Serena Williams lên tiếng: Phụ nữ da đen có nguy cơ tử vong thai sản \textbf{cao gấp $> 3$ lần} phụ nữ da trắng.\\[0.1cm]
-    \textbf{Sự thật bàng hoàng khi báo chí điều tra:}
-    \begin{itemize}\setlength{\itemsep}{1.5pt}
-        \item Hệ thống y tế Mỹ theo dõi rất sát bệnh tim hay thay khớp háng.
-        \item Nhưng \textbf{không hề có hệ thống quốc gia theo dõi biến chứng thai sản}!
-    \end{itemize}
-}
-\end{column}
-\end{columns}
-\slidenumber{07}
-\end{frame}
-
-% ==================== SLIDE 8: DỮ LIỆU CÔNG KHAI VS RIÊNG TƯ ====================
-
-
-\begin{frame}[plain, t]
-
-
-\slideheader{Chương 3 • Pháp Lý \& Đạo Đức}{Dữ Liệu Công Khai (Public) vs. Riêng Tư (Private)}
+\slideheader{Chương 3 • Pháp Lý \& Đạo Đức}{Dữ Liệu Công Khai vs. Riêng Tư}
 {\fontsize{7.5pt}{9.2pt}\selectfont
-\begin{table}[h]
-\centering
-\begin{tabular}{p{0.18\textwidth} p{0.36\textwidth} p{0.38\textwidth}}
+\begin{center}
+\begin{tabular}{p{0.17\textwidth} p{0.34\textwidth} p{0.37\textwidth}}
 \toprule
-\textbf{\color{navyMain} Khía cạnh} & \textbf{\color{navyMain} Khu vực Tư nhân (Big Tech)} & \textbf{\color{navyMain} Khu vực Công (Chính phủ)} \\
+\textbf{\color{navyMain} Khía cạnh} & \textbf{\color{navyMain} Khu vực Tư nhân} & \textbf{\color{navyMain} Khu vực Công} \\
 \midrule
-\textbf{Thực trạng thu thập} & \textbf{Chủ nghĩa tư bản giám sát} (Shoshana Zuboff): Google (cookie), Amazon (Alexa), Meta (theo dõi hành vi). & Dữ liệu công dân; công chúng dùng \textbf{Đạo luật Tự do Thông tin (FOIA)} / Sunshine Laws để giám sát. \\
+\textbf{Thực trạng thu thập} & \textbf{Chủ nghĩa tư bản giám sát}: Google, Amazon, Meta. & Dữ liệu công dân; công chúng dùng \textbf{Đạo luật Tự do Thông tin} / Sunshine Laws để giám sát. \\
 \midrule
-\textbf{Dữ liệu cấm công khai cá nhân} & Phụ thuộc chính sách nội bộ và đạo luật người tiêu dùng (CCPA). & • \textbf{HIPAA:} Bảo mật hồ sơ bệnh án.\\
-& & • \textbf{FERPA:} Bảo mật điểm học tập.\\
-& & $\rightarrow$ \textit{Bắt buộc ẩn danh hóa \& gom cụm.} \\
+\textbf{Dữ liệu cấm công khai cá nhân} & Phụ thuộc chính sách nội bộ và đạo luật người tiêu dùng. & • \textbf{HIPAA:} Bảo mật hồ sơ bệnh án.\newline
+• \textbf{FERPA:} Bảo mật điểm học tập.\newline
+$\rightarrow$ \textit{Bắt buộc ẩn danh hóa \& gom cụm.} \\
 \midrule
-\textbf{Dữ liệu cá nhân công khai vì cộng đồng} & Dữ liệu di chuyển tổng hợp (Apple Mobility Index trong đại dịch). & 1. Đóng góp tài chính bầu cử (FEC).\\
-& & 2. Hồ sơ sở hữu và giá trị bất động sản.\\
-& & 3. Lương lãnh đạo quỹ phi lợi nhuận (IRS 990).\\
-& & 4. Hồ sơ cảnh sát dùng vũ lực (The Force Report).\\
+\textbf{Dữ liệu cá nhân công khai vì cộng đồng} & Dữ liệu di chuyển tổng hợp. & 1. Đóng góp tài chính bầu cử.\newline
+2. Hồ sơ sở hữu và giá trị bất động sản.\newline
+3. Lương lãnh đạo quỹ phi lợi nhuận.\newline
+4. Hồ sơ cảnh sát dùng vũ lực. \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{center}
 }
 \slidenumber{08}
 \end{frame}
 
-% ==================== SLIDE 9: ĐẠO ĐỨC DỮ LIỆU: MASKING & AGGREGATING ====================
-
-
+% ==================== SLIDE 9: MASKING & AGGREGATING ====================
 \begin{frame}[plain, t]
-
-
 \slideheader{Chương 3 • Đạo Đức Dữ Liệu}{Bảo Vệ Danh Tính: Làm Mờ \& Tổng Hợp}
-\begin{columns}[T]
-\begin{column}{0.51\textwidth}
-\calloutbox[\textwidth]{Câu Hỏi Đạo Đức Cốt Lõi}{
-    Ngay cả khi dữ liệu cá nhân là \textbf{hợp pháp và công khai}, việc tái xuất bản lên bản đồ có gây hại cho nạn nhân nhiều hơn lợi ích cộng đồng?
-}
-\vspace{0.15cm}
-{\fontsize{8.2pt}{10.5pt}\selectfont
-\textbf{Tình huống: Bản đồ cuộc gọi 911 về bạo lực}
-\begin{itemize}\setlength{\itemsep}{2pt}
-    \item Nếu định vị chính xác địa chỉ nhà nạn nhân, bạn có thể gây tổn thương tâm lý hoặc nguy cơ trả thù.
-    \item Cần chuyển hóa dữ liệu qua 2 kỹ thuật bảo vệ.
-\end{itemize}
-}
-\end{column}
-\begin{column}{0.45\textwidth}
-\begin{tikzpicture}[scale=0.88]
-    \node[draw=navyMain, fill=white, rounded corners=4pt, align=center, font=\scriptsize\bfseries] (raw) at (0, 2.2) {DỮ LIỆU GỐC NGUY HIỂM\\{\tiny 1234 Main St | Aggravated Assault}};
-    \node[draw=navyMain, fill=boxBg, rounded corners=4pt, align=center, font=\scriptsize\bfseries] (mask) at (-1.8, 0.4) {1. LÀM MỜ (MASKING)\\{\tiny Ẩn ký tự cuối địa chỉ}\\{\tiny \textbf{1XXX Main St}}};
-    \node[draw=navyMain, fill=boxBg, rounded corners=4pt, align=center, font=\scriptsize\bfseries] (agg) at (1.8, 0.4) {2. TỔNG HỢP (AGGREGATING)\\{\tiny Gom theo khu phố/Tract}\\{\tiny \textbf{East Side: 13 vụ}}};
-    \draw[-{Latex[length=2mm]}, line width=1.1pt, navyMain] (raw) -- (mask);
-    \draw[-{Latex[length=2mm]}, line width=1.1pt, navyMain] (raw) -- (agg);
-    \node[draw=navyMain, fill=navyLight, rounded corners=4pt, align=center, font=\tiny\bfseries, text width=4.2cm] at (0, -1.0) {Vừa bảo vệ danh tính nạn nhân,\\vừa làm rõ xu hướng địa bàn phục vụ hoạch định};
-    \draw[-{Latex[length=1.5mm]}, line width=0.8pt, navyMain] (mask) -- (0, -0.6);
-    \draw[-{Latex[length=1.5mm]}, line width=0.8pt, navyMain] (agg) -- (0, -0.6);
-\end{tikzpicture}
-\end{column}
-\end{columns}
-\slidenumber{09}
-\end{frame}
-
-% ==================== SLIDE 10: QUẢN TRỊ NGUỒN DỮ LIỆU (SOURCE YOUR DATA) ====================
-
-
-\begin{frame}[plain, t]
-
-
-\slideheader{Chương 3 • Quản Trị Dữ Liệu}{Quy Tắc Quản Trị Nguồn Dữ Liệu Chuẩn}
 \begin{columns}[T]
 \begin{column}{0.52\textwidth}
 {\fontsize{8.2pt}{10.5pt}\selectfont
-Để đảm bảo \textbf{tính minh bạch, độ tin cậy và khả năng tái lập (Replicability)}, hãy rèn luyện 3 thói quen ngay khi tải file:
+Để đảm bảo \textbf{tính minh bạch, độ tin cậy và khả năng tái lập }, hãy rèn luyện 3 thói quen ngay khi tải file:
 
 \vspace{0.12cm}
-\textbf{1. Đặt tên file có ý nghĩa (Meaningful Filenames)}
+\textbf{1. Đặt tên file có ý nghĩa}
 \begin{itemize}\setlength{\itemsep}{1.5pt}
     \item \textcolor{accentRed}{\textbf{Tránh:}} \texttt{data.csv}, \texttt{download.xlsx}, \texttt{file(1).csv}.
-    \item \textbf{Chuẩn:} Nguồn + Chủ đề + Ngày \texttt{YYYY-MM-DD} (chữ thường, gạch nối): \texttt{eurostat-co2-emissions-2020-05-01.xlsx}.
+    \item \textbf{Chuẩn:} Nguồn + Chủ đề + Ngày \texttt{YYYY-MM-DD} (chữ thường, gạch nối):\\ \texttt{eurostat-co2-emissions-2020-05-01.xlsx}.
 \end{itemize}
 
 \vspace{0.12cm}
@@ -459,39 +222,42 @@
 \end{column}
 \begin{column}{0.44\textwidth}
 \centering
-\includegraphics[width=\textwidth, height=0.48\textheight, keepaspectratio]{images/fig_3_3_tabs.png}\\[0.15cm]
-{\fontsize{6.8pt}{8pt}\selectfont \textcolor{navyMuted}{\textit{Hình 3.3: Cấu trúc 3 tab chuẩn: data | notes | backup trong bảng tính.}}}
+\begin{tikzpicture}[scale=0.85]
+    \node[draw=navyMain, fill=white, rounded corners=4pt, align=center, font=\scriptsize\bfseries] (raw) at (0, 2.3) {DỮ LIỆU GỐC NGUY HIỂM\\{\tiny 1234 Main St | Aggravated Assault}};
+    \node[draw=navyMain, fill=boxBg, rounded corners=4pt, align=center, font=\scriptsize\bfseries, text width=2.3cm] (mask) at (-1.55, 0.45) {1. LÀM MỜ\\(MASKING)\\{\tiny Ẩn ký tự cuối địa chỉ}\\{\tiny \textbf{1XXX Main St}}};
+    \node[draw=navyMain, fill=boxBg, rounded corners=4pt, align=center, font=\scriptsize\bfseries, text width=2.3cm] (agg) at (1.55, 0.45) {2. TỔNG HỢP\\(AGGREGATING)\\{\tiny Gom theo khu phố/Tract}\\{\tiny \textbf{East Side: 13 vụ}}};
+    \draw[-{Latex[length=2mm]}, line width=1.1pt, navyMain] (raw) -- (mask);
+    \draw[-{Latex[length=2mm]}, line width=1.1pt, navyMain] (raw) -- (agg);
+    \node[draw=navyMain, fill=navyLight, rounded corners=4pt, align=center, font=\tiny\bfseries, text width=4.2cm] (res) at (0, -1.25) {Vừa bảo vệ danh tính nạn nhân,\\vừa làm rõ xu hướng địa bàn phục vụ hoạch định};
+    \draw[-{Latex[length=1.5mm]}, line width=0.8pt, navyMain] (mask) -- (res);
+    \draw[-{Latex[length=1.5mm]}, line width=0.8pt, navyMain] (agg) -- (res);
+\end{tikzpicture}
 \end{column}
 \end{columns}
-\slidenumber{10}
+\slidenumber{09}
 \end{frame}
-
-% ==================== SLIDE 11: NHẬN DIỆN DỮ LIỆU XẤU (PHẦN 1) ====================
-
-
+% ==================== SLIDE 11: BAD DATA ====================
 \begin{frame}[plain, t]
-
-
-\slideheader{Chương 3 • Nhận Diện Dữ Liệu Xấu}{4 Dấu Hiệu Dữ Liệu Lỗi Kinh Điển (Quartz Guide)}
+\slideheader{Chương 3 • Nhận Diện Dữ Liệu Xấu}{4 Dấu Hiệu Dữ Liệu Lỗi Kinh Điển}
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}
-\calloutbox[\textwidth]{1. Missing Values Nhập Sai}{
+\calloutbox[\linewidth]{1. Missing Values Nhập Sai}{
     Ô trống (\texttt{null/blank}) có ý nghĩa khác số \texttt{0}.\\[0.05cm]
     \textbf{Cảnh báo:} Người nhập điền \texttt{0}, \texttt{-1}, \texttt{-999} để báo khuyết làm sai lệch hoàn toàn hàm \texttt{SUM}, \texttt{AVERAGE}!
 }
 \vspace{0.15cm}
-\calloutbox[\textwidth]{2. Mất Số 0 Dẫn Đầu (Leading Zeros)}{
+\calloutbox[\linewidth]{2. Mất Số 0 Dẫn Đầu (Leading Zeros)}{
     Xảy ra khi phần mềm tự ép kiểu Text sang Number.\\[0.05cm]
     \textbf{Hậu quả:} Mã Zip \texttt{06106} bị biến thành \texttt{6106}. Mã FIPS hạt LA \texttt{037} biến thành \texttt{37} (nhầm sang bang Bắc Carolina)!
 }
 \end{column}
 \begin{column}{0.48\textwidth}
-\calloutbox[\textwidth]{3. Chạm Giới Hạn Dòng Của Phần Mềm}{
+\calloutbox[\linewidth]{3. Chạm Giới Hạn Dòng Của Phần Mềm}{
     Nếu dữ liệu dừng ở dòng thứ \textbf{65.536} (giới hạn Excel \texttt{.xls} cũ) $\rightarrow$ Dữ liệu đã bị cắt cụt!\\[0.05cm]
     \textbf{Thực tế:} Y tế Anh từng mất hàng ngàn mẫu xét nghiệm Covid-19 vì lỗi này.
 }
 \vspace{0.15cm}
-\calloutbox[\textwidth]{4. Bất Nhất Định Dạng Ngày Tháng}{
+\calloutbox[\linewidth]{4. Bất Nhất Định Dạng Ngày Tháng}{
     Nhầm giữa chuẩn Mỹ \texttt{MM/DD/YYYY} và Quốc tế \texttt{DD/MM/YYYY}.\\[0.05cm]
     Xuất hiện ngày mặc định hệ thống (\texttt{1/1/1900}, \texttt{1970}) hoặc số thứ tự nội bộ Excel (\texttt{43891}).
 }
@@ -500,12 +266,8 @@
 \slidenumber{11}
 \end{frame}
 
-% ==================== SLIDE 12: BẪY GEOCODING: KANSAS & NULL ISLAND ====================
-
-
+% ==================== SLIDE 12: GEOCODING ====================
 \begin{frame}[plain, t]
-
-
 \slideheader{Chương 3 • Nhận Diện Dữ Liệu Xấu}{Ảo Giác Địa Lý: Bẫy Geocoding Sai Lệch}
 \begin{columns}[T]
 \begin{column}{0.52\textwidth}
@@ -513,7 +275,7 @@
 Khi chuyển đổi địa chỉ IP hoặc tọa độ thành điểm bản đồ, thuật toán Geocoding tự động có thể sinh ra bẫy chết người:
 
 \vspace{0.15cm}
-\textbf{1. Trang trại Bắc Kansas (Alberto Cairo)}
+\textbf{1. Trang trại Bắc Kansas}
 \begin{itemize}\setlength{\itemsep}{2pt}
     \item Một bản đồ từng chỉ ra cư dân vùng nông thôn Bắc Kansas xem web người lớn nhiều nhất nước Mỹ.
     \item \textbf{Sự thật:} Hàng triệu IP ẩn danh (VPN) không xác định vị trí bị tự động gán vào \textbf{tâm địa lý của lục địa Mỹ} (tình cờ trúng nông trại này).
@@ -528,112 +290,16 @@ Khi chuyển đổi địa chỉ IP hoặc tọa độ thành điểm bản đ�
 \end{column}
 \begin{column}{0.44\textwidth}
 \centering
-\includegraphics[width=\textwidth, height=0.52\textheight, keepaspectratio]{images/fig_3_4_null_island.png}\\[0.15cm]
+\includegraphics[width=\linewidth, height=0.52\textheight, keepaspectratio]{images/fig_3_4_null_island.png}\\[0.15cm]
 {\fontsize{6.8pt}{8pt}\selectfont \textcolor{navyMuted}{\textit{Hình 3.4: Bẫy tâm địa lý Kansas (trái) \& Null Island tọa độ (0,0) (phải).}}}
 \end{column}
 \end{columns}
 \slidenumber{12}
 \end{frame}
 
-% ==================== SLIDE 13: PHẢN BIỆN SÂU DỮ LIỆU: METADATA ====================
-
-
+% ==================== SLIDE 15: DỮ LIỆU THÔ ====================
 \begin{frame}[plain, t]
-
-
-\slideheader{Chương 3 • Phản Biện Dữ Liệu}{Đọc Sâu Metadata: Sai Số \& Kiến Tạo Xã Hội}
-\begin{columns}[T]
-\begin{column}{0.31\textwidth}
-\calloutbox[\textwidth]{1. Nhãn Cột Nghĩa Là Gì?}{
-    • Đơn vị đo lường: Cột \texttt{Elevation} tính bằng mét hay feet?\\
-    • Phạm vi khảo sát: Cột \texttt{Income} tính theo cá nhân, gia đình hay hộ gia đình? Là số trung bình (\texttt{Mean}) hay trung vị (\texttt{Median})?
-}
-\end{column}
-\begin{column}{0.31\textwidth}
-\calloutbox[\textwidth]{2. Sai Số Lấy Mẫu (Margin of Error)}{
-    • Dữ liệu lấy mẫu luôn đi kèm khoảng bất định.\\
-    • Khảo sát ACS cấp khu vực (4.000 dân) báo thu nhập $\$50.000$ nhưng \textbf{sai số $\pm \$25.000$} (thực tế từ $\$25.000$ đến $\$75.000$ $\rightarrow$ vô nghĩa nếu không chú thích).
-}
-\end{column}
-\begin{column}{0.31\textwidth}
-\calloutbox[\textwidth]{3. Kiến Tạo Xã Hội}{
-    • Các danh mục phân loại thay đổi theo thời gian và chính trị.\\
-    • Điều tra Census Mỹ: Tách \textit{Native White} và \textit{Foreign-born White} (1930) $\rightarrow$ đổi \textit{Negro} thành \textit{Black} (1980) $\rightarrow$ cho phép chọn đa chủng tộc (2000).
-}
-\end{column}
-\end{columns}
-\slidenumber{13}
-\end{frame}
-
-% ==================== SLIDE 14: CHUYỂN TIẾP CHƯƠNG 4 ====================
-
-
-\begin{frame}[plain, c]
-
-
-\begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=west, text width=0.76\textwidth] at ($(current page.west)+(1.0cm, 0.2cm)$) {
-        {\fontsize{13pt}{15pt}\selectfont \textbf{\color{navyMuted} PHẦN 1 • MỤC 02}}\\[0.25cm]
-        {\fontsize{28pt}{32pt}\selectfont \textbf{\color{navyMain} KỸ THUẬT LÀM SẠCH}}\\[0.12cm]
-        {\fontsize{22pt}{26pt}\selectfont \textbf{\color{navyMain} DỮ LIỆU BẨN}}\\[0.35cm]
-        \pillbox{\fontsize{10pt}{12pt}\selectfont Chương 4: Clean Up Messy Data}\\[0.45cm]
-        {\normalsize \color{navyMuted} \textit{``Đừng ngạc nhiên nếu bạn dành nhiều thời gian để dọn dẹp dữ liệu\\hơn là phân tích và vẽ biểu đồ.''}}
-    };
-\end{tikzpicture}
-\slidenumber{14}
-\end{frame}
-
-% ==================== SLIDE 15: THỰC TRẠNG PHŨ PHÀNG CỦA DỮ LIỆU THÔ ====================
-
-
-\begin{frame}[plain, t]
-
-
-\slideheader{Chương 4 • Dữ Liệu Thô}{Thực Trạng Phũ Phàng Của Bảng Dữ Liệu Thô}
-\begin{columns}[T]
-\begin{column}{0.52\textwidth}
-{\fontsize{7.8pt}{9.8pt}\selectfont
-Hiếm khi dữ liệu tải về có thể vẽ đồ thị ngay. Dữ liệu thô luôn chứa đầy lỗi định dạng:
-
-\vspace{0.1cm}
-\begin{table}[h]
-\centering
-\begin{tabular}{lll}
-\toprule
-\textbf{\color{navyMain} Year} & \textbf{\color{navyMain} City} & \textbf{\color{navyMain} Amount} \\
-\midrule
-\texttt{1990} & \texttt{New York City} & \texttt{\$1,123,456.00} \\
-\texttt{1995-96} & \textit{(Trống)} & \texttt{2.2 mil} \\
-\texttt{2000s} & \texttt{NYC} & \texttt{No data} \\
-\texttt{2020} & \texttt{New\_York} & \texttt{5000000+} \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\vspace{-0.1cm}
-\begin{itemize}\setlength{\itemsep}{1.5pt}
-    \item \textbf{Cột Year:} Trộn lẫn năm, khoảng năm và thập kỷ.
-    \item \textbf{Cột City:} Ô trống, viết tắt tùy tiện, dấu gạch nối.
-    \item \textbf{Cột Amount:} Ký hiệu \$, chữ \texttt{mil}, \texttt{No data}, dấu \texttt{+} khiến máy tính hiểu nhầm cả cột thành chuỗi văn bản (Text)!
-\end{itemize}
-}
-\end{column}
-\begin{column}{0.44\textwidth}
-\centering
-\includegraphics[width=\textwidth, height=0.52\textheight, keepaspectratio]{images/fig_4_1_messy_data.png}\\[0.15cm]
-{\fontsize{6.8pt}{8pt}\selectfont \textcolor{navyMuted}{\textit{Hình 4.1: Bản phác thảo các lỗi định dạng kinh điển của dữ liệu thô.}}}
-\end{column}
-\end{columns}
-\slidenumber{15}
-\end{frame}
-
-% ==================== SLIDE 16: KỸ THUẬT 1: TRÙNG LẶP & BẪY " TOWN" ====================
-
-
-\begin{frame}[plain, t]
-
-
-\slideheader{Chương 4 • Kỹ Thuật Làm Sạch}{Xử Lý Trùng Lặp, Khoảng Trắng \& Bẫy Chuỗi}
+\slideheader{Chương 4 • Dữ Liệu Thô, Làm Sạch}{Thực Trạng Phũ Phàng Của Bảng Dữ Liệu Thô}
 \begin{columns}[T]
 \begin{column}{0.52\textwidth}
 {\fontsize{8.2pt}{10.5pt}\selectfont
@@ -659,43 +325,38 @@ Hiếm khi dữ liệu tải về có thể vẽ đồ thị ngay. Dữ liệu t
 \end{column}
 \begin{column}{0.44\textwidth}
 \centering
-\includegraphics[width=\textwidth, height=0.52\textheight, keepaspectratio]{images/fig_4_3_find_replace.png}\\[0.15cm]
-{\fontsize{6.8pt}{8pt}\selectfont \textcolor{navyMuted}{\textit{Hình 4.3: Hướng dẫn tìm kiếm có dấu cách: "Make sure it begins with a space".}}}
+\includegraphics[width=\linewidth, height=0.52\textheight, keepaspectratio]{images/fig_4_1_messy_data.png}\\[0.15cm]
+{\fontsize{6.8pt}{8pt}\selectfont \textcolor{navyMuted}{\textit{Hình 4.1: Bản phác thảo các lỗi định dạng kinh điển của dữ liệu thô.}}}
 \end{column}
 \end{columns}
-\slidenumber{16}
+\slidenumber{15}
 \end{frame}
-
-% ==================== SLIDE 17: KỸ THUẬT 2: TÁI CẤU TRÚC BẢNG (TRANSPOSE, SPLIT & COMBINE) ====================
-
-
+% ==================== SLIDE 17: TRANSPOSE, SPLIT & COMBINE ====================
 \begin{frame}[plain, t]
-
-
 \slideheader{Chương 4 • Kỹ Thuật Làm Sạch}{Tái Cấu Trúc Bảng: Transpose, Split \& Combine}
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}
-\calloutbox[\textwidth]{1. Xoay Trục Dữ Liệu: Transpose (Hàng $\leftrightarrow$ Cột)}{
-    \textbf{Mâu thuẫn góc nhìn (Stephen Few):}
+\calloutbox[\linewidth]{1. Xoay Trục Dữ Liệu: Transpose (Hàng $\leftrightarrow$ Cột)}{
+    \textbf{Mâu thuẫn góc nhìn:}
     \begin{itemize}\setlength{\itemsep}{2pt}
         \item Khi trình bày \textbf{Bảng (Table)} cho người đọc: Thời gian xếp \textbf{nằm ngang} theo cột (\texttt{2000 | 2010 | 2020}).
-        \item Khi vẽ \textbf{Biểu đồ đường (Line Chart)}: Phần mềm yêu cầu thời gian phải chạy \textbf{thẳng đứng} theo cột đầu tiên từ trên xuống dưới.
+        \item Khi vẽ \textbf{Biểu đồ đường}: Phần mềm yêu cầu thời gian phải chạy \textbf{thẳng đứng} theo cột đầu tiên từ trên xuống dưới.
     \end{itemize}
     $\rightarrow$ Kỹ thuật \textbf{Transpose} giúp đảo ngược ma trận Hàng $\leftrightarrow$ Cột tức thời mà không cần nhập lại dữ liệu.
 }
 \end{column}
 \begin{column}{0.48\textwidth}
-\calloutbox[\textwidth]{2. Tách Cột (Split) \& Gộp Cột (Combine)}{
-    \textbf{Tách cột (Splitting):}
+\calloutbox[\linewidth]{2. Tách Cột \& Gộp Cột }{
+    \textbf{Tách cột:}
     \begin{itemize}\setlength{\itemsep}{1.5pt}
         \item Khi nhiều thực thể bị nhét chung vào 1 ô:
         \item \texttt{300 Summit St, Hartford CT--06106}
         \item Dùng dấu phân cách (\texttt{,}, khoảng trắng, \texttt{--}) tách thành 4 cột riêng: \texttt{Street | City | State | Zip}.
     \end{itemize}
     \vspace{0.08cm}
-    \textbf{Gộp cột (Concatenating):}
+    \textbf{Gộp cột :}
     \begin{itemize}\setlength{\itemsep}{1.5pt}
-        \item Ngược lại, khi nạp vào công cụ bản đồ (Geocoding), nối các cột địa chỉ rời rạc thành một chuỗi duy nhất có dấu phẩy phân cách.
+        \item Ngược lại, khi nạp vào công cụ bản đồ, nối các cột địa chỉ rời rạc thành một chuỗi duy nhất có dấu phẩy phân cách.
     \end{itemize}
 }
 \end{column}
@@ -703,17 +364,13 @@ Hiếm khi dữ liệu tải về có thể vẽ đồ thị ngay. Dữ liệu t
 \slidenumber{17}
 \end{frame}
 
-% ==================== SLIDE 18: KỸ THUẬT 3: GOM CỤM CHUẨN HÓA (CLUSTERING) ====================
-
-
+% ==================== SLIDE 18: CLUSTERING ====================
 \begin{frame}[plain, t]
-
-
-\slideheader{Chương 4 • Kỹ Thuật Làm Sạch}{Gom Cụm Chuẩn Hóa Tên Gọi (Clustering)}
+\slideheader{Chương 4 • Kỹ Thuật Làm Sạch}{Gom Cụm Chuẩn Hóa Tên Gọi}
 \begin{columns}[T]
 \begin{column}{0.51\textwidth}
 {\fontsize{8.2pt}{10.5pt}\selectfont
-\textbf{Thực tế dữ liệu viện trợ Mỹ (Greenbook):}
+\textbf{Thực tế dữ liệu viện trợ Mỹ:}
 \begin{itemize}\setlength{\itemsep}{2pt}
     \item Chỉ riêng 2 quốc gia Triều Tiên và Hàn Quốc nhưng xuất hiện tới \textbf{26 cách viết khác nhau}:
     \texttt{Korea, N}, \texttt{Korea-North}, \texttt{SouthKorea}, \texttt{So Korea}, \texttt{Korea, South}...
@@ -721,17 +378,17 @@ Hiếm khi dữ liệu tải về có thể vẽ đồ thị ngay. Dữ liệu t
 \end{itemize}
 
 \vspace{0.12cm}
-\textbf{Thuật toán Gom cụm thông minh (Clustering):}
+\textbf{Thuật toán Gom cụm thông minh:}
 \begin{itemize}\setlength{\itemsep}{2pt}
-    \item \textbf{Key Collision (Fingerprinting):} Chuẩn hóa chữ hoa/thường, xóa dấu câu, sắp xếp lại từ khóa. Tốc độ rất cao, quét tập dữ liệu lớn.
+    \item \textbf{Key Collision:} Chuẩn hóa chữ hoa/thường, xóa dấu câu, sắp xếp lại từ khóa. Tốc độ rất cao, quét tập dữ liệu lớn.
     \item \textbf{Nearest Neighbor:} Tính khoảng cách chỉnh sửa giữa các chuỗi để bắt các lỗi chính tả tinh vi.
 \end{itemize}
 }
 \end{column}
 \begin{column}{0.45\textwidth}
 \centering
-\includegraphics[width=\textwidth, height=0.25\textheight, keepaspectratio]{images/fig_4_11_korea_raw.png}\\[0.1cm]
-\includegraphics[width=\textwidth, height=0.26\textheight, keepaspectratio]{images/fig_4_18_korea_cluster.png}\\[0.1cm]
+\includegraphics[width=\linewidth, height=0.25\textheight, keepaspectratio]{images/fig_4_11_korea_raw.png}\\[0.1cm]
+\includegraphics[width=\linewidth, height=0.26\textheight, keepaspectratio]{images/fig_4_18_korea_cluster.png}\\[0.1cm]
 {\fontsize{6.5pt}{7.8pt}\selectfont \textcolor{navyMuted}{\textit{Hình 4.11: Dữ liệu thô lộn xộn \& Hình 4.18: Giao diện gom cụm về 1 tên.}}}
 \end{column}
 \end{columns}
@@ -740,25 +397,7 @@ Hiếm khi dữ liệu tải về có thể vẽ đồ thị ngay. Dữ liệu t
 
 % ==================== SLIDE 19: CHUYỂN TIẾP CHƯƠNG 5 ====================
 
-
-\begin{frame}[plain, c]
-
-
-\begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=west, text width=0.76\textwidth] at ($(current page.west)+(1.0cm, 0.2cm)$) {
-        {\fontsize{13pt}{15pt}\selectfont \textbf{\color{navyMuted} PHẦN 1 • MỤC 03}}\\[0.25cm]
-        {\fontsize{28pt}{32pt}\selectfont \textbf{\color{navyMain} TẠO PHÉP SO SÁNH}}\\[0.12cm]
-        {\fontsize{22pt}{26pt}\selectfont \textbf{\color{navyMain} CÓ Ý NGHĨA}}\\[0.35cm]
-        \pillbox{\fontsize{10pt}{12pt}\selectfont Chương 5: Make Meaningful Comparisons}\\[0.45cm]
-        {\normalsize \color{navyMuted} \textit{``Trọng tâm của tư duy định lượng nằm ở một câu hỏi duy nhất:\\So sánh với cái gì? (Compared to what?)''}\\[0.1cm]-- Edward Tufte}
-    };
-\end{tikzpicture}
-\slidenumber{19}
-\end{frame}
-
 % ==================== SLIDE 20: MEAN VS. MEDIAN ====================
-
-
 \begin{frame}[plain, t]
 \slideheader{Chương 5 • Ngôn Từ Chuẩn Xác}{Trung Bình (Mean) vs. Trung Vị (Median)}
 \begin{columns}[T]
@@ -769,31 +408,23 @@ Hiếm khi dữ liệu tải về có thể vẽ đồ thị ngay. Dữ liệu t
     \item \textbf{Mean (Trung bình):} Rất nhạy cảm, dễ bị kéo lệch bởi ngoại lai.
     \item \textbf{Median (Trung vị):} Giá trị chính giữa, kháng nhiễu tuyệt đối.
 \end{itemize}
-
-\vspace{0.05cm}
-\begin{table}[h]
-\centering
-{\fontsize{7pt}{8.5pt}\selectfont
-\begin{tabular}{llcc}
-\toprule
-\textbf{\color{navyMain} Tình huống} & \textbf{\color{navyMain} Dãy số khảo sát} & \textbf{\color{navyMain} Mean} & \textbf{\color{navyMain} Median} \\
-\midrule
-Dãy chuẩn đồng đều & 1, 2, 3, 4, 5 & \textbf{3} & \textbf{3} \\
-Xuất hiện ngoại lai & 1, 2, 3, 4, 100 & \textbf{22} \textit{(Ảo)} & \textbf{3} \textit{(Thực)} \\
-\bottomrule
-\end{tabular}
 }
-\end{table}
-
-\vspace{-0.08cm}
-\calloutbox[\textwidth]{Bài Học Kinh Điển}{
-    \textit{``Khi tỷ phú bước vào phòng, tính Mean ai cũng thành triệu phú, nhưng Median không ai giàu lên cả.''} $\rightarrow$ Dùng \textbf{Median} cho thu nhập, giá nhà.
+\calloutbox[\linewidth]{1. Thay Đổi Phần Trăm (Percent Change)}{
+    Biến thiên tương đối so với giá trị ban đầu:\\[0.12cm]
+    \centering
+    $\boldsymbol{\Delta\% = \dfrac{V_{\text{mới}} - V_{\text{cũ}}}{|V_{\text{cũ}}|} \times 100\%}$
 }
+
+\vspace{0.12cm}
+\calloutbox[\linewidth]{2. Chênh Lệch Điểm Phần Trăm (Percentage Point)}{
+    Phép trừ số học giữa hai số tỷ lệ \%:\\[0.12cm]
+    \centering
+    \textbf{Điểm \% = Tỷ lệ Mới $-$ Tỷ lệ Cũ}
 }
 \end{column}
 \begin{column}{0.42\textwidth}
 \centering
-\includegraphics[width=\textwidth, height=0.40\textheight, keepaspectratio]{images/fig_5_1_median_vs_mean.png}\\[0.08cm]
+\includegraphics[width=\linewidth, height=0.40\textheight, keepaspectratio]{images/fig_5_1_median_vs_mean.png}\\[0.08cm]
 {\fontsize{6.5pt}{7.5pt}\selectfont \textcolor{navyMuted}{\textit{Hình 5.1: Minh họa Mean nhảy vọt lên 22 trong khi Median giữ vững ở 3.}}}
 \end{column}
 \end{columns}
@@ -801,42 +432,8 @@ Xuất hiện ngoại lai & 1, 2, 3, 4, 100 & \textbf{22} \textit{(Ảo)} & \tex
 \end{frame}
 
 
-
+% ==================== SLIDE 22: TƯƠNG QUAN ≠ NHÂN QUẢ ====================
 \begin{frame}[plain, t]
-\slideheader{Chương 5 • Ngôn Từ Chuẩn Xác}{\% Thay Đổi vs. Điểm Phần Trăm}
-\begin{columns}[T]
-\begin{column}{0.48\textwidth}
-\calloutbox[\textwidth]{1. Thay Đổi Phần Trăm (Percent Change)}{
-    Biến thiên tương đối so với giá trị ban đầu:\\[0.12cm]
-    \centering
-    $\mathbf{\Delta\% = \dfrac{V_{\text{mới}} - V_{\text{cũ}}}{|V_{\text{cũ}}|} \times 100\%}$
-}
-
-\vspace{0.12cm}
-\calloutbox[\textwidth]{2. Chênh Lệch Điểm Phần Trăm (Percentage Point)}{
-    Phép trừ số học giữa hai số tỷ lệ \%:\\[0.12cm]
-    \centering
-    $\mathbf{\text{Điểm \%} = \text{Tỷ lệ Mới} - \text{Tỷ lệ Cũ}}$
-}
-\end{column}
-\begin{column}{0.48\textwidth}
-\calloutbox[\textwidth]{Bẫy Truyền Thông: Tăng Thuế Tiêu Dùng (Sales Tax)}{
-    Chính quyền tăng thuế từ \textbf{5\% lên 6\%} và tuyên bố: \textit{``Thuế chỉ tăng có 1\% thôi!''}\\[0.08cm]
-    $\rightarrow$ \textbf{Tuyên bố này hoàn toàn SAI LỆCH!}\\[0.08cm]
-    • \textbf{Nói đúng 1:} Tăng \textbf{1 điểm phần trăm} ($6\% - 5\% = 1\text{ pp}$).\\
-    • \textbf{Nói đúng 2:} Gánh nặng thuế thực tế đã \textbf{tăng 20\%}:\\[0.10cm]
-    \centering
-    $\mathbf{\dfrac{6\% - 5\%}{5\%} = \dfrac{1\%}{5\%} = 20\%}$
-}
-\end{column}
-\end{columns}
-\slidenumber{21}
-\end{frame}
-
-
-\begin{frame}[plain, t]
-
-
 \slideheader{Chương 5 • Ngôn Từ Chuẩn Xác}{Tương Quan Không Đồng Nghĩa Với Nhân Quả}
 \begin{columns}[T]
 \begin{column}{0.54\textwidth}
@@ -864,9 +461,8 @@ Xuất hiện ngoại lai & 1, 2, 3, 4, 100 & \textbf{22} \textit{(Ảo)} & \tex
     \node[draw=navyMain, fill=boxBg, rounded corners=4pt, align=center, font=\scriptsize\bfseries] (C) at (0, 2.0) {Biến Gây Nhiễu Ẩn\\(Confounding C)};
     \node[draw=navyMain, fill=white, rounded corners=4pt, align=center, font=\scriptsize\bfseries] (A) at (-1.8, 0) {Biến A\\(Quan sát)};
     \node[draw=navyMain, fill=white, rounded corners=4pt, align=center, font=\scriptsize\bfseries] (B) at (1.8, 0) {Biến B\\(Quan sát)};
-    
-    \draw[{Latex[length=2mm]}-{Latex[length=2mm]}, dashed, line width=1.1pt, accentRed] (A) -- (B) 
-        node[midway, below, font=\tiny\bfseries, color=accentRed] {Tương quan biểu kiến};
+    \draw[{Latex[length=2mm]}-{Latex[length=2mm]}, dashed, line width=1.1pt, accentRed] (A) -- (B);
+    \node[font=\tiny\bfseries, color=accentRed] at (0, -0.55) {Tương quan biểu kiến};
     \draw[-{Latex[length=2.5mm]}, line width=1.2pt, navyMain] (C) -- (A) node[midway, left, font=\tiny] {Tác động};
     \draw[-{Latex[length=2.5mm]}, line width=1.2pt, navyMain] (C) -- (B) node[midway, right, font=\tiny] {Tác động};
 \end{tikzpicture}\\[0.15cm]
@@ -875,191 +471,68 @@ Xuất hiện ngoại lai & 1, 2, 3, 4, 100 & \textbf{22} \textit{(Ảo)} & \tex
 \end{columns}
 \slidenumber{22}
 \end{frame}
-
-% ==================== SLIDE 23: CHUẨN HÓA DỮ LIỆU: CASE STUDY GIAO THÔNG ====================
-
-
+% ==================== SLIDE 24: CHUẨN HÓA KHÁC ====================
 \begin{frame}[plain, t]
-
-
-\slideheader{Chương 5 • Chuẩn Hóa Dữ Liệu}{Case Study: Đâu Là Tiểu Bang An Toàn Nhất?}
-{\fontsize{7.5pt}{9.2pt}\selectfont
-\begin{table}[h]
-\centering
-\begin{tabular}{p{0.22\textwidth} p{0.32\textwidth} p{0.38\textwidth}}
-\toprule
-\textbf{\color{navyMain} Phương pháp} & \textbf{\color{navyMain} Top 3 Bang Dẫn Đầu} & \textbf{\color{navyMain} Đánh giá tính công bằng} \\
-\midrule
-\textbf{Lần 1: Số đếm thô} & 1. Washington D.C. ($31$)\newline 2. Rhode Island ($59$)\newline 3. Vermont ($68$) & \textbf{Bất công:} Các nơi này cực kỳ ít dân so với California hay Texas! Không phản ánh mức độ an toàn. \\
-\midrule
-\textbf{Lần 2: Chuẩn hóa theo Dân số}\newline {\tiny $\frac{\text{Số ca}}{\text{Dân số}} \times 100.000$} & 1. Washington D.C. ($4,4$)\newline 2. New York ($4,8$)\newline 3. Massachusetts ($5,2$) & \textbf{Chưa chuẩn:} Vùng đô thị Đông Bắc người dân chủ yếu đi bộ và tàu điện ngầm, rất ít lái xe! \\
-\midrule
-\textbf{Lần 3: Chuẩn hóa theo Quãng đường (VMT)}\newline {\tiny $\frac{\text{Số ca}}{\text{Triệu dặm xe chạy}} \times 100$} & 1. Massachusetts ($0,54$)\newline 2. Minnesota ($0,63$)\newline 3. New Jersey ($0,73$) & \textbf{Chính xác nhất:} \textit{D.C. bị loại khỏi Top 5!} Thước đo này phản ánh sát nhất rủi ro thực tế khi tham gia giao thông. \\
-\bottomrule
-\end{tabular}
-\end{table}
-}
-\slidenumber{23}
-\end{frame}
-
-% ==================== SLIDE 24: PHƯƠNG PHÁP CHUẨN HÓA KHÁC & KHI NÀO KHÔNG CẦN ====================
-
-
-\begin{frame}[plain, t]
-
-
 \slideheader{Chương 5 • Chuẩn Hóa Dữ Liệu}{Các Phương Pháp Chuẩn Hóa \& Ngoại Lệ}
 \begin{columns}[T]
 \begin{column}{0.51\textwidth}
 {\fontsize{8.2pt}{10.5pt}\selectfont
 \textbf{Các kỹ thuật chuẩn hóa chuyên sâu khác:}
 \begin{itemize}\setlength{\itemsep}{2pt}
-    \item \textbf{1. Điều chỉnh theo lạm phát (Real Dollars):}
-    Không thể so thu nhập $\$10.000$ năm 1970 với năm 2020. Phải quy đổi từ số danh nghĩa sang sức mua thực tế.
-    \item \textbf{2. Điều chỉnh theo mùa vụ (Seasonal Adjustment):}
+    \item \textbf{1. Điều chỉnh theo lạm phát:}
+    Không thể so thu nhập \$10.000 năm 1970 với năm 2020. Phải quy đổi từ số danh nghĩa sang sức mua thực tế.
+    \item \textbf{2. Điều chỉnh theo mùa vụ:}
     Loại bỏ biến động chu kỳ tự nhiên (du lịch mùa hè, bán lẻ dịp Giáng sinh) để thấy xu hướng thực chất.
-    \item \textbf{3. Chỉ số hóa (Indexing \& Z-score):}
+    \item \textbf{3. Chỉ số hóa:}
     Đưa các biến có đơn vị khác nhau về cùng mốc chuẩn Base 100 hoặc độ lệch chuẩn.
 \end{itemize}
 }
 \end{column}
 \begin{column}{0.45\textwidth}
-\calloutbox[\textwidth]{Khi Nào KHÔNG CẦN Chuẩn Hóa?}{
-    Khi biến số bản thân nó đã là một \textbf{đại lượng đo lường trên thang quy chiếu chung (Measured variables)}:\\[0.1cm]
-    • \textbf{Độ tuổi trung vị (Median Age):} Con người ở mọi thành phố đều sống trong thang tuổi $0\text{--}120$, có thể so sánh trực tiếp.\\
-    • \textbf{Thu nhập hộ gia đình trung vị (Median Income):} Xét trong cùng 1 năm và 1 đơn vị tiền tệ có thể đối chiếu giữa các vùng mà không cần chia theo đầu người!
+\calloutbox[\linewidth]{Khi Nào KHÔNG CẦN Chuẩn Hóa?}{
+    Khi biến số bản thân nó đã là một \textbf{đại lượng đo lường trên thang quy chiếu chung}:\\[0.1cm]
+    • \textbf{Độ tuổi trung vị (Median Age):} Con người ở mọi thành phố đều sống trong thang tuổi 0--120, có thể so sánh trực tiếp.\\
+    • \textbf{Thu nhập hộ gia đình trung vị:} Xét trong cùng 1 năm và 1 đơn vị tiền tệ có thể đối chiếu giữa các vùng mà không cần chia theo đầu người!
 }
 \end{column}
 \end{columns}
 \slidenumber{24}
 \end{frame}
 
-% ==================== SLIDE 25: 3 BẪY THIÊN VỊ CHỌN MẪU (1 & 2) ====================
-
-
+% ==================== SLIDE 25: SELECTION & NON-RESPONSE ====================
 \begin{frame}[plain, t]
 \slideheader{Chương 5 • Bẫy Chọn Mẫu}{Thiên Vị Chọn Mẫu \& Không Phản Hồi}
 \begin{columns}[T]
 \begin{column}{0.52\textwidth}
 {\fontsize{8pt}{10.2pt}\selectfont
-Ngay cả khi không cố tình \textit{``chọn quả anh đào''} (cherry-picking), dữ liệu vẫn có thể bị bóp méo từ khâu lấy mẫu:
-
 \vspace{0.08cm}
-\textbf{1. Thiên vị chọn mẫu (Selection Bias)}
+\textbf{1. Thiên vị chọn mẫu }
 \begin{itemize}\setlength{\itemsep}{1pt}
     \item Mẫu được chọn khác biệt có hệ thống so với tổng thể.
-    \item \textit{``Những gì bạn thấy phụ thuộc vào nơi bạn nhìn''} (Bergstrom \& West).
     \item \textbf{Ví dụ:} Đứng trước cửa phòng Gym để đo chiều cao ngẫu nhiên $\rightarrow$ kết luận sai rằng dân số cao vượt trội!
 \end{itemize}
 
 \vspace{0.08cm}
-\textbf{2. Thiên vị không phản hồi (Non-response Bias)}
+\textbf{2. Thiên vị không phản hồi}
 \begin{itemize}\setlength{\itemsep}{1pt}
     \item Người từ chối trả lời khác biệt người trả lời.
     \item \textbf{Thực tế:} Census 2020 trong đại dịch, người nghèo ít phản hồi $\rightarrow$ thu nhập trung vị bị đội lên cao giả tạo.
 \end{itemize}
-}
-\end{column}
-\begin{column}{0.44\textwidth}
-\centering
-\includegraphics[width=\textwidth, height=0.44\textheight, keepaspectratio]{images/fig_5_2_selection_bias.png}\\[0.08cm]
-{\fontsize{6.5pt}{7.5pt}\selectfont \textcolor{navyMuted}{\textit{Hình 5.2: Khung Gym chỉ toàn người cao so với tổng thể chung.}}}
-\end{column}
-\end{columns}
-\slidenumber{25}
-\end{frame}
-
-
-
-\begin{frame}[plain, t]
-
-
-\slideheader{Chương 5 • Bẫy Chọn Mẫu}{Thiên Vị Tự Lựa Chọn \& Chia Mẫu Ngẫu Nhiên}
-\begin{columns}[T]
-\begin{column}{0.52\textwidth}
-{\fontsize{8.2pt}{10.5pt}\selectfont
-\textbf{3. Thiên vị tự lựa chọn (Self-selection Bias)}
+\textbf{3. Thiên vị tự lựa chọn}
 \begin{itemize}\setlength{\itemsep}{2pt}
     \item Xảy ra khi đánh giá hiệu quả chương trình nơi người tham gia \textbf{tự nguyện đăng ký} (giảm cân, học bổng).
     \item \textcolor{accentRed}{\textbf{So sánh SAI:}} So sánh người không tham gia (Nhóm A) với người tự đăng ký (Nhóm B).
     \item \textit{Lý do:} Nhóm B vốn đã có \textbf{động lực và ý thức cao hơn hẳn} Nhóm A!
 \end{itemize}
 
-\vspace{0.12cm}
-\textbf{Giải pháp chuẩn (Randomized Trial):}
-\begin{itemize}\setlength{\itemsep}{2pt}
-    \item Lấy toàn bộ người đã tình nguyện đăng ký (Nhóm B -- có cùng mức quyết tâm).
-    \item \textbf{Chia ngẫu nhiên (Randomly split)} thành Nhóm C (phác đồ 1) và Nhóm D (phác đồ 2) để so sánh công bằng.
-\end{itemize}
 }
 \end{column}
 \begin{column}{0.44\textwidth}
 \centering
-\includegraphics[width=\textwidth, height=0.48\textheight, keepaspectratio]{images/fig_5_3_self_selection_bias.png}\\[0.15cm]
-{\fontsize{6.8pt}{8pt}\selectfont \textcolor{navyMuted}{\textit{Hình 5.3: Không so A với B; Tách ngẫu nhiên B thành C và D.}}}
+\includegraphics[width=\linewidth, height=0.44\textheight, keepaspectratio]{images/fig_5_2_selection_bias.png}\\[0.08cm]
+{\fontsize{6.5pt}{7.5pt}\selectfont \textcolor{navyMuted}{\textit{Hình 5.2: Khung Gym chỉ toàn người cao so với tổng thể chung.}}}
 \end{column}
 \end{columns}
-\slidenumber{26}
+\slidenumber{25}
 \end{frame}
-
-% ==================== SLIDE 27: TỔNG KẾT PHẦN 1 ====================
-
-
-\begin{frame}[plain, t]
-
-
-\slideheader{Phần 1 • Tổng Kết}{Hành Trang Cốt Lõi Trước Khi Vẽ Biểu Đồ}
-\begin{columns}[T]
-\begin{column}{0.31\textwidth}
-\begin{tikzpicture}
-    \node[draw=navyMain, fill=boxBg, rounded corners=6pt, line width=0.9pt, inner sep=7pt, text width=\textwidth-16pt, align=left] {
-        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{navyMain} 1. TÌM KIẾM \& PHẢN BIỆN}}\\[0.05cm]
-        {\fontsize{7.5pt}{9.2pt}\selectfont \color{navyMuted} Chương 3}\\[0.12cm]
-        {\fontsize{7.2pt}{9pt}\selectfont \color{navyMain}
-        • Viết câu hỏi rõ có dấu ?\\
-        • Tôn trọng quyền riêng tư (Masking, Aggregating)\\
-        • Quy tắc 3 tab: data, notes, backup\\
-        • Cảnh giác bẫy Null Island\\
-        • Đọc sâu sai số Metadata}
-    };
-\end{tikzpicture}
-\end{column}
-\begin{column}{0.31\textwidth}
-\begin{tikzpicture}
-    \node[draw=navyMain, fill=boxBg, rounded corners=6pt, line width=0.9pt, inner sep=7pt, text width=\textwidth-16pt, align=left] {
-        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{navyMain} 2. LÀM SẠCH DỮ LIỆU}}\\[0.05cm]
-        {\fontsize{7.5pt}{9.2pt}\selectfont \color{navyMuted} Chương 4}\\[0.12cm]
-        {\fontsize{7.2pt}{9pt}\selectfont \color{navyMain}
-        • Dọn sạch khoảng trắng thừa\\
-        • Bẫy có dấu cách \texttt{" town"}\\
-        • Xoay trục bảng (Transpose)\\
-        • Tách/gộp cột linh hoạt\\
-        • Gom cụm (Clustering) tên}
-    };
-\end{tikzpicture}
-\end{column}
-\begin{column}{0.31\textwidth}
-\begin{tikzpicture}
-    \node[draw=navyMain, fill=boxBg, rounded corners=6pt, line width=0.9pt, inner sep=7pt, text width=\textwidth-16pt, align=left] {
-        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{navyMain} 3. PHÉP SO SÁNH}}\\[0.05cm]
-        {\fontsize{7.5pt}{9.2pt}\selectfont \color{navyMuted} Chương 5}\\[0.12cm]
-        {\fontsize{7.2pt}{9pt}\selectfont \color{navyMain}
-        • Ưu tiên dùng Median\\
-        • Phân biệt Điểm \% và \%\\
-        • Tương quan $\neq$ Nhân quả\\
-        • Chuẩn hóa theo mẫu số đúng\\
-        • Tránh 3 bẫy thiên vị mẫu}
-    };
-\end{tikzpicture}
-\end{column}
-\end{columns}
-\vspace{0.3cm}
-\centering
-\pillbox{\fontsize{9pt}{11pt}\selectfont Tiếp theo: Phần 2 -- Trực Quan Hóa Biểu Đồ Thực Chiến (Chương 6 \& 14)}
-\slidenumber{27}
-\end{frame}
-
-% ==================== SLIDE 1: TIÊU ĐỀ PHẦN 2 ====================
-
-
 \end{document}
