@@ -14,8 +14,11 @@
 \setbeamertemplate{footline}{}
 
 \usepackage{fontspec}
-\setsansfont{Segoe UI}
-\setmainfont{Segoe UI}
+% [SỬA LỖI 1] Segoe UI chỉ có trên Windows -> máy khác/Overleaf báo "font not found".
+% Tự động dùng font dự phòng nếu không có Segoe UI.
+\IfFontExistsTF{Segoe UI}{\setsansfont{Segoe UI}\setmainfont{Segoe UI}}{%
+  \IfFontExistsTF{Carlito}{\setsansfont{Carlito}\setmainfont{Carlito}}{%
+    \setsansfont{DejaVu Sans Condensed}\setmainfont{DejaVu Sans Condensed}}}
 
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -103,6 +106,23 @@
         ] {\textbf{#2}};
     \end{tikzpicture}%
 }
+
+% [SỬA LỖI 2] Thiếu file ảnh trong images/ -> lỗi "File not found" và dừng biên dịch.
+% Nếu ảnh có thật: chèn bình thường. Nếu chưa có: vẽ khung giữ chỗ cùng kích thước.
+\pgfkeys{/ph/.is family, /ph,
+  width/.store in=\phw, height/.store in=\phh, .unknown/.code={}}
+\let\origincludegraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{%
+  \IfFileExists{#2}{\origincludegraphics[#1]{#2}}{%
+    \begingroup
+    \pgfkeys{/ph, width=\linewidth, height=0.4\textheight, #1}%
+    \begin{tikzpicture}
+      \node[draw=navyMuted, dashed, line width=0.7pt, fill=white!55!bgBeige, rounded corners=3pt,
+            minimum width=\phw, minimum height={0.8*(\phh)}, text width={\phw-8pt}, align=center,
+            font=\fontsize{6pt}{7.5pt}\selectfont, text=navyMuted]
+        {\textbf{[Chèn ảnh]}\\\detokenize{#2}};
+    \end{tikzpicture}%
+    \endgroup}}
 
 \begin{document}
 
