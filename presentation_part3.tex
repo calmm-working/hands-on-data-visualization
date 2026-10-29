@@ -32,6 +32,8 @@
 \definecolor{navyMuted}{RGB}{85, 95, 140}    % Muted Navy for subtext/metadata
 \definecolor{navyLight}{RGB}{228, 225, 235}  % Soft tinted fill
 \definecolor{accentDark}{RGB}{185, 28, 28}   % Alert crimson
+\definecolor{boxBg}{RGB}{230, 221, 208}      % Tinted card bg #E6DDD0
+\definecolor{accentRed}{RGB}{185, 28, 28}    % Alert crimson #B91C1C
 
 \setbeamercolor{background canvas}{bg=bgBeige}
 \setbeamercolor{normal text}{fg=navyMain}
@@ -53,9 +55,9 @@
 
 % --- CUSTOM SLIDE HEADER ---
 \newcommand{\slideheader}[2]{%
-    \vspace*{-0.15cm}%
-    {\fontsize{7.5pt}{9pt}\selectfont \textbf{\color{navyMuted}\MakeUppercase{#1}}}\\[0.03cm]
-    {\fontsize{13.5pt}{16pt}\selectfont \textbf{\color{navyMain}\MakeUppercase{#2}}}\\[0.25cm]
+    \par\vspace*{-0.15cm}%
+    {\fontsize{7.5pt}{9pt}\selectfont \textbf{\color{navyMuted}\MakeUppercase{#1}}}\par\vspace{0.06cm}%
+    {\fontsize{13.5pt}{16pt}\selectfont \textbf{\color{navyMain}\MakeUppercase{#2}}}\par\vspace{0.20cm}%
 }
 
 % --- CUSTOM FOOTER NUMBER ---
@@ -70,11 +72,7 @@
     \end{tikzpicture}%
 }
 
-% --- PILL BOX MACRO ---
-
-\definecolor{boxBg}{RGB}{230, 221, 208}      % Tinted card bg #E6DDD0
-\definecolor{accentRed}{RGB}{185, 28, 28}    % Alert crimson #B91C1C
-
+% --- PILL BOX & CALLOUT MACROS ---
 \newcommand{\calloutbox}[3][\textwidth]{%
     \begin{tikzpicture}
         \node[
@@ -82,39 +80,23 @@
             draw=navyMain,
             line width=0.8pt,
             rounded corners=4pt,
-            inner sep=5pt,
-            text width=#1-14pt,
+            inner sep=3.5pt,
+            text width=#1-10pt,
             align=left
         ] {
-            {\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{navyMain}#2}}\\[0.03cm]
-            {\fontsize{7.5pt}{9.5pt}\selectfont \color{navyMain}#3}
+            {\fontsize{8pt}{10pt}\selectfont \textbf{\color{navyMain}#2}}\par\vspace{0.02cm}%
+            {\fontsize{7.2pt}{9.2pt}\selectfont \color{navyMain}#3}
         };
     \end{tikzpicture}%
 }
 
-\newcommand{\pillbox}[2][]{%
-    \begin{tikzpicture}
-        \node[
-            draw=navyMain,
-            rounded corners=10pt,
-            line width=1.1pt,
-            inner xsep=12pt,
-            inner ysep=4pt,
-            text=navyMain,
-            #1
-        ] {\textbf{#2}};
-    \end{tikzpicture}%
-}
-
-
-% Concise on-slide text; longer explanations stay in hidden Beamer notes.
 \setbeameroption{hide notes}
 \newcommand{\bodytext}{\fontsize{10pt}{13pt}\selectfont\raggedright}
-\newcommand{\figcaption}[1]{{\fontsize{7.5pt}{9.5pt}\selectfont\color{navyMuted}#1\par}}
-\newcommand{\takeaway}[1]{\vspace{0.18cm}{\fontsize{9.5pt}{12.5pt}\selectfont\bfseries #1\par}}
+\newcommand{\figcaption}[1]{{\fontsize{7pt}{8.5pt}\selectfont\color{navyMuted}#1\par}}
+\newcommand{\takeaway}[1]{\vspace{0.08cm}{\fontsize{8.5pt}{11pt}\selectfont\bfseries #1\par}}
 \newcommand{\briefdef}[2]{{\fontsize{10pt}{13pt}\selectfont\textbf{#1} #2\par}\vspace{0.20cm}}
 
-% [SỬA LỖI] Thiếu file ảnh trong images/ -> vẽ khung giữ chỗ
+% Image fallback placeholder if missing
 \pgfkeys{/ph/.is family, /ph,
   width/.store in=\phw, height/.store in=\phh, .unknown/.code={}}
 \let\origincludegraphics\includegraphics
@@ -132,8 +114,9 @@
 
 \begin{document}
 
-% ==================== SLIDE 1 ====================
+% ==================== SLIDE 1: TRANG BÌA PHẦN 3 ====================
 \begin{frame}[plain,c]
+\slidenumber{01}
 \begin{tikzpicture}[remember picture,overlay]
 \node[anchor=north west] at ($(current page.north west)+(1.0cm,-0.8cm)$) {\textcolor{navyMuted}{\fontsize{8.5pt}{10.5pt}\selectfont Tháng 10, 2026}};
 \node[anchor=west,text width=0.96\textwidth] at ($(current page.west)+(1.0cm,0.3cm)$) {
@@ -141,209 +124,312 @@
 {\fontsize{28pt}{32pt}\selectfont\bfseries\color{navyMain}TRỰC QUAN HÓA}\\[0.12cm]
 {\fontsize{28pt}{32pt}\selectfont\bfseries\color{navyMain}KHÔNG GIAN}\\[0.18cm]
 {\fontsize{20pt}{24pt}\selectfont\bfseries\color{navyMain}MAP YOUR DATA}\\[0.35cm]
-{\fontsize{10pt}{13pt}\selectfont Chương 7\\[0.15cm]Chọn kiểu bản đồ • Thiết kế màu • So sánh đúng}\\[0.35cm]
+{\fontsize{10pt}{13pt}\selectfont Chương 7\\[0.15cm]Các loại bản đồ • Cấu trúc tương tác • So sánh biểu diễn • Thiết kế màu sắc}\\[0.35cm]
 {\fontsize{8.5pt}{10.5pt}\selectfont \color{navyMuted} Thuyết trình: \textbf{Nguyễn Hữu Quyết} • Tác phẩm: \textit{Hands-On Data Visualization}}
 };
 \end{tikzpicture}
-\note{Giới thiệu Chương 7: chọn kiểu bản đồ, thiết kế bản đồ và so sánh dữ liệu có ý nghĩa. Không phải hướng dẫn thao tác từng công cụ. Nguồn: \url{https://handsondataviz.org/map.html}.}
-\slidenumber{01}
 \end{frame}
 
-% ==================== SLIDE 2 ====================
+% ==================== SLIDE 2: BẢN ĐỒ KÝ HIỆU TỶ LỆ ====================
 \begin{frame}[plain,t]
-\slideheader{Chương 7 • Map Your Data}{Khi Nào Cần Bản Đồ?}
-{\bodytext Vẽ bản đồ khi \textbf{vị trí} giúp làm rõ câu chuyện.\par}
-\vspace{0.45cm}
+\slidenumber{02}
+\slideheader{Chương 7 • Phân Loại Bản Đồ}{Bản Đồ Ký Hiệu Tỷ Lệ (Symbol Point Map)}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+{\fontsize{8pt}{10.2pt}\selectfont
+\textbf{1. Mục đích sử dụng tối ưu:}
+\begin{itemize}\setlength{\itemsep}{1pt}
+    \item Thể hiện các \textbf{vị trí cụ thể} (thành phố, địa điểm) kèm theo các \textbf{đại lượng số liệu định lượng}.
+\end{itemize}
+
+\vspace{0.08cm}
+\textbf{2. Cơ chế mã hóa thị giác kép:}
+\begin{itemize}\setlength{\itemsep}{1pt}
+    \item \textbf{Kích thước (Size):} Tỷ lệ thuận với quy mô dân số (vòng tròn lớn/nhỏ).
+    \item \textbf{Màu sắc (Color):} Phân loại chiều hướng biến động (xanh lá = tăng trưởng, đỏ tía = suy giảm).
+\end{itemize}
+
+\vspace{0.08cm}
+\textbf{3. So sánh với bản đồ điểm thông thường:}
+\begin{itemize}\setlength{\itemsep}{1pt}
+    \item \textit{Bản đồ điểm thường (Point Map):} Chỉ định vị địa chỉ bằng biểu tượng phân loại đơn thuần.
+    \item \textit{Bản đồ ký hiệu tỷ lệ:} Cho phép so sánh trực tiếp cả độ lớn và xu hướng biến động giữa các địa điểm.
+\end{itemize}
+}
+\end{column}
+\begin{column}{0.48\textwidth}\centering
+\includegraphics[width=\linewidth,height=0.52\textheight,keepaspectratio]{images/p2_table7_1_img2_599x400.png}\\[0.06cm]
+\figcaption{Dân số thành phố Mỹ (kích thước) \& tỷ lệ tăng giảm 2010--2019 (màu sắc)}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==================== SLIDE 3: BẢN ĐỒ PHÂN VÙNG MÀU & BẢN ĐỒ NHIỆT ====================
+\begin{frame}[plain,t]
+\slidenumber{03}
+\slideheader{Chương 7 • Phân Loại Bản Đồ}{Bản Đồ Phân Vùng Màu \& Bản Đồ Nhiệt Điểm}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}\centering
+\includegraphics[width=0.92\linewidth,height=0.36\textheight,keepaspectratio]{images/p2_table7_1_img3_600x400.png}\\[0.06cm]
+{\fontsize{8.5pt}{10.5pt}\selectfont\textbf{1. Bản Đồ Phân Vùng Màu (Choropleth Map)}}\\[0.04cm]
+{\fontsize{7.6pt}{9.8pt}\selectfont\raggedright
+\begin{itemize}\setlength{\itemsep}{1pt}
+    \item \textbf{Đặc trưng:} Tô màu các ranh giới khép kín (bang, hạt, xã) để phản ánh độ lớn số liệu.
+    \item \textbf{Ứng dụng tốt nhất:} Thấy rõ mô hình không gian khu vực (thu nhập, giá nhà, tỷ lệ bệnh tật). Bắt buộc phải chuẩn hóa theo tỷ lệ/đầu người.
+\end{itemize}\par}
+\end{column}
+\begin{column}{0.48\textwidth}\centering
+\includegraphics[width=0.92\linewidth,height=0.36\textheight,keepaspectratio]{images/p2_table7_1_img4_600x400.png}\\[0.06cm]
+{\fontsize{8.5pt}{10.5pt}\selectfont\textbf{2. Bản Đồ Nhiệt Điểm (Heat Point Map)}}\\[0.04cm]
+{\fontsize{7.6pt}{9.8pt}\selectfont\raggedright
+\begin{itemize}\setlength{\itemsep}{1pt}
+    \item \textbf{Đặc trưng:} Gom cụm hàng ngàn điểm dữ liệu thành các ``vùng nóng'' (hotspots) liên tục bằng gradient màu.
+    \item \textbf{Ứng dụng tốt nhất:} Nhấn mạnh mật độ tập trung cao (tội phạm, điểm đen tai nạn giao thông, mật độ dân cư đô thị).
+\end{itemize}\par}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==================== SLIDE 4: BẢN ĐỒ CẬP NHẬT TỰ ĐỘNG ====================
+\begin{frame}[plain,t]
+\slidenumber{04}
+\slideheader{Chương 7 • Phân Loại Bản Đồ}{Bản Đồ Cập Nhật Tự Động (Dữ Liệu Mở)}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+{\fontsize{8pt}{10.2pt}\selectfont
+\textbf{1. Đặc trưng bản đồ thời gian thực (Open-Data):}
+\begin{itemize}\setlength{\itemsep}{1pt}
+    \item Kết nối API tự động kéo dữ liệu từ kho dữ liệu mở chính phủ (Socrata, ArcGIS Hub).
+    \item Dữ liệu luôn tự cập nhật mới nhất mà không cần tải file thủ công.
+\end{itemize}
+
+\vspace{0.08cm}
+\textbf{2. Bộ lọc dữ liệu quan trọng (Tai nạn NYC):}
+\begin{itemize}\setlength{\itemsep}{1pt}
+    \item \textbf{Khung thời gian:} Lọc trong 365 ngày gần nhất.
+    \item \textbf{Mức nghiêm trọng:} Chỉ chọn vụ có người tử vong (\texttt{KILLED > 0}).
+\end{itemize}
+
+\vspace{0.08cm}
+\textbf{3. Cảnh báo kỹ thuật \& bẫy tọa độ:}
+\begin{itemize}\setlength{\itemsep}{1pt}
+    \item Tọa độ lỗi \texttt{(0,0)} (\textit{Null Island}) do địa mã hóa thất bại.
+    \item Cần bảo trì định kỳ tránh lỗi khi API thay đổi cấu trúc dữ liệu.
+\end{itemize}
+}
+\end{column}
+\begin{column}{0.48\textwidth}\centering
+\includegraphics[width=\linewidth,height=0.52\textheight,keepaspectratio]{images/fig_7_61_nyc_crashes.png}\\[0.06cm]
+\figcaption{Bản đồ tai nạn giao thông nghiêm trọng tại New York (nguồn Socrata)}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==================== SLIDE 5: CÁC THÀNH PHẦN BẢN ĐỒ TƯƠNG TÁC ====================
+\begin{frame}[plain,t]
+\slidenumber{05}
+\slideheader{Chương 7 • Cấu Trúc Bản Đồ}{Các Thành Phần Của Bản Đồ Tương Tác}
+\begin{columns}[c,onlytextwidth]
+\begin{column}{0.46\textwidth}
+{\fontsize{7.8pt}{9.8pt}\selectfont
+\textbf{Cấu trúc phân lớp hoàn chỉnh (Key Elements):}
+\begin{itemize}\setlength{\itemsep}{1pt}
+    \item \textbf{Lớp nền (Basemap):} Cung cấp bối cảnh địa lý (Raster vệ tinh hoặc Vector đường phố giữ nét khi zoom).
+    \item \textbf{Lớp dữ liệu (Data layers):}
+        \begin{itemize}\setlength{\itemsep}{0.8pt}
+            \item \textbf{Điểm (Point):} Vị trí tọa độ cụ thể kèm biểu tượng (marker).
+            \item \textbf{Tuyến (Polyline):} Tuyến đường / mạng lưới giao thông.
+            \item \textbf{Vùng (Polygon):} Ranh giới khu vực khép kín.
+        \end{itemize}
+    \item \textbf{Yếu tố tương tác:} Nút zoom (\texttt{+}/\texttt{-}), Chú thích nổi (Tooltip khi rê chuột), Cửa sổ chi tiết (Popup khi bấm).
+    \item \textbf{Định hướng \& Chú thích:} Tiêu đề, Bảng chú giải, Thước tỷ lệ, Mũi tên Bắc, Nguồn trích dẫn.
+\end{itemize}
+}
+\end{column}
+\begin{column}{0.51\textwidth}\centering
+\includegraphics[width=\linewidth,height=0.52\textheight,keepaspectratio]{images/fig_7_2_map_elements.png}\\[0.06cm]
+\figcaption{Hình 7.2: Các thành phần cốt lõi của bản đồ tương tác trong sách}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==================== SLIDE 6: MỘT BIẾN & TRÁNH CHỒNG LỚP ====================
+\begin{frame}[plain,t]
+\slidenumber{06}
+\slideheader{Chương 7 • So Sánh Biểu Diễn}{Quy Tắc Một Biến \& Tránh Chồng Lớp}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.46\textwidth}
+{\fontsize{8.2pt}{10.8pt}\selectfont
+\textbf{Sai lầm khi biểu diễn hai biến số:}
+\begin{itemize}\setlength{\itemsep}{1.5pt}
+    \item Chồng lớp \textbf{bản đồ ký hiệu tỷ lệ} (học vấn) đè lên \textbf{bản đồ phân vùng màu} (thu nhập).
+    \item \textbf{Hậu quả:} Làm quá tải thị giác, ký hiệu che khuất sắc độ màu của đa giác, độc giả không thể nhận biết mối tương quan.
+\end{itemize}
+
+\vspace{0.10cm}
+\textbf{Giải pháp tối ưu từ sách:}
+\begin{itemize}\setlength{\itemsep}{1.5pt}
+    \item \textbf{Biểu đồ phân tán:} Thể hiện rõ ràng và chuẩn xác nhất quan hệ giữa 2 biến số.
+    \item \textbf{Ghép đôi bản đồ và biểu đồ:} Đặt 1 bản đồ phân vùng màu bên cạnh 1 biểu đồ phân tán để giữ cả vị trí địa lý lẫn mối tương quan.
+\end{itemize}
+}
+\end{column}
+\begin{column}{0.50\textwidth}\centering
+\includegraphics[width=\linewidth,height=0.52\textheight,keepaspectratio,trim=0 0 0 213.75bp,clip]{images/fig_7_3_one_var_not_two.png}\\[0.06cm]
+\figcaption{Hình 7.3: Chồng 2 biến gây rối (trái) vs. Biểu đồ phân tán rõ ràng (phải)}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==================== SLIDE 7: VẤN ĐỀ MAUP ====================
+\begin{frame}[plain,t]
+\slidenumber{07}
+\slideheader{Chương 7 • So Sánh Biểu Diễn}{Độ Phân Giải Không Gian \& Vấn Đề MAUP}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+{\fontsize{8pt}{10.2pt}\selectfont
+\textbf{1. Vấn đề Đơn vị Không gian (MAUP):}
+\begin{itemize}\setlength{\itemsep}{1.2pt}
+    \item Cách chia hoặc gộp ranh giới không gian ảnh hưởng trực tiếp đến mô hình dữ liệu người xem nhận thức được (\textit{Modifiable Areal Unit Problem}).
+\end{itemize}
+
+\vspace{0.06cm}
+\textbf{2. So sánh Cấp Bang vs. Cấp Hạt (Hình 7.4):}
+\begin{itemize}\setlength{\itemsep}{1.2pt}
+    \item \textbf{Cấp Bang (Trái):} Thể hiện bức tranh tổng thể giữa các bang (Massachusetts có giá nhà cao vượt trội so với lân cận).
+    \item \textbf{Cấp Hạt (Phải):} Bộc lộ phân hóa sâu sắc nội bộ (vùng đô thị NYC, Boston đắt đỏ so với vùng nông thôn).
+\end{itemize}
+
+\vspace{0.06cm}
+\calloutbox[\linewidth]{Nguyên tắc chọn đơn vị}{Đơn vị nhỏ hơn bộc lộ nhiều chi tiết hơn; tuy nhiên nếu chia quá nhỏ sẽ gây nhiễu, làm mất đi mẫu hình tổng thể.}
+}
+\end{column}
+\begin{column}{0.48\textwidth}\centering
+\includegraphics[width=\linewidth,height=0.56\textheight,keepaspectratio]{images/fig_7_4_state_vs_county.png}\\[0.06cm]
+\figcaption{Hình 7.4: Giá nhà Zillow 9/2020 ở Cấp Bang (trái) vs. Cấp Hạt (phải)}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==================== SLIDE 8: CHUẨN HÓA DỮ LIỆU ====================
+\begin{frame}[plain,t]
+\slidenumber{08}
+\slideheader{Chương 7 • So Sánh Biểu Diễn}{Chuẩn Hóa Trên Bản Đồ Phân Vùng Màu}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+{\fontsize{8pt}{10.5pt}\selectfont
+\textbf{1. Bản chất bản đồ phân vùng màu (Choropleth):}
+\begin{itemize}\setlength{\itemsep}{1.2pt}
+    \item Bản đồ tô màu phủ kín theo diện tích đa giác; diện tích lớn dễ gây ảo giác thị giác nếu chỉ hiển thị số lượng thô.
+    \item Không chuẩn hóa sẽ biến bản đồ thành biểu thị \textbf{mật độ dân số}, làm sai lệch bản chất hiện tượng.
+\end{itemize}
+
+\vspace{0.06cm}
+\textbf{2. So sánh Số ca nhiễm Covid-19 (Hình 7.14):}
+\begin{itemize}\setlength{\itemsep}{1.2pt}
+    \item \textbf{Số đếm thô (Trái):} Bang đông dân (CA, TX, FL) có màu sẫm nhất do tổng dân số vượt trội.
+    \item \textbf{Tỷ lệ trên dân số (Phải):} Chuẩn hóa theo đầu người mới làm lộ rõ tâm dịch thực sự (NY, NJ, MA).
+\end{itemize}
+}
+\end{column}
+\begin{column}{0.48\textwidth}\centering
+\includegraphics[width=\linewidth,height=0.36\textheight,keepaspectratio]{images/fig_7_14_normalize_covid_map.png}\\[0.05cm]
+\figcaption{Hình 7.14: Tổng số ca Covid-19 (trái) vs. Ca nhiễm theo dân số (phải)}\par\vspace{0.08cm}
+\calloutbox[\linewidth]{Quy tắc cốt lõi}{Chỉ dùng bản đồ phân vùng màu cho giá trị tương đối: tỷ lệ \%, mật độ hoặc bình quân đầu người.}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==================== SLIDE 9: BẢNG MÀU ====================
+\begin{frame}[plain,t]
+\slidenumber{09}
+\slideheader{Chương 7 • Thiết Kế Màu Sắc}{3 Loại Bảng Màu Chuẩn (ColorBrewer)}
+\vspace{0.10cm}
+\centering
+\includegraphics[width=0.92\linewidth,height=0.20\textheight,keepaspectratio]{images/fig_7_6_color_palettes.png}\\[0.15cm]
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.31\textwidth}\centering
+{\fontsize{10.5pt}{12.5pt}\selectfont\bfseries 1. Tuần Tự (Sequential)}\\[0.06cm]
+{\fontsize{7.8pt}{10pt}\selectfont\raggedright
+\textbf{Dữ liệu số:} từ thấp $\rightarrow$ cao.\\[0.05cm]
+Sắc độ từ nhạt đến đậm (hoặc đơn sắc / đa sắc liên tiếp).\\[0.05cm]
+\textbf{Ví dụ:} Mức thu nhập, lượng mưa, mật độ dân số.\par}
+\end{column}
+\begin{column}{0.31\textwidth}\centering
+{\fontsize{10.5pt}{12.5pt}\selectfont\bfseries 2. Phân Kỳ (Diverging)}\\[0.08cm]
+{\fontsize{7.8pt}{10pt}\selectfont\raggedright
+\textbf{Lệch 2 phía quanh mốc chuẩn:} Điểm 0, trung bình hoặc trung vị.\\[0.05cm]
+2 màu tương phản ở 2 cực, màu trung tính (nhạt) ở giữa.\\[0.05cm]
+\textbf{Ví dụ:} Tăng trưởng âm/dương, thu nhập so với chuẩn quốc gia.\par}
+\end{column}
+\begin{column}{0.31\textwidth}\centering
+{\fontsize{10.5pt}{12.5pt}\selectfont\bfseries 3. Định Tính (Qualitative)}\\[0.08cm]
+{\fontsize{7.8pt}{10pt}\selectfont\raggedright
+\textbf{Dữ liệu phân loại/danh mục:}\\[0.05cm]
+Không có trật tự cao thấp. Các màu độc lập, dễ phân biệt.\\[0.05cm]
+\textbf{Ví dụ:} Mục đích sử dụng đất (đất ở, thương mại, rừng, nước), đảng phái chính trị.\par}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==================== SLIDE 10: KHOẢNG CHIA MÀU ====================
+\begin{frame}[plain,t]
+\slidenumber{10}
+\slideheader{Chương 7 • Thiết Kế Màu Sắc}{Khoảng Chia Màu: Bậc Thang \& Liên Tục}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
-{\fontsize{15pt}{21pt}\selectfont\bfseries Khoảng cách\\[0.32cm]Cụm điểm\\[0.32cm]Phân bố theo vùng\par}
+{\fontsize{8pt}{10.3pt}\selectfont
+\textbf{1. Bậc thang (Steps) vs. Liên tục (Continuous):}
+\begin{itemize}\setlength{\itemsep}{1.2pt}
+    \item \textbf{Bậc thang:} Phân chia ngưỡng màu rời rạc (khuyên dùng 3--7 lớp). Dễ đối chiếu chú giải; phù hợp khi cần ra quyết định theo mốc chuẩn.
+    \item \textbf{Liên tục:} Gradient màu chuyển dịch mượt mà. Giúp quan sát biến thiên tinh tế, tránh tạo ranh giới nhân tạo.
+\end{itemize}
+
+\vspace{0.06cm}
+\textbf{2. Ba phương pháp gom nhóm phân lớp:}
+\begin{itemize}\setlength{\itemsep}{1.2pt}
+    \item \textbf{Khoảng đều (Equal Interval):} Các đoạn giá trị bằng nhau; dễ hiểu, phù hợp phân bố chuẩn.
+    \item \textbf{Phân vị (Quantiles):} Số lượng đơn vị bằng nhau mỗi nhóm; tối ưu khi dữ liệu bị lệch (\textit{skewed}).
+    \item \textbf{Cụm tự nhiên (Jenks):} Tự động gom cụm theo khoảng trống tự nhiên của dữ liệu.
+\end{itemize}
+}
 \end{column}
-\begin{column}{0.46\textwidth}
-\briefdef{So sánh giá trị}{→ Biểu đồ thanh}
-\briefdef{Theo thời gian}{→ Biểu đồ đường}
-\briefdef{Quan hệ hai biến}{→ Biểu đồ phân tán}
+\begin{column}{0.48\textwidth}\centering
+\includegraphics[width=0.92\linewidth,height=0.25\textheight,keepaspectratio]{images/fig_14_12_inequality_continuous.png}\\[0.03cm]
+\figcaption{Hình 14.12: Dải màu liên tục (Continuous -- Tuyến tính)}\par\vspace{0.08cm}
+\includegraphics[width=0.92\linewidth,height=0.25\textheight,keepaspectratio]{images/fig_14_13_inequality_jenks.png}\\[0.03cm]
+\figcaption{Hình 14.13: Bậc thang (3 Steps -- Cụm tự nhiên Jenks)}
 \end{column}
 \end{columns}
-\vspace{0.40cm}
-\takeaway{Có địa chỉ không có nghĩa phải vẽ bản đồ.}
-\note{Bản đồ hữu ích khi vị trí và mẫu hình không gian là một phần của câu hỏi. Khoảng cách giữa các điểm, cụm điểm và phân bố theo vùng thường dễ nhận ra trên bản đồ. Nhưng nếu câu hỏi là nơi nào cao nhất thì biểu đồ thanh có thể giúp so sánh chính xác hơn. Dùng biểu đồ đường cho thay đổi theo thời gian, biểu đồ phân tán cho quan hệ hai biến. Không nên hiểu rằng bản đồ không bao giờ thể hiện được hai biến: đây là quyết định dựa trên câu chuyện và mức độ phức tạp. Nguồn: \url{https://handsondataviz.org/map-design.html}.}
-\slidenumber{02}
 \end{frame}
 
-% ==================== SLIDE 3 ====================
+% ==================== SLIDE 11: TẬN DỤNG DẢI MÀU & TIẾP CẬN ====================
 \begin{frame}[plain,t]
-\slideheader{Chương 7 • Map Your Data}{Bản Đồ Gồm Nền Và Lớp Dữ Liệu}
-\begin{columns}[c,onlytextwidth]
-\begin{column}{0.30\textwidth}
-\briefdef{Lớp nền:}{bối cảnh địa lý.}
-\briefdef{Lớp dữ liệu:}{đối tượng cần thể hiện.}
-\vspace{0.15cm}
-\briefdef{Điểm:}{một vị trí}
-\briefdef{Tuyến:}{chuỗi điểm nối nhau}
-\briefdef{Vùng:}{hình khép kín}
-\end{column}
-\begin{column}{0.66\textwidth}\centering
-\includegraphics[width=\linewidth,height=0.58\textheight,keepaspectratio]{images/fig_7_2_map_elements.png}\\[0.12cm]
-\figcaption{Các thành phần của bản đồ tương tác}
-\end{column}
-\end{columns}
-\note{Bản đồ nền cung cấp bối cảnh; lớp dữ liệu phủ lên trên cho biết đối tượng đang nghiên cứu. Raster lưu thông tin theo ô ảnh, có thể là ảnh vệ tinh. Vector mô tả hình học bằng tọa độ nên giữ nét khi phóng gần; mức chi tiết vẫn phụ thuộc dữ liệu và cách dựng. Điểm có thể là Tượng Nữ thần Tự do tại vĩ độ 40.69, kinh độ -74.04. Tuyến là chuỗi điểm, vùng là ranh giới khép kín. Tiêu đề, chú giải, bối cảnh và nguồn giúp người đọc hiểu bản đồ. Nút zoom, tooltip và popup thường gặp ở bản đồ tương tác; mũi tên Bắc và thước tỷ lệ thêm khi cần, không phải mọi bản đồ đều bắt buộc. Nguồn: \url{https://handsondataviz.org/map-design.html}.}
-\slidenumber{03}
-\end{frame}
-
-% ==================== SLIDE 4 ====================
-\begin{frame}[plain,t]
-\slideheader{Chương 7 • Map Your Data}{Chọn Kiểu Bản Đồ Theo Dữ Liệu}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.30\textwidth}
-\briefdef{Điểm}{→ Vị trí cụ thể}
-\briefdef{Ký hiệu tỷ lệ}{→ Giá trị tại vị trí}
-\briefdef{Phân vùng màu}{→ Giá trị theo vùng\\(choropleth)}
-\vspace{0.20cm}
-{\bodytext Công viên có thể là \textbf{điểm hoặc vùng}, tùy câu hỏi.\par}
-\end{column}
-\begin{column}{0.66\textwidth}\centering
-\includegraphics[width=\linewidth,height=0.56\textheight,keepaspectratio]{images/fig_7_34_symbol_map.png}\\[0.12cm]
-\figcaption{Màu: biến động dân số • Kích thước: dân số 2019.}
-\end{column}
-\end{columns}
-\note{Chọn kiểu bản đồ theo đại lượng cần thể hiện. Hình minh họa các thành phố Mỹ trên 100 nghìn dân: màu cho biết biến động dân số 2010--2019; kích thước ký hiệu biểu diễn dân số ước tính năm 2019. Điểm đánh dấu vị trí. Ký hiệu tỷ lệ có kích thước thay đổi theo giá trị tại vị trí. Choropleth tô màu vùng theo giá trị. Cùng một địa điểm có thể dùng nhiều cách biểu diễn: công viên là điểm khi cần tìm đường, là vùng khi cần tính diện tích đất công. Có thể dùng tâm điểm thành phố để vẽ vòng tròn, hoặc gộp số giường của từng bệnh viện theo hạt. Các loại khác gồm bản đồ nhiệt để thấy điểm nóng, bản đồ câu chuyện cho hành trình và đa tuyến cho mạng lưới. Nguồn: \url{https://handsondataviz.org/map.html} và \url{https://handsondataviz.org/map-design.html}.}
-\slidenumber{04}
-\end{frame}
-
-% ==================== SLIDE 5 ====================
-\begin{frame}[plain,t]
-\slideheader{Chương 7 • Map Your Data}{Hai Biến: Cân Nhắc Biểu Đồ Phân Tán}
-{\bodytext\textbf{Thu nhập:} tô màu\qquad\textbf{Học vấn:} kích thước ký hiệu\par}
-\vspace{0.15cm}
-\centering
-% Show panels (c) and (d); crop only the two introductory single-variable panels.
-% Original PNG is 563 x 599 pixels at 96 dpi; top trim = 285px * 72/96.
-\includegraphics[width=0.88\linewidth,height=0.47\textheight,keepaspectratio,trim=0 0 0 213.75bp,clip]{images/fig_7_3_one_var_not_two.png}\\[0.10cm]
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.48\textwidth}{\bodytext\textbf{Chồng hai biến}\\[0.08cm]Khó nhận ra quan hệ\par}\end{column}
-\begin{column}{0.48\textwidth}{\bodytext\textbf{Biểu đồ phân tán}\\[0.08cm]Quan hệ hai biến rõ hơn\par}\end{column}
-\end{columns}
-\takeaway{Có thể đặt bản đồ một biến cạnh biểu đồ phân tán.}
-\note{Hình minh họa thu nhập và tỷ lệ có bằng đại học tại tám hạt. Bản đồ tô màu và ký hiệu tỷ lệ có thể đọc riêng, nhưng chồng hai cách mã hóa sẽ tăng công sức giải mã. Sách thường khuyên tránh cách chồng này và dùng biểu đồ phân tán nếu mục tiêu là tìm quan hệ. Đây là lời khuyên tránh chồng bản đồ ký hiệu lên choropleth, không phải lệnh cấm mọi cách mã hóa hai biến. Ví dụ bản đồ ký hiệu ở slide 4 vẫn có thể dùng cả màu lẫn kích thước của cùng ký hiệu. Có thể đặt một bản đồ cạnh biểu đồ phân tán để giữ cả bối cảnh không gian lẫn quan hệ số liệu. Nguồn: \url{https://handsondataviz.org/map-design.html}.}
-\slidenumber{05}
-\end{frame}
-
-% ==================== SLIDE 6 ====================
-\begin{frame}[plain,t]
-\slideheader{Chương 7 • Map Your Data}{Chọn Mức Địa Lý Phù Hợp}
-{\bodytext\textbf{MAUP:} Cách chia đơn vị không gian ảnh hưởng mẫu hình nhìn thấy.\par}
-\vspace{0.12cm}
-\centering
-\includegraphics[width=0.88\linewidth,height=0.50\textheight,keepaspectratio]{images/fig_7_4_state_vs_county.png}\\[0.08cm]
-\figcaption{Giá nhà điển hình, Đông Bắc Mỹ • 9/2020}
-\vspace{0.12cm}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.48\textwidth}{\bodytext\textbf{Cấp bang:} khác biệt giữa các bang\par}\end{column}
-\begin{column}{0.48\textwidth}{\bodytext\textbf{Cấp hạt:} khác biệt trong mỗi bang\par}\end{column}
-\end{columns}
-\takeaway{Nhỏ hơn thường cho thêm chi tiết; quá chi tiết cũng che khuất mẫu hình.}
-\note{MAUP là ảnh hưởng của cách chia hoặc gộp đơn vị không gian đến mẫu hình nhìn thấy. Hình dùng giá nhà điển hình Zillow tháng 9/2020; hai bản đồ dùng cùng thang màu và đều trung thực. Cấp bang phù hợp so sánh giữa các bang. Cấp hạt cho thấy các cụm giá nhà quanh New York, Long Island và Boston trong cùng bang. Đơn vị nhỏ hơn thường bộc lộ thêm chi tiết, nhưng chi tiết quá mức cũng có thể làm khó nhận ra mẫu hình. Nguồn: \url{https://handsondataviz.org/map-design.html}.}
-\slidenumber{06}
-\end{frame}
-
-% ==================== SLIDE 7 ====================
-\begin{frame}[plain,t]
-\slideheader{Chương 7 • Map Your Data}{Chọn Bảng Màu Khớp Dữ Liệu}
-\vspace{0.25cm}
-\centering
-\includegraphics[width=0.96\linewidth,height=0.26\textheight,keepaspectratio]{images/fig_7_6_color_palettes.png}\\[0.25cm]
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.31\textwidth}\centering
-{\fontsize{12pt}{15pt}\selectfont\bfseries Tuần tự}\\[0.12cm]
-{\fontsize{9.5pt}{12.5pt}\selectfont\raggedright
-\textbf{Dữ liệu số:} thấp $\rightarrow$ cao.\\[0.10cm]
-Màu thường từ nhạt đến đậm.\\[0.10cm]
-\textbf{Ví dụ:} thu nhập, lượng mưa.\par}
-\end{column}
-\begin{column}{0.31\textwidth}\centering
-{\fontsize{12pt}{15pt}\selectfont\bfseries Phân kỳ}\\[0.12cm]
-{\fontsize{9.5pt}{12.5pt}\selectfont\raggedright
-\textbf{Trên / dưới một mốc:} 0, trung bình hoặc trung vị.\\[0.10cm]
-Hai màu ở hai phía, màu trung tính ở giữa.\\[0.10cm]
-\textbf{Ví dụ:} thu nhập so với trung bình.\par}
-\end{column}
-\begin{column}{0.31\textwidth}\centering
-{\fontsize{12pt}{15pt}\selectfont\bfseries Định tính}\\[0.12cm]
-{\fontsize{9.5pt}{12.5pt}\selectfont\raggedright
-\textbf{Dữ liệu danh mục:} không xếp từ thấp đến cao.\\[0.10cm]
-Mỗi loại dùng màu phân biệt.\\[0.10cm]
-\textbf{Ví dụ:} đất ở, đất thương mại, mặt nước.\par}
-\end{column}
-\end{columns}
-\note{Bảng màu phải khớp với dữ liệu và câu chuyện. Tuần tự phù hợp trật tự thấp tới cao. Phân kỳ có một mốc ở giữa để phân biệt hai phía. Định tính phân biệt danh mục mà không ngụ ý thứ tự. Cùng số liệu thu nhập bình quân đầu người Mỹ năm 2018, hai bảng màu nhấn hai cách đọc khác nhau. ColorBrewer hỗ trợ chọn bảng màu và kiểm tra khả năng đọc với người mù màu. Không phải mọi thiết kế đều bắt buộc mức cao mang màu đậm hơn. Nguồn: \url{https://handsondataviz.org/design-choropleth.html}.}
-\slidenumber{07}
-\end{frame}
-
-% ==================== SLIDE 8 ====================
-\begin{frame}[plain,t]
-\slideheader{Chương 7 • Map Your Data}{Bậc Thang Hay Liên Tục?}
+\slidenumber{11}
+\slideheader{Chương 7 • Thiết Kế Màu Sắc}{Tận Dụng Dải Màu \& Thiết Kế Tiếp Cận}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.48\textwidth}
-\briefdef{Bậc thang:}{nhóm màu rời rạc.}
-\vspace{0.20cm}
-\begin{tikzpicture}[x=0.9cm,y=0.6cm]
-\foreach \i/\c in {0/10,1/30,2/50,3/75,4/100}{\fill[navyMain!\c!bgBeige] (\i,0) rectangle +(1,1);}
-\end{tikzpicture}\par
-\vspace{0.22cm}
-{\bodytext\textbf{Làm rõ ngưỡng}\\[0.15cm]Ví dụ: vùng ngập khi nước biển dâng 1~m.\par}
-\end{column}
-\begin{column}{0.48\textwidth}
-\briefdef{Liên tục:}{chuyển màu dần theo giá trị.}
-\vspace{0.20cm}
-\begin{tikzpicture}[x=0.9cm,y=0.6cm]\shade[left color=bgBeige,right color=navyMain] (0,0) rectangle (5,1);\end{tikzpicture}\par
-\vspace{0.22cm}
-{\bodytext\textbf{Thấy khác biệt tinh tế}\\[0.15cm]Giá trị gần nhau có màu gần nhau.\par}
-\end{column}
-\end{columns}
-\vspace{0.35cm}
-\figcaption{Minh họa khái niệm theo sách}
-\takeaway{Cách chia khoảng màu ảnh hưởng đến những khác biệt người xem nhận ra.}
-\note{Bậc thang chia giá trị thành những nhóm màu riêng để làm rõ ngưỡng. Ví dụ câu hỏi nơi nào ngập khi nước biển dâng một mét cần phân biệt trên và dưới ngưỡng. Liên tục cho thấy khác biệt tinh tế hơn, tránh tạo cảm giác hai giá trị rất gần nhau thuộc hai nhóm hoàn toàn khác nhau. Thử số nhóm phù hợp; nhiều nhóm hơn không tự động tốt hơn. Hai thang màu trên slide là minh họa khái niệm do người trình bày dựng theo sách, không phải hình gốc của sách. Nguồn: \url{https://handsondataviz.org/design-choropleth.html}. Tham khảo khi được hỏi về phương pháp chia màu: Xem histogram trước để hiểu phân bố. Tuyến tính đặt các khoảng giá trị đều trên thang màu; không nên nhầm với yêu cầu dữ liệu phải có phân bố chuẩn. Phân vị tạo các nhóm có số đơn vị gần bằng nhau, hữu ích khi dữ liệu lệch và cần phân biệt các mức ở giữa; giá trị trùng nhau có thể khiến nhóm không bằng hẳn. Jenks gom các giá trị gần nhau và là một phương án thỏa hiệp, không phải giải pháp hoàn hảo cho mọi dữ liệu. Thử các cách và tận dụng dải màu, không tự chọn ngưỡng để ép câu chuyện theo ý muốn. Nguồn: \url{https://handsondataviz.org/design-choropleth.html}.}
-\slidenumber{08}
-\end{frame}
+{\fontsize{8pt}{10.2pt}\selectfont
+\textbf{Tận dụng toàn bộ dải màu (Full Color Range):}
+\begin{itemize}\setlength{\itemsep}{1.2pt}
+    \item \textbf{Tránh dùng quá ít màu:} Bỏ phí sắc thái trung gian, làm các vùng trông đơn điệu như nhau.
+    \item \textbf{Tránh dồn màu tối/sáng:} Bao phủ quá nhiều khoảng giá trị sẽ che khuất sự phân hóa không gian.
+\end{itemize}
 
-% ==================== SLIDE 9 ====================
-\begin{frame}[plain,t]
-\slideheader{Chương 7 • Map Your Data}{Chuẩn Hóa Để So Sánh Có Ý Nghĩa}
-{\bodytext\textbf{Chuẩn hóa:} đưa dữ liệu về thang chung để so sánh.\par}
-\vspace{0.12cm}
-\centering\includegraphics[width=0.95\linewidth,height=0.46\textheight,keepaspectratio]{images/fig_7_14_normalize_covid_map.png}\\[0.08cm]
-\figcaption{Covid-19 tại Mỹ • 26/6/2020}
-\vspace{0.16cm}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.48\textwidth}{\bodytext\textbf{Tổng số ca ghi nhận}\\Số đếm → Quy mô\par}\end{column}
-\begin{column}{0.48\textwidth}{\bodytext\textbf{Số ca theo dân số}\\Theo đầu người → Mức tương đối\par}\end{column}
-\end{columns}
-\takeaway{Choropleth thường phù hợp với tỷ lệ hoặc giá trị tương đối.}
-\note{Chuẩn hóa giúp so sánh trên cùng một cơ sở. Tổng số ca ghi nhận mô tả quy mô; số ca chia dân số mô tả mức tương đối. Đây là ví dụ lịch sử từ New York Times ngày 26/6/2020, không phản ánh rủi ro hiện tại. California, Texas và Florida đông dân nên nổi bật trên bản đồ số ca. Khi chia dân số, các bang như New York, New Jersey và Massachusetts nổi bật hơn. Không gọi số đếm là sai trong mọi mục tiêu, và không suy luận rằng tỷ lệ ca ghi nhận đo toàn bộ nguy cơ hay số ca chưa phát hiện. Nguồn: \url{https://handsondataviz.org/normalize-choropleth.html}.}
-\slidenumber{09}
-\end{frame}
-
-% ==================== SLIDE 10 ====================
-\begin{frame}[plain,t]
-\slideheader{Chương 7 • Map Your Data}{Bản Đồ Cập Nhật Vẫn Cần Kiểm Tra}
-{\bodytext\textbf{Bản đồ cập nhật:} lấy dữ liệu mới từ nguồn được kết nối.\par}
-\vspace{0.18cm}
-\begin{columns}[c,onlytextwidth]
-\begin{column}{0.30\textwidth}
-\briefdef{Thời gian}{365 ngày}
-\briefdef{Mức nghiêm trọng}{Vụ có người tử vong}
-\briefdef{Tọa độ}{Loại điểm ngoài New York, như (0,0)}
+\vspace{0.08cm}
+\calloutbox[\linewidth]{Thiết kế tiếp cận (Colorblind-Safe)}{%
+{\fontsize{7.2pt}{9.2pt}\selectfont
+\textbullet~Tuyệt đối \textbf{tránh cặp Đỏ -- Xanh lá} (dạng mù màu phổ biến nhất).\\[0.04cm]
+\textbullet~Kiểm tra bảng màu trên \textbf{ColorBrewer} hỗ trợ người khiếm thị màu.\\[0.04cm]
+\textbullet~Đảm bảo độ tương phản sáng/tối để in đen trắng vẫn phân biệt rõ.}
+}
+}
 \end{column}
-\begin{column}{0.66\textwidth}\centering
-\includegraphics[width=\linewidth,height=0.52\textheight,keepaspectratio]{images/fig_7_61_nyc_crashes.png}\\[0.10cm]
-\figcaption{Bản đồ tai nạn có người tử vong ở New York}
+\begin{column}{0.48\textwidth}\centering
+\includegraphics[width=\linewidth,height=0.56\textheight,keepaspectratio]{images/fig_7_13_full_color_range.png}\\[0.06cm]
+\figcaption{Hình 7.13: Tận dụng toàn dải màu (dưới) vs. Phân khoảng chưa tối ưu (trên)}
 \end{column}
 \end{columns}
-\takeaway{Đúng dữ liệu • Đúng cách so sánh • Đúng câu chuyện}
-\note{Bản đồ lấy dữ liệu từ nguồn được kết nối chỉ cập nhật khi nguồn và hệ thống vẫn được duy trì. Trong ví dụ tai nạn New York, lọc số người tử vong lớn hơn không, ngày tai nạn trong 365 ngày gần nhất và loại điểm ngoài phạm vi. Tọa độ (0,0) có thật trên Trái Đất nhưng nằm ngoài New York; trong dữ liệu tai nạn này nó có thể phản ánh lỗi hoặc thiếu vị trí. Điều kiện LATITUDE lớn hơn không chỉ là bộ lọc của trường hợp này, không phải phép kiểm tra tọa độ phổ quát. Đổi tên cột, thay nền tảng, ngắt API hoặc dừng cập nhật nguồn đều có thể làm bản đồ hỏng. Hình trong kho có số thứ tự khác phiên bản web, nên slide dùng chú thích mô tả. Kết lại: đúng dữ liệu, đúng cách so sánh và đúng câu chuyện. Nguồn: \url{https://handsondataviz.org/map-socrata.html}.}
-\slidenumber{10}
 \end{frame}
 
 \end{document}

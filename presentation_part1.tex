@@ -432,45 +432,6 @@ Khi chuyển đổi địa chỉ IP hoặc tọa độ thành điểm bản đ�
 \end{frame}
 
 
-% ==================== SLIDE 22: TƯƠNG QUAN ≠ NHÂN QUẢ ====================
-\begin{frame}[plain, t]
-\slideheader{Chương 5 • Ngôn Từ Chuẩn Xác}{Tương Quan Không Đồng Nghĩa Với Nhân Quả}
-\begin{columns}[T]
-\begin{column}{0.54\textwidth}
-{\fontsize{8.2pt}{10.5pt}\selectfont
-\textbf{Cực kỳ thận trọng với các động từ mang tính áp đặt:}
-\textit{``dẫn đến'' (leads to)}, \textit{``thúc đẩy'' (promotes)}, \textit{``gây ra'' (causes)}.
-
-\begin{itemize}\setlength{\itemsep}{2pt}
-    \item \textbf{Tương quan (Correlation):} Hai biến số cùng biến thiên trên biểu đồ (ví dụ: tuổi thọ càng cao thì tỷ lệ sinh càng thấp).
-    \item \textbf{Nhân quả (Causation):} Biến độc lập trực tiếp tạo ra sự thay đổi ở biến phụ thuộc.
-\end{itemize}
-
-\vspace{0.12cm}
-\textbf{3 bước bắt buộc để khẳng định Quan hệ Nhân quả:}
-\begin{enumerate}\setlength{\itemsep}{1.5pt}
-    \item Chứng minh có \textbf{tương quan thống kê rõ rệt}.
-    \item Xây dựng \textbf{lý thuyết cơ chế tác động} thuyết phục.
-    \item \textbf{Cô lập hoàn toàn mọi biến gây nhiễu (Confounding variables)} -- yếu tố ẩn tác động đồng thời lên cả hai biến.
-\end{enumerate}
-}
-\end{column}
-\begin{column}{0.42\textwidth}
-\centering
-\begin{tikzpicture}[scale=0.9]
-    \node[draw=navyMain, fill=boxBg, rounded corners=4pt, align=center, font=\scriptsize\bfseries] (C) at (0, 2.0) {Biến Gây Nhiễu Ẩn\\(Confounding C)};
-    \node[draw=navyMain, fill=white, rounded corners=4pt, align=center, font=\scriptsize\bfseries] (A) at (-1.8, 0) {Biến A\\(Quan sát)};
-    \node[draw=navyMain, fill=white, rounded corners=4pt, align=center, font=\scriptsize\bfseries] (B) at (1.8, 0) {Biến B\\(Quan sát)};
-    \draw[{Latex[length=2mm]}-{Latex[length=2mm]}, dashed, line width=1.1pt, accentRed] (A) -- (B);
-    \node[font=\tiny\bfseries, color=accentRed] at (0, -0.55) {Tương quan biểu kiến};
-    \draw[-{Latex[length=2.5mm]}, line width=1.2pt, navyMain] (C) -- (A) node[midway, left, font=\tiny] {Tác động};
-    \draw[-{Latex[length=2.5mm]}, line width=1.2pt, navyMain] (C) -- (B) node[midway, right, font=\tiny] {Tác động};
-\end{tikzpicture}\\[0.15cm]
-{\fontsize{6.8pt}{8pt}\selectfont \textcolor{navyMuted}{\textit{Sơ đồ tam giác: A và B tương quan chỉ vì cùng bị C chi phối!}}}
-\end{column}
-\end{columns}
-\slidenumber{22}
-\end{frame}
 % ==================== SLIDE 24: CHUẨN HÓA KHÁC ====================
 \begin{frame}[plain, t]
 \slideheader{Chương 5 • Chuẩn Hóa Dữ Liệu}{Các Phương Pháp Chuẩn Hóa \& Ngoại Lệ}
