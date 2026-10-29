@@ -244,99 +244,72 @@ Histogram giúp hiểu cách chia nhóm. Số liệu của Mỹ vẫn là \textb
 % ==================== SLIDE 5 ====================
 \begin{frame}[plain,t]
 \slideheader{02 • Giảm Thiên Lệch}{Thiên Lệch Khi Thu Thập Và Đọc Dữ Liệu}
-\vspace{0.20cm}
+\vspace{0.35cm}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.48\textwidth}
 \begin{tikzpicture}
 \node[fill=boxBg,draw=navyMain,line width=0.7pt,rounded corners=4pt,
-inner sep=9pt,align=left] {\parbox[t][5.5cm][t]{\dimexpr\linewidth-20pt\relax}{\raggedright
-{\fontsize{11pt}{14pt}\selectfont\bfseries 1. Thiên lệch chọn mẫu}\\[0.18cm]
-{\fontsize{9pt}{12pt}\selectfont Cách thu thập làm mẫu không đại diện và kết quả lệch đi.}\\[0.14cm]
-{\fontsize{9pt}{12pt}\selectfont \textbf{Ví dụ:} Đo chiều cao người vừa tập bóng rổ, rồi suy rộng cho mọi người.}\\[0.15cm]
-{\centering
-\begin{tikzpicture}[>=Stealth]
-\node[draw=navyMain,fill=bgBeige,rounded corners=3pt,text width=3.7cm,align=center,inner sep=5pt,font=\fontsize{10pt}{12pt}\selectfont] (sample) {\textbf{Người vừa tập bóng rổ}};
-\node[draw=navyMain,fill=bgBeige,rounded corners=3pt,text width=3.7cm,align=center,inner sep=5pt,font=\fontsize{10pt}{12pt}\selectfont,below=0.65cm of sample] (population) {\textbf{Toàn bộ dân số}};
-\draw[->,accentRed,line width=1pt] (sample.south) -- (population.north)
-node[midway,fill=boxBg,text=accentRed,inner sep=2pt,font=\fontsize{8.5pt}{10pt}\selectfont] {Không thể suy rộng};
-\end{tikzpicture}
-\par}
-\vspace{0.05cm}
-{\fontsize{9pt}{12pt}\selectfont\color{navyMain}Kiểm tra tính đại diện của mẫu.}
+inner sep=10pt,align=left] {\parbox[t][5.0cm][t]{\dimexpr\linewidth-22pt\relax}{\raggedright
+{\fontsize{11pt}{14pt}\selectfont\bfseries 1. Thiên lệch chọn mẫu}\\[0.35cm]
+{\fontsize{9pt}{11pt}\selectfont\bfseries\color{navyMuted}KHÁI NIỆM}\\[0.10cm]
+{\fontsize{10pt}{13pt}\selectfont\color{navyMain} Cách thu thập khiến mẫu không đại diện cho đối tượng nghiên cứu.\par}
+\vspace{0.35cm}
+{\fontsize{9pt}{11pt}\selectfont\bfseries\color{navyMuted}CÁCH GIẢM}\\[0.10cm]
+{\fontsize{10pt}{13pt}\selectfont\color{navyMain} Nếu nghi ngờ mẫu thiên lệch, không dùng dữ liệu hoặc công khai hạn chế về tính đại diện.\par}
 }};
 \end{tikzpicture}
 \end{column}
 \begin{column}{0.48\textwidth}
 \begin{tikzpicture}
 \node[fill=boxBg,draw=navyMain,line width=0.7pt,rounded corners=4pt,
-inner sep=9pt,align=left] {\parbox[t][5.5cm][t]{\dimexpr\linewidth-20pt\relax}{\raggedright
-{\fontsize{11pt}{14pt}\selectfont\bfseries 2. Thiên lệch nhận thức}\\[0.18cm]
-{\fontsize{9pt}{12pt}\selectfont Cách suy nghĩ của con người làm lệch cách hiểu dữ liệu.}\\[0.14cm]
-{\fontsize{9pt}{12pt}\selectfont \textbf{Ví dụ:} hiệu ứng đóng khung}\\[0.25cm]
-{\centering
-\begin{tikzpicture}
-\node[align=center,text=accentRed] at (0,0) {{\fontsize{30pt}{34pt}\selectfont\bfseries 5\%}\\[0.10cm]{\fontsize{10pt}{12pt}\selectfont tử vong}};
-\node[align=center,text=navyMain] at (3.16,0) {{\fontsize{30pt}{34pt}\selectfont\bfseries 95\%}\\[0.10cm]{\fontsize{10pt}{12pt}\selectfont sống sót}};
-\node[font=\fontsize{11pt}{13pt}\selectfont,text=navyMuted] at (1.55,0.10) {$\longleftrightarrow$};
-\end{tikzpicture}
-\par}
-\vspace{0.10cm}
-{\fontsize{10pt}{13pt}\selectfont\color{navyMain}\bfseries Cùng số liệu, khác cảm nhận.}
+inner sep=10pt,align=left] {\parbox[t][5.0cm][t]{\dimexpr\linewidth-22pt\relax}{\raggedright
+{\fontsize{11pt}{14pt}\selectfont\bfseries 2. Thiên lệch nhận thức}\\[0.35cm]
+{\fontsize{9pt}{11pt}\selectfont\bfseries\color{navyMuted}KHÁI NIỆM}\\[0.10cm]
+{\fontsize{10pt}{13pt}\selectfont\color{navyMain} Cách suy nghĩ của con người làm lệch cách hiểu dữ liệu.\par}
+\vspace{0.35cm}
+{\fontsize{9pt}{11pt}\selectfont\bfseries\color{navyMuted}CÁCH GIẢM}\\[0.10cm]
+{\fontsize{10pt}{13pt}\selectfont\color{navyMain} Chủ động tìm cách giải thích khác và bằng chứng trái chiều.\par}
 }};
 \end{tikzpicture}
 \end{column}
 \end{columns}
+\note{\url{https://handsondataviz.org/data-bias.html}}
 \slidenumber{05}
 \end{frame}
 
 % ==================== SLIDE 6 ====================
 \begin{frame}[plain,t]
 \slideheader{02 • Giảm Thiên Lệch}{Thiên Lệch Thuật Toán Và Giữa Các Nhóm}
-\begin{columns}[c,onlytextwidth]
-\begin{column}{0.30\textwidth}
-{\fontsize{11pt}{14pt}\selectfont\bfseries 3. Thuật toán}\\[0.12cm]
-{\fontsize{10pt}{13pt}\selectfont Ưu tiên kết quả \textbf{có hệ thống}}\\[0.10cm]
-{\fontsize{9pt}{12pt}\selectfont\color{navyMuted}ProPublica • Dự báo tái phạm}
-\end{column}
-\begin{column}{0.66\textwidth}
+\vspace{0.35cm}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
 \begin{tikzpicture}
-\node[fill=boxBg,draw=navyMain,rounded corners=4pt,inner sep=8pt,
-text width=\dimexpr\linewidth-18pt\relax,align=left] {
-{\fontsize{10pt}{13pt}\selectfont\bfseries Tỷ lệ dự báo sai: gần gấp đôi}\\[0.08cm]
-{\fontsize{9pt}{12pt}\selectfont Bị cáo da đen so với bị cáo da trắng}\\[0.08cm]
-{\fontsize{8.5pt}{11pt}\selectfont\color{navyMuted}Sai số dự báo $\neq$ tỷ lệ tái phạm thực}
-};
+\node[fill=boxBg,draw=navyMain,line width=0.7pt,rounded corners=4pt,
+inner sep=10pt,align=left] {\parbox[t][5.0cm][t]{\dimexpr\linewidth-22pt\relax}{\raggedright
+{\fontsize{11pt}{14pt}\selectfont\bfseries 3. Thiên lệch thuật toán}\\[0.35cm]
+{\fontsize{9pt}{11pt}\selectfont\bfseries\color{navyMuted}KHÁI NIỆM}\\[0.10cm]
+{\fontsize{10pt}{13pt}\selectfont\color{navyMain} Hệ thống máy tính ưu tiên một số kết quả một cách có hệ thống.\par}
+\vspace{0.35cm}
+{\fontsize{9pt}{11pt}\selectfont\bfseries\color{navyMuted}CÁCH GIẢM}\\[0.10cm]
+{\fontsize{10pt}{13pt}\selectfont\color{navyMain} Cảnh giác với cách dữ liệu và thuật toán được sử dụng.\par}
+}};
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{tikzpicture}
+\node[fill=boxBg,draw=navyMain,line width=0.7pt,rounded corners=4pt,
+inner sep=10pt,align=left] {\parbox[t][5.0cm][t]{\dimexpr\linewidth-22pt\relax}{\raggedright
+{\fontsize{11pt}{14pt}\selectfont\bfseries 4. Thiên lệch giữa các nhóm}\\[0.35cm]
+{\fontsize{9pt}{11pt}\selectfont\bfseries\color{navyMuted}KHÁI NIỆM}\\[0.10cm]
+{\fontsize{10pt}{13pt}\selectfont\color{navyMain} Ưu ái hoặc phân biệt đối xử theo các nhóm xã hội.\par}
+\vspace{0.35cm}
+{\fontsize{9pt}{11pt}\selectfont\bfseries\color{navyMuted}CÁCH GIẢM}\\[0.10cm]
+{\fontsize{10pt}{13pt}\selectfont\color{navyMain} Rà soát thứ tự nhãn, các nhóm bị bỏ sót và tránh màu sắc rập khuôn.\par}
+}};
 \end{tikzpicture}
 \end{column}
 \end{columns}
-\vspace{0.28cm}
-{\color{navyMuted!35}\hrule height 0.4pt}
-\vspace{0.30cm}
-\begin{columns}[c,onlytextwidth]
-\begin{column}{0.30\textwidth}
-{\fontsize{11pt}{14pt}\selectfont\bfseries 4. Giữa các nhóm}\\[0.12cm]
-{\fontsize{10pt}{13pt}\selectfont
-\textbf{Ưu ái / phân biệt đối xử}\\
-Chủng tộc • Giới • $\ldots$
-\begin{itemize}\setlength{\itemsep}{3pt}
-\item Thứ tự: White / Men
-\item Nhóm bị bỏ sót?
-\item Mốc so sánh?
-\end{itemize}
-}
-\end{column}
-\begin{column}{0.32\textwidth}\centering
-\parbox[c][3.25cm][c]{\linewidth}{\centering
-\includegraphics[width=\linewidth,height=3.25cm,keepaspectratio]{images/fig_14_15_deficit_chart.png}}\\[0.10cm]
-{\fontsize{8pt}{10pt}\selectfont\color{navyMuted}Hình 14.15 • Gộp nhóm\\\phantom{+ mốc tham chiếu}}
-\end{column}
-\begin{column}{0.32\textwidth}\centering
-\parbox[c][3.25cm][c]{\linewidth}{\centering
-\includegraphics[width=\linewidth,height=3.25cm,keepaspectratio]{images/fig_14_16_separate_panels.png}}\\[0.10cm]
-{\fontsize{8pt}{10pt}\selectfont\color{navyMuted}Hình 14.16 • Tách nhóm\\+ mốc tham chiếu}
-\end{column}
-\end{columns}
-\note{Thuật toán: sách dẫn điều tra ProPublica về tỷ lệ dự báo sai bị cáo da đen sẽ tái phạm gần gấp đôi bị cáo da trắng. Đây là sai số dự báo, không phải tỷ lệ tái phạm thực tế. Giữa các nhóm: cách sắp thứ tự, bỏ sót nhóm và chọn mốc so sánh có thể củng cố định kiến. Hình 14.15 và 14.16 minh họa cách gộp hoặc tách nhóm trong dữ liệu mất thu nhập việc làm. Schwabish và Feng đề xuất tách nhóm; Dougherty và Ilyankou chưa bị thuyết phục rằng cách này tất yếu tăng công bằng, vì có thể khó nhận ra rào cản cấu trúc.}
+\note{\url{https://handsondataviz.org/data-bias.html}}
 \slidenumber{06}
 \end{frame}
 
