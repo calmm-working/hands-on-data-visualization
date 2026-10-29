@@ -110,12 +110,12 @@
 }
 
 
-% Concise on-slide text; longer explanations stay in hidden Beamer notes.
+% On-slide explanations support presentation; notes retain source context.
 \setbeameroption{hide notes}
 \newcommand{\bodytext}{\fontsize{10pt}{13pt}\selectfont\raggedright}
 \newcommand{\figcaption}[1]{{\fontsize{7.5pt}{9.5pt}\selectfont\color{navyMuted}#1\par}}
 \newcommand{\takeaway}[1]{\vspace{0.18cm}{\fontsize{9.5pt}{12.5pt}\selectfont\bfseries #1\par}}
-\newcommand{\briefdef}[2]{{\fontsize{10pt}{13pt}\selectfont\textbf{#1} #2\par}\vspace{0.20cm}}
+\newcommand{\briefdef}[2]{{\fontsize{10pt}{13pt}\selectfont\textbf{#1}\\[0.03cm]#2\par}\vspace{0.20cm}}
 
 
 \begin{document}
@@ -129,10 +129,10 @@
 {\fontsize{28pt}{32pt}\selectfont\bfseries\color{navyMain}TRỰC QUAN HÓA}\\[0.12cm]
 {\fontsize{28pt}{32pt}\selectfont\bfseries\color{navyMain}BIỂU ĐỒ}\\[0.18cm]
 {\fontsize{20pt}{24pt}\selectfont\bfseries\color{navyMain}CHART YOUR DATA}\\[0.35cm]
-{\fontsize{10pt}{13pt}\selectfont Chương 6\\[0.15cm]Chọn đúng dạng • Đọc đúng thang • Làm rõ dữ liệu}
+{\fontsize{10pt}{13pt}\selectfont Chương 6\\[0.15cm]Từ câu hỏi đến cách chọn, đọc và trình bày biểu đồ}
 };
 \end{tikzpicture}
-\note{Chương 6 tập trung vào chọn loại biểu đồ theo dữ liệu và câu chuyện, đọc đúng thang đo và thiết kế rõ ràng. Nguồn: sách trang 121--126; \url{https://handsondataviz.org/chart.html}.}
+\note{Phần này trả lời ba câu hỏi: nên chọn biểu đồ nào, đọc hình ra sao và tránh hiểu sai ở đâu. Các ví dụ giúp chúng ta thấy cùng dữ liệu có thể được trình bày khác nhau tùy mục đích. Nguồn: Chương 6, sách trang 121--126. \url{https://handsondataviz.org/chart.html}}
 \slidenumber{01}\end{frame}
 % ==================== SLIDE 2 ====================
 \begin{frame}[plain,t]
@@ -140,17 +140,17 @@
 {\bodytext Loại biểu đồ phụ thuộc \textbf{dữ liệu và câu chuyện}.\par}\vspace{0.18cm}\vspace{0.25cm}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{.47\textwidth}
-\briefdef{So sánh}{→ Thanh / cột}
-\briefdef{Phân bố}{→ Histogram}
-\briefdef{Thời gian}{→ Đường}
+\briefdef{So sánh nhóm: thanh / cột}{Nhóm nào cao hơn, thấp hơn?}
+\briefdef{Phân bố: histogram}{Giá trị tập trung ở khoảng nào?}
+\briefdef{Thời gian: đường}{Giá trị tăng, giảm hay đổi hướng?}
 \end{column}
 \begin{column}{.47\textwidth}
-\briefdef{Chênh lệch}{→ Range}
-\briefdef{Quan hệ}{→ Phân tán}
+\briefdef{Chênh lệch: range}{Hai nhóm cách nhau bao xa?}
+\briefdef{Quan hệ: phân tán}{Hai biến đi cùng nhau thế nào?}
 \end{column}
 \end{columns}
-\vspace{0.40cm}\takeaway{Đôi khi bảng hoặc một câu văn đã đủ.}
-\note{Đặt câu hỏi trước khi chọn loại biểu đồ. Dữ liệu danh mục, chuỗi thời gian hay nhiều biến cần cách biểu diễn khác nhau. Nguyên tắc thiết kế cần được đánh giá theo sự trung thực và khả năng đọc, không áp dụng máy móc cho mọi trường hợp. Bảng tra cứu chi tiết trong sách trang 122--125. Nguồn: \url{https://handsondataviz.org/chart.html}; \url{https://handsondataviz.org/chart-design.html}.}
+\vspace{0.40cm}\takeaway{Viết câu hỏi trước khi chọn hình. Đôi khi bảng hoặc một câu văn đã đủ.}
+\note{Trước khi mở công cụ, hãy viết câu hỏi cần trả lời. Ví dụ, so sánh các quốc gia khác với xem một quốc gia thay đổi qua nhiều năm, nên cách biểu diễn cũng khác. Nguồn: sách trang 122--125. \url{https://handsondataviz.org/chart.html} \url{https://handsondataviz.org/chart-design.html}}
 \slidenumber{02}
 \end{frame}
 
@@ -159,15 +159,15 @@
 \slideheader{Chương 6 • Chart Your Data}{Biểu Đồ Cần Gì Để Đọc Đúng?}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{.30\textwidth}
-\briefdef{Tiêu đề:}{thông điệp}
-\briefdef{Trục:}{thang đo và đơn vị}
-\briefdef{Nhãn / chú giải:}{cách đọc giá trị}
-\briefdef{Nguồn / ghi chú:}{bối cảnh}
+\briefdef{Tiêu đề:}{đang nói về điều gì?}
+\briefdef{Trục:}{đo biến nào, đơn vị gì?}
+\briefdef{Nhãn / chú giải:}{màu và dấu biểu thị ai?}
+\briefdef{Nguồn / ghi chú:}{dữ liệu ở đâu, khi nào?}
 \end{column}
 \begin{column}{.66\textwidth}
 \centering \includegraphics[width=\linewidth,height=.51\textheight,keepaspectratio]{images/part2_book/fig_6_1.png}\\[0.08cm]\figcaption{Các thành phần của biểu đồ}
 \end{column}\end{columns}\takeaway{Thông tin cốt lõi phải hiện ra, không chỉ nằm trong hộp thông tin (tooltip).}
-\note{Tiêu đề có thể nêu thông điệp, kết hợp phụ đề kỹ thuật ngắn mô tả biến, địa điểm và thời gian. Nếu bất định đã biết, thể hiện bằng thanh sai số khi phù hợp hoặc ghi hạn chế; không phải mọi dữ liệu mẫu đều bắt buộc vẽ chữ I. Tooltip chỉ bổ sung vì có thể mất khi in và khó tương tác trên điện thoại. Hình 6.1, sách trang 127; nội dung trang 126--128. \url{https://handsondataviz.org/chart-design.html}.}
+\note{Hãy xem hình như một bản hướng dẫn đọc dữ liệu: tiêu đề định hướng, trục và chú giải giúp giải mã. Những thông tin quan trọng phải hiện trực tiếp vì tooltip sẽ mất khi in hoặc trình chiếu ảnh tĩnh. Tiêu đề có thể kết hợp phụ đề ngắn về biến, địa điểm và thời gian. Nếu biết bất định, thể hiện thanh sai số khi phù hợp hoặc ghi hạn chế. Hình 6.1, trang 127. \url{https://handsondataviz.org/chart-design.html}}
 \slidenumber{03}
 \end{frame}
 
@@ -176,26 +176,26 @@
 \slideheader{Chương 6 • Chart Your Data}{Gốc 0 Phụ Thuộc Cách Mã Hóa}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{.48\textwidth}
-{\bodytext \textbf{Thanh / cột / miền}\\Chiều dài hoặc diện tích → bắt đầu từ 0.\par}\vspace{0.18cm}\centering \includegraphics[width=\linewidth,height=.32\textheight,keepaspectratio]{images/part2_book/fig_6_2.png}\\[0.08cm]\figcaption{Cột: gốc 0 và trục bị cắt}
+{\bodytext \textbf{Thanh / cột / miền}\\Độ dài hoặc diện tích thể hiện lượng. Giữ gốc 0 để tránh phóng đại chênh lệch.\par}\vspace{0.18cm}\centering \includegraphics[width=\linewidth,height=.32\textheight,keepaspectratio]{images/part2_book/fig_6_2.png}\\[0.08cm]\figcaption{Cột: gốc 0 và trục bị cắt}
 \end{column}
 \begin{column}{.48\textwidth}
-{\bodytext \textbf{Đường}\\Vị trí của điểm → không bắt buộc gốc 0.\par}\vspace{0.18cm}\centering \includegraphics[width=\linewidth,height=.32\textheight,keepaspectratio]{images/part2_book/fig_6_4.png}\\[0.08cm]\figcaption{Đường: điều chỉnh khoảng trục}
-\end{column}\end{columns}\takeaway{Với biểu đồ đường, chọn giới hạn trục phù hợp và ghi rõ thang đo.}
-\note{Cột dùng chiều dài nên phải giữ gốc 0, tương tự vùng tô diện tích. Đường mã hóa vị trí điểm nên có thể điều chỉnh khoảng trục để đọc biến động. Trục đường từ 0 vẫn có thể chấp nhận; cả hai cách đều có thể trung thực. Không quy kết ý định lừa dối chỉ vì trục đường không bắt đầu từ 0. Hình 6.2 trang 128 và hình 6.4 trang 130. \url{https://handsondataviz.org/chart-design.html}.}
+{\bodytext \textbf{Đường}\\Vị trí điểm thể hiện giá trị. Có thể thu hẹp trục để thấy thay đổi nhỏ.\par}\vspace{0.18cm}\centering \includegraphics[width=\linewidth,height=.32\textheight,keepaspectratio]{images/part2_book/fig_6_4.png}\\[0.08cm]\figcaption{Đường: điều chỉnh khoảng trục}
+\end{column}\end{columns}\takeaway{Trục đổi làm cảm giác chênh lệch đổi, dù dữ liệu giữ nguyên. Luôn đọc giới hạn trục.}
+\note{Ở cột, người xem thường so độ dài nên cắt trục có thể làm khác biệt trông rất lớn. Với đường, trục không bắt đầu từ 0 vẫn có thể phù hợp; cần nhìn rõ giới hạn và đơn vị trước khi kết luận biến động mạnh hay nhẹ. Giữ gốc 0 cho thanh, cột và vùng tô diện tích. Trục đường từ 0 vẫn có thể chấp nhận. Hình 6.2 trang 128, hình 6.4 trang 130. \url{https://handsondataviz.org/chart-design.html}}
 \slidenumber{04}
 \end{frame}
 
 % ==================== SLIDE 5 ====================
 \begin{frame}[plain,t]
 \slideheader{Chương 6 • Chart Your Data}{Biểu Đồ Tròn Thể Hiện Một Tổng 100\%}
-{\bodytext Mỗi lát là một phần của \textbf{cùng tổng thể}.\par}\vspace{0.18cm}\begin{columns}[T,onlytextwidth]
+{\bodytext Mỗi lát là một phần của \textbf{cùng tổng thể}. Các phần phải cộng thành 100\%.\par}\vspace{0.18cm}\begin{columns}[T,onlytextwidth]
 \begin{column}{.48\textwidth}
-\centering \includegraphics[width=\linewidth,height=.34\textheight,keepaspectratio]{images/part2_book/fig_6_6.png}\\[0.08cm]\figcaption{Các phần phải cộng thành 100\%}
+\centering \includegraphics[width=\linewidth,height=.34\textheight,keepaspectratio]{images/part2_book/fig_6_6.png}\\[0.08cm]\figcaption{Câu hỏi cho chọn nhiều đáp án thường không phù hợp.}
 \end{column}
 \begin{column}{.48\textwidth}
-\centering \includegraphics[width=\linewidth,height=.34\textheight,keepaspectratio]{images/part2_book/fig_6_7.png}\\[0.08cm]\figcaption{Khó so sánh? Cân nhắc thanh}
-\end{column}\end{columns}\takeaway{100\%: điều kiện cần • Ít lát: dễ đọc hơn}
-\note{Biểu đồ tròn cần các phần của cùng tổng thể và tổng bằng 100 phần trăm. Khảo sát cho phép chọn nhiều đáp án thường không đáp ứng điều kiện này. Sách khuyên không quá năm lát và sắp từ 12 giờ theo chiều kim đồng hồ; đây là khuyến nghị về khả năng đọc. Thanh giúp so sánh các phần có giá trị gần nhau. Hình 6.6 trang 131 và hình 6.7 trang 132. \url{https://handsondataviz.org/chart-design.html}.}
+\centering \includegraphics[width=\linewidth,height=.34\textheight,keepaspectratio]{images/part2_book/fig_6_7.png}\\[0.08cm]\figcaption{Các lát gần bằng nhau khó phân biệt. Thanh giúp so sánh rõ hơn.}
+\end{column}\end{columns}\takeaway{Dùng ít lát và ghi nhãn rõ. Sách khuyến nghị không quá 5 lát.}
+\note{Đọc biểu đồ tròn bằng cách đối chiếu từng phần với toàn bộ vòng tròn. Nếu mục tiêu là xếp hạng hoặc nhận ra chênh lệch nhỏ giữa các nhóm, biểu đồ thanh thường dễ đọc hơn. Sắp lát từ 12 giờ theo chiều kim đồng hồ là khuyến nghị về khả năng đọc của sách. Hình 6.6 trang 131, hình 6.7 trang 132. \url{https://handsondataviz.org/chart-design.html}}
 \slidenumber{05}
 \end{frame}
 
@@ -204,15 +204,15 @@
 \slideheader{Chương 6 • Chart Your Data}{Giữ Điều Giúp Người Xem Đọc Rõ}
 {\bodytext \textbf{Rác đồ họa:} yếu tố trang trí làm giảm khả năng đọc.\par}\vspace{0.18cm}\begin{columns}[T,onlytextwidth]
 \begin{column}{.30\textwidth}
-\briefdef{Bỏ}{3D / bóng đổ thừa}
-\briefdef{Nhãn dài}{→ Thanh ngang}
-\briefdef{Sắp xếp}{có lý do}
-\briefdef{Màu}{có mục đích}
+\briefdef{Bỏ 3D, bóng đổ thừa}{Tránh làm méo cảm nhận.}
+\briefdef{Nhãn dài: thanh ngang}{Tên nhóm dễ đọc hơn.}
+\briefdef{Sắp xếp có lý do}{Theo giá trị hoặc thứ tự tự nhiên.}
+\briefdef{Màu có mục đích}{Nhấn nhóm cần chú ý và dùng nhất quán.}
 \end{column}
 \begin{column}{.66\textwidth}
 \centering \includegraphics[width=\linewidth,height=.51\textheight,keepaspectratio]{images/part2_book/fig_6_11.png}\\[0.08cm]\figcaption{Tinh giản để làm rõ dữ liệu}
 \end{column}\end{columns}\takeaway{Kiểm tra khả năng phân biệt màu và bản in trắng đen.}
-\note{Giảm trang trí không phục vụ đọc dữ liệu. Tránh 3D giả tạo làm méo cảm nhận; điều này không cấm biểu diễn dữ liệu thực sự ba chiều. Nhãn dài phù hợp thanh ngang. Sắp xếp theo giá trị hay thứ tự có lý do. Màu có ý nghĩa theo ngữ cảnh và văn hóa; không mặc định đỏ luôn xấu và xanh luôn tốt. Kiểm tra người có khác biệt thị giác màu và bản in thang xám. Hình 6.11 trang 135. \url{https://handsondataviz.org/chart-design.html}.}
+\note{Trong hình, sự tinh giản giúp mắt tập trung vào độ dài và nhãn thay vì trang trí. Màu không nên là tín hiệu duy nhất: hãy kết hợp nhãn hoặc vị trí để người khó phân biệt màu vẫn theo dõi được. Tránh 3D giả tạo, không phải cấm biểu diễn dữ liệu thực sự ba chiều. Ý nghĩa màu phụ thuộc ngữ cảnh và văn hóa. Hình 6.11 trang 135. \url{https://handsondataviz.org/chart-design.html}}
 \slidenumber{06}
 \end{frame}
 
@@ -220,28 +220,28 @@
 \begin{frame}[plain,t]
 \slideheader{Chương 6 • Chart Your Data}{Ba Cách So Sánh Danh Mục}
 \begin{columns}[T,onlytextwidth]
-\begin{column}{.315\textwidth}\briefdef{Nhóm}{Đặt cạnh nhau}
+\begin{column}{.315\textwidth}\begin{minipage}[t][2.0cm][t]{\linewidth}\raggedright\briefdef{Nhóm}{Đặt cạnh nhau để so nam và nữ trong từng nhóm tuổi.}\end{minipage}
 \centering \includegraphics[width=\linewidth,height=.32\textheight,keepaspectratio]{images/part2_book/fig_6_13.png}\\[0.08cm]\figcaption{Béo phì theo tuổi / giới}\end{column}
-\begin{column}{.315\textwidth}\briefdef{Tách}{Chia thành cụm}
+\begin{column}{.315\textwidth}\begin{minipage}[t][2.0cm][t]{\linewidth}\raggedright\briefdef{Tách}{Chia cụm để đọc calo các món của từng nhà hàng.}\end{minipage}
 \centering \includegraphics[width=\linewidth,height=.32\textheight,keepaspectratio]{images/part2_book/fig_6_23.png}\\[0.08cm]\figcaption{Calo món ăn theo nhà hàng}\end{column}
-\begin{column}{.315\textwidth}\briefdef{Chồng}{Thành phần trong tổng}
+\begin{column}{.315\textwidth}\begin{minipage}[t][2.0cm][t]{\linewidth}\raggedright\briefdef{Chồng}{Đọc tỷ trọng các nhóm cân nặng trong mỗi quốc gia.}\end{minipage}
 \centering \includegraphics[width=\linewidth,height=.32\textheight,keepaspectratio]{images/part2_book/fig_6_25.png}\\[0.08cm]\figcaption{Nhóm cân nặng theo quốc gia}\end{column}
-\end{columns}\takeaway{Cách bố trí phụ thuộc điều cần so sánh.}
-\note{Nhóm đặt các cột cạnh nhau. Tách trong ví dụ sách là các cụm riêng vì danh sách món ăn của hai nhà hàng khác nhau; không đồng nhất với các đồ thị con độc lập cùng trục. Chồng thể hiện các thành phần trong tổng; phần ở đáy có cùng gốc nên dễ so sánh hơn các phần phía trên. Hình 6.13 trang 137 dùng NHANES 2017--2018; hình 6.23 trang 142 dùng thực đơn Starbucks và McDonalds; hình 6.25 trang 144 dùng WHO và CDC. Nguồn: Chương 6, sách trang 136--144.}
+\end{columns}\takeaway{Nhóm và tách giúp so giá trị. Chồng giúp đọc thành phần trong tổng.}
+\note{Không ghép từng món Starbucks với một món McDonalds thành các cặp tương ứng vì danh sách không giống nhau. Với cột chồng, phần ở đáy cùng gốc nên dễ so sánh hơn các phần ở phía trên. Hình 6.13 trang 137 dùng NHANES 2017--2018. Hình 6.23 trang 142 dùng thực đơn Starbucks và McDonalds. Hình 6.25 trang 144 dùng WHO và CDC. }
 \slidenumber{07}
 \end{frame}
 
 % ==================== SLIDE 8 ====================
 \begin{frame}[plain,t]
 \slideheader{Chương 6 • Chart Your Data}{Histogram Cho Thấy Phân Bố}
-{\bodytext Đếm số giá trị rơi vào từng \textbf{khoảng (bin)}.\par}\vspace{0.18cm}\begin{columns}[T,onlytextwidth]
+{\bodytext Trục ngang là \textbf{khoảng calo (bin)}, trục dọc là \textbf{số quốc gia}. Các bin là khoảng số liên tiếp, thay vì danh mục.\par}\vspace{0.18cm}\begin{columns}[T,onlytextwidth]
 \begin{column}{.30\textwidth}
-{\bodytext\textbf{Trung tâm}\\[0.25cm]\textbf{Độ phân tán}\\[0.25cm]\textbf{Giá trị ở hai đuôi}\par}
+{\bodytext\textbf{Cột cao:} nhiều quốc gia tập trung ở khoảng đó.\\[0.20cm]\textbf{Toàn dải:} mức phân tán và hai đuôi.\\[0.20cm]Đổi độ rộng bin có thể đổi hình dạng phân bố.\par}
 \end{column}
 \begin{column}{.66\textwidth}
 \centering \includegraphics[width=\linewidth,height=.51\textheight,keepaspectratio]{images/part2_book/fig_6_28.png}\\[0.08cm]\figcaption{Nguồn cung calo/người/ngày • 174 quốc gia • 2017}
 \end{column}\end{columns}\takeaway{Nguồn cung thực phẩm không đồng nghĩa lượng thực sự ăn.}
-\note{Histogram đếm quan sát theo khoảng giá trị, thay vì mỗi cột là một danh mục. Ví dụ FAO qua Our World in Data năm 2017 gồm 174 quốc gia, đo nguồn cung calo bình quân mỗi người mỗi ngày, không đo lượng ăn thực tế. Đỉnh khoảng 2800 kcal; tám nước dưới 2000 và mười một nước trên 3500. Không từ đó gán nhãn đói nghèo hay dư thừa. Kích thước bin ảnh hưởng hình dạng quan sát, nên thử cách chia hợp lý. Hình 6.28 trang 146. \url{https://handsondataviz.org/histogram-google.html}.}
+\note{Mỗi cột không đại diện một quốc gia mà đếm nhiều quốc gia trong cùng khoảng giá trị. Quan sát chỗ tập trung và hai đuôi giúp hiểu dữ liệu trước khi chọn cách chia nhóm hoặc làm bản đồ. Ví dụ FAO qua Our World in Data năm 2017 gồm 174 quốc gia. Đỉnh khoảng 2800 kcal. Không từ hình này gán nhãn đói nghèo hay dư thừa. Hình 6.28 trang 146. \url{https://handsondataviz.org/histogram-google.html}}
 \slidenumber{08}
 \end{frame}
 
@@ -250,36 +250,36 @@
 \slideheader{Chương 6 • Chart Your Data}{Đường Xem Từng Chuỗi, Miền Chồng Xem Tổng}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{.48\textwidth}
-{\bodytext \textbf{Đường:} giá trị thay đổi\\theo thời gian.\par}\vspace{0.18cm}\centering \includegraphics[width=\linewidth,height=.35\textheight,keepaspectratio]{images/part2_book/fig_6_33.png}\\[0.08cm]\figcaption{Đường → So từng loại}
+{\bodytext \textbf{Đường:} theo dõi từng loại thịt và các giao cắt. Thịt gà tăng rõ ở giai đoạn cuối.\par}\vspace{0.18cm}\centering \includegraphics[width=\linewidth,height=.35\textheight,keepaspectratio]{images/part2_book/fig_6_33.png}\\[0.08cm]\figcaption{Dễ so sánh xu hướng của từng chuỗi.}
 \end{column}
 \begin{column}{.48\textwidth}
-{\bodytext \textbf{Miền chồng:} thành phần và tổng thay đổi theo thời gian.\par}\vspace{0.18cm}\centering \includegraphics[width=\linewidth,height=.35\textheight,keepaspectratio]{images/part2_book/fig_6_34.png}\\[0.08cm]\figcaption{Miền chồng → Thấy tổng}
+{\bodytext \textbf{Miền chồng:} độ dày mỗi dải là lượng từng loại. Biên trên cùng là tổng ba loại tại mỗi năm, không cộng dồn.\par}\vspace{0.18cm}\centering \includegraphics[width=\linewidth,height=.35\textheight,keepaspectratio]{images/part2_book/fig_6_34.png}\\[0.08cm]\figcaption{Tổng tại từng năm, không phải tổng cộng dồn.}
 \end{column}\end{columns}\takeaway{Lượng thịt sẵn có bình quân đầu người tại Mỹ • USDA}
-\note{Dữ liệu USDA đo lượng thực phẩm sẵn có bình quân đầu người, không phải lượng tiêu thụ thực tế. Đường giúp đọc từng loại và các giao cắt; thịt gà vượt thịt bò và thịt lợn quanh năm 2000, không nên khẳng định chính xác năm nếu hình không chứng minh. Miền chồng làm rõ cả tổng và thành phần; đường không làm tổng bất khả thi nhưng khó thấy trực tiếp. Có thể thêm chú thích sự kiện và bộ lọc để giảm quá tải, như các ví dụ thất nghiệp và sử dụng Internet trong sách. Hình 6.33 trang 151 và 6.34 trang 152. \url{https://handsondataviz.org/pie-line-area-google.html}.}
+\note{Ở hình đường, ta dễ theo dõi một loại thịt từ đầu đến cuối. Ở miền chồng, đừng đọc đường biên trên của một dải thành giá trị riêng của loại đó: cần đọc độ dày dải; dữ liệu này cũng không đo lượng ăn thực tế. Miền thể hiện tổng ba loại tại từng năm, không cộng dồn qua các năm. Thịt gà vượt thịt bò và thịt lợn quanh năm 2000, không khẳng định chính xác năm nếu hình không chứng minh. Hình 6.33 trang 151 và 6.34 trang 152. \url{https://handsondataviz.org/pie-line-area-google.html}}
 \slidenumber{09}
 \end{frame}
 
 % ==================== SLIDE 10 ====================
 \begin{frame}[plain,t]
 \slideheader{Chương 6 • Chart Your Data}{Range Làm Rõ Chênh Lệch}
-{\bodytext Hai điểm và đoạn nối nhấn \textbf{chênh lệch giữa các nhóm}.\par}\vspace{0.18cm}\centering \includegraphics[width=.95\linewidth,height=.54\textheight,keepaspectratio]{images/part2_book/fig_6_39.png}\\[0.08cm]\figcaption{Thu nhập trung vị theo giới và học vấn • Mỹ, ACS 2019}\takeaway{Chênh lệch vẫn hiện ở từng bậc học.}
-\note{Ví dụ là thu nhập trung vị của người từ 25 tuổi trở lên, theo giới và trình độ học vấn trong ACS 2019. Nam có bằng cử nhân khoảng 69 nghìn USD, nữ có bằng sau đại học hoặc chuyên môn khoảng 64 nghìn USD. Không diễn giải thành mọi cá nhân hay chênh lệch lương đã điều chỉnh yếu tố khác; cũng không suy luận nhân quả. Thu nhập trung vị theo nhóm không mô tả mọi cá nhân. Hình 6.39 trang 158. \url{https://handsondataviz.org/range-datawrapper.html}.}
+{\bodytext Mỗi hàng là một bậc học. Hai điểm là \textbf{thu nhập trung vị của nam và nữ}. Đoạn nối càng dài, chênh lệch càng lớn.\par}\vspace{0.18cm}\centering \includegraphics[width=.95\linewidth,height=.46\textheight,keepaspectratio]{images/part2_book/fig_6_39.png}\\[0.08cm]\figcaption{Thu nhập trung vị theo giới và học vấn • Người từ 25 tuổi trở lên • Mỹ, ACS 2019}\takeaway{Bậc cử nhân: nữ khoảng 48 nghìn USD, nam 69 nghìn USD.\\So sánh nhóm chưa cho biết nguyên nhân.}
+\note{Mỗi hàng so sánh hai nhóm có cùng bậc học. Đoạn nối cho thấy mức chênh lệch trung vị, không mô tả mọi cá nhân và không xác định nguyên nhân. Ở bậc cử nhân, nữ khoảng 48 nghìn USD và nam khoảng 69 nghìn USD. Đây là thu nhập trung vị của người từ 25 tuổi trở lên trong ACS 2019, chưa điều chỉnh các yếu tố khác. Hình 6.39 trang 158. \url{https://handsondataviz.org/range-datawrapper.html}}
 \slidenumber{10}
 \end{frame}
 
 % ==================== SLIDE 11 ====================
 \begin{frame}[plain,t]
 \slideheader{Chương 6 • Chart Your Data}{Phân Tán Cho Thấy Quan Hệ X–Y}
-{\bodytext Mỗi điểm đặt hai giá trị của \textbf{cùng một đối tượng} lên hai trục.\par}\vspace{0.18cm}\begin{columns}[T,onlytextwidth]
+{\bodytext Mỗi điểm là một quốc gia. Vị trí kết hợp hai giá trị của \textbf{cùng quốc gia}.\par}\vspace{0.18cm}\begin{columns}[T,onlytextwidth]
 \begin{column}{.30\textwidth}
-\briefdef{X:}{tuổi thọ}
-\briefdef{Y:}{số con / phụ nữ}
-\vspace{0.3cm}{\bodytext Tương quan \textbf{không chứng minh nhân quả}.\par}
+\briefdef{X: tuổi thọ}{Sang phải là cao hơn.}
+\briefdef{Y: số con / phụ nữ}{Lên trên là cao hơn.}
+{\bodytext Tuổi thọ cao thường đi cùng số con thấp trong nhóm được chọn.\par}
 \end{column}
 \begin{column}{.66\textwidth}
 \centering \includegraphics[width=\linewidth,height=.51\textheight,keepaspectratio]{images/part2_book/fig_6_44.png}\\[0.08cm]\figcaption{World Bank 2018 • Mỗi điểm là một quốc gia trong ví dụ}
-\end{column}\end{columns}
-\note{Biểu đồ thể hiện một số quốc gia được chọn trong dữ liệu World Bank 2018, không phải tất cả quốc gia. Trục X là tuổi thọ, trục Y là số con trên một phụ nữ, không phải số ca sinh trên nghìn dân. Mẫu hình tương quan nghịch không cho phép kết luận sinh ít con làm tăng tuổi thọ. Ví dụ tương quan thuận thu nhập và điểm thi ở Connecticut có thể dùng trong lời nói để đối chiếu, không cần thêm một hình nhỏ trên slide. Hình 6.44 trang 162. \url{https://handsondataviz.org/scatter-bubble-datawrapper.html}.}
+\end{column}\end{columns}\takeaway{Tương quan không chứng minh nhân quả.}
+\note{Ta đọc từng điểm bằng cả hai trục, rồi lùi lại để quan sát xu hướng chung và các điểm khác biệt. Không thể dùng hình này để kết luận sinh ít con làm tăng tuổi thọ hoặc ngược lại. Ví dụ dùng một số quốc gia được chọn trong World Bank 2018, không phải tất cả quốc gia. Số con trên một phụ nữ khác với số ca sinh trên nghìn dân. Hình 6.44 trang 162. \url{https://handsondataviz.org/scatter-bubble-datawrapper.html}}
 \slidenumber{11}
 \end{frame}
 
@@ -288,15 +288,14 @@
 \slideheader{Chương 6 • Chart Your Data}{Bong Bóng Thêm Kích Thước Và Màu}
 {\bodytext Mở rộng biểu đồ phân tán bằng \textbf{hai biến nữa}.\par}\vspace{0.18cm}\begin{columns}[T,onlytextwidth]
 \begin{column}{.30\textwidth}
-\briefdef{X:}{tuổi thọ}
-\briefdef{Y:}{số con / phụ nữ}
-\briefdef{Kích thước:}{dân số}
-\briefdef{Màu:}{khu vực}
+\briefdef{X / Y:}{tuổi thọ và số con / phụ nữ.}
+\briefdef{Diện tích bong bóng: dân số}{Bong bóng lớn hơn nghĩa là đông dân hơn.}
+\briefdef{Màu: khu vực}{Các quốc gia cùng khu vực dùng cùng màu.}
 \end{column}
 \begin{column}{.66\textwidth}
 \centering \includegraphics[width=\linewidth,height=.51\textheight,keepaspectratio]{images/part2_book/fig_6_48.png}\\[0.08cm]\figcaption{Tuổi thọ, số con/phụ nữ và dân số • World Bank 2018}
-\end{column}\end{columns}\takeaway{Chọn đúng dạng • Giữ đúng thang • Làm rõ điều quan trọng}
-\note{Hình dùng các quốc gia được chọn trong World Bank 2018. Bốn biến được mã hóa qua X, Y, kích thước và màu. Tên quốc gia là định danh, không tự động tính thành biến thứ năm. Chuyển động có thể bổ sung thời gian trong một ứng dụng khác nhưng nằm ngoài ví dụ tĩnh này. Kích thước vòng tròn cần đọc theo diện tích, không diễn giải theo bán kính. Kết nối sang phần bản đồ: cùng câu hỏi chọn hình thức biểu diễn phù hợp với dữ liệu. Hình 6.48 trang 165. \url{https://handsondataviz.org/scatter-bubble-datawrapper.html}.}
+\end{column}\end{columns}\takeaway{Đọc kích thước theo diện tích, không theo bán kính. Chọn biểu đồ theo câu hỏi cần trả lời.}
+\note{So với phân tán, bong bóng cho thêm bối cảnh về quy mô dân số và khu vực. Cần đọc kích thước theo diện tích, không theo bán kính; khi nhiều điểm chồng nhau, nhãn và công cụ tương tác có thể giúp tra cứu. Bốn biến qua X, Y, diện tích và màu. Tên quốc gia là định danh. Ví dụ tĩnh dùng các quốc gia được chọn trong World Bank 2018. Kết nối sang phần bản đồ bằng câu hỏi chọn hình thức biểu diễn phù hợp với dữ liệu. Hình 6.48 trang 165. \url{https://handsondataviz.org/scatter-bubble-datawrapper.html}}
 \slidenumber{12}
 \end{frame}
 
