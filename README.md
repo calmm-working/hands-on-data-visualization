@@ -10,9 +10,9 @@ Bộ slide thuyết trình chuyên đề gồm **88 slide** được thiết k�
 | Phần | Người trình bày | Nội dung chuyên đề | File LaTeX | File PDF |
 | :--- | :---: | :--- | :--- | :--- |
 | **Phần 1** | **Người 1** | **Nền tảng Dữ liệu:** Săn tìm, làm sạch dữ liệu bẩn và chuẩn hóa (Chương 3, 4, 5) — 27 slides | [`presentation_part1.tex`](presentation_part1.tex) | [`presentation_part1.pdf`](presentation_part1.pdf) |
-| **Phần 2** | **Người 2** | **Trực quan hóa Biểu đồ:** Nguyên lý thiết kế, quy tắc gốc 0 & tổng 100%, 6 nhóm biểu đồ (Chương 6) — 22 slides | [`presentation_part2.tex`](presentation_part2.tex) | [`presentation_part2.pdf`](presentation_part2.pdf) |
-| **Phần 3** | **Người 3** | **Trực quan hóa Không gian:** Bản chất dữ liệu địa lý, lớp nền Raster/Vector, bản đồ Choropleth & chuẩn hóa (Chương 7) — 18 slides | [`presentation_part3.tex`](presentation_part3.tex) | [`presentation_part3.pdf`](presentation_part3.pdf) |
-| **Phần 4** | **Người 4** | **Đạo đức & Kể chuyện:** Phát hiện lừa dối, giảm định kiến, Cartogram, công thức Tell-Show-Why (Chương 14, 15) — 19 slides | [`presentation_part4.tex`](presentation_part4.tex) | [`presentation_part4.pdf`](presentation_part4.pdf) |
+| **Phần 2** | **Người 2** | **Trực quan hóa Biểu đồ:** Nguyên lý thiết kế, quy tắc gốc 0 & tổng 100%, 6 nhóm biểu đồ (Chương 6) — 12 slides | [`presentation_part2.tex`](presentation_part2.tex) | [`presentation_part2.pdf`](presentation_part2.pdf) |
+| **Phần 3** | **Người 3** | **Trực quan hóa Không gian:** Bản chất dữ liệu địa lý, lớp nền Raster/Vector, bản đồ Choropleth & chuẩn hóa (Chương 7) — 10 slides | [`presentation_part3.tex`](presentation_part3.tex) | [`presentation_part3.pdf`](presentation_part3.pdf) |
+| **Phần 4** | **Người 4** | **Đạo đức & Kể chuyện:** Phát hiện lừa dối, giảm định kiến, Cartogram, công thức Tell-Show-Why (Chương 14, 15) — 11 slides | [`presentation_part4.tex`](presentation_part4.tex) | [`presentation_part4.pdf`](presentation_part4.pdf) |
 | **Master** | **Cả nhóm** | **Toàn bộ bài báo cáo tổng hợp (88 trang)** | [`presentation.tex`](presentation.tex) | [`presentation.pdf`](presentation.pdf) |
 
 - **Bản Marp Markdown đồng bộ:** [`presentation.md`](presentation.md)

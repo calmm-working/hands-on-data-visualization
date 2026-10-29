@@ -1,0 +1,223 @@
+[
+  {
+    "file": "images/part2_book/fig_6_1.png",
+    "figure": "fig_6_1",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 127,
+    "crop_bbox_points": [
+      106.86900329589844,
+      123.87162780761719,
+      450.60528564453125,
+      306.281005859375
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_2.png",
+    "figure": "fig_6_2",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 128,
+    "crop_bbox_points": [
+      160.66700744628906,
+      450.20245361328125,
+      504.40325927734375,
+      612.4459838867188
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_3.png",
+    "figure": "fig_6_3",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 129,
+    "crop_bbox_points": [
+      137.72300720214844,
+      195.7970428466797,
+      419.7286376953125,
+      342.79998779296875
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_4.png",
+    "figure": "fig_6_4",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 130,
+    "crop_bbox_points": [
+      190.2729949951172,
+      123.87298583984375,
+      474.77301025390625,
+      246.37298583984375
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_5.png",
+    "figure": "fig_6_5",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 131,
+    "crop_bbox_points": [
+      106.86900329589844,
+      123.87226867675781,
+      450.60528564453125,
+      271.90802001953125
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_6.png",
+    "figure": "fig_6_6",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 131,
+    "crop_bbox_points": [
+      107.4749984741211,
+      425.88800048828125,
+      449.9750061035156,
+      597.3880004882812
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_7.png",
+    "figure": "fig_6_7",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 132,
+    "crop_bbox_points": [
+      161.2729949951172,
+      123.87298583984375,
+      503.77301025390625,
+      295.37298583984375
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_11.png",
+    "figure": "fig_6_11",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 135,
+    "crop_bbox_points": [
+      116.21299743652344,
+      201.03536987304688,
+      441.239013671875,
+      359.0480041503906
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_13.png",
+    "figure": "fig_6_13",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 137,
+    "crop_bbox_points": [
+      122.46800231933594,
+      396.1229248046875,
+      434.98358154296875,
+      578.6320190429688
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_23.png",
+    "figure": "fig_6_23",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 142,
+    "crop_bbox_points": [
+      179.27099609375,
+      433.8465270996094,
+      485.7771301269531,
+      605.8499755859375
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_25.png",
+    "figure": "fig_6_25",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 144,
+    "crop_bbox_points": [
+      160.66700744628906,
+      139.2546844482422,
+      504.38262939453125,
+      324.97198486328125
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_28.png",
+    "figure": "fig_6_28",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 146,
+    "crop_bbox_points": [
+      251.0229949951172,
+      532.468017578125,
+      414.02301025390625,
+      631.968017578125
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_33.png",
+    "figure": "fig_6_33",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 151,
+    "crop_bbox_points": [
+      123.9749984741211,
+      123.87298583984375,
+      433.4750061035156,
+      312.37298583984375
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_34.png",
+    "figure": "fig_6_34",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 152,
+    "crop_bbox_points": [
+      184.76699829101562,
+      123.87211608886719,
+      480.2817687988281,
+      301.8810119628906
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_39.png",
+    "figure": "fig_6_39",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 158,
+    "crop_bbox_points": [
+      183.01199340820312,
+      187.20803833007812,
+      482.0359191894531,
+      324.218994140625
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_44.png",
+    "figure": "fig_6_44",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 162,
+    "crop_bbox_points": [
+      160.66700744628906,
+      123.8734130859375,
+      504.38262939453125,
+      356.7130126953125
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  },
+  {
+    "file": "images/part2_book/fig_6_48.png",
+    "figure": "fig_6_48",
+    "source": "HandsOnDataViz.pdf",
+    "pdf_page": 165,
+    "crop_bbox_points": [
+      154.72300720214844,
+      123.87164306640625,
+      402.72796630859375,
+      291.875
+    ],
+    "method": "Rendered exact embedded figure bounds from book PDF at 288 dpi on white page; no reconstruction"
+  }
+]

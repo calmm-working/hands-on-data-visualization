@@ -16,3 +16,6 @@ sample_page_*.png
 slide_1_preview.png
 test_*
 custom_theme/
+
+# Local source book; the slide figures are tracked separately.
+HandsOnDataViz.pdf
