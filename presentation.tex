@@ -176,8 +176,9 @@ minimum height=2.55cm,align=left] {
     };
     
     % Presenter info at bottom-left
-    \node[anchor=south west] at ($(current page.south west)+(1.0cm, 0.9cm)$) {
-        \textcolor{navyMain}{\fontsize{9.5pt}{11pt}\selectfont Thuyết trình bởi: \textbf{Nhóm 4 Thuyết Trình Viên}}
+    \node[anchor=south west, align=left, text width=0.88\textwidth] at ($(current page.south west)+(1.0cm, 0.85cm)$) {
+        {\fontsize{10.5pt}{13pt}\selectfont \textbf{\color{navyMain} Thuyết trình: Nhóm 20}}\\[0.12cm]
+        {\fontsize{8.5pt}{10.5pt}\selectfont \color{navyMuted} Thành viên: \textbf{Trần Thị Mai Anh} (P1) • \textbf{Vũ Đức Quý} (P2) • \textbf{Nguyễn Hữu Quyết} (P3) • \textbf{Nguyễn Lê Tùng Dương} (P4)}
     };
 \end{tikzpicture}
 \end{frame}
@@ -196,7 +197,7 @@ minimum height=2.55cm,align=left] {
     \node[draw=navyMain, rounded corners=12pt, line width=1.1pt, inner xsep=14pt, inner ysep=8pt, minimum width=0.95\textwidth, text width=0.85\textwidth, align=left] {
         {\large \textbf{\color{navyMain} 01. Nền Tảng Dữ Liệu}}\\[3pt]
         \footnotesize \textcolor{navyMuted}{Thu thập, làm sạch \& so sánh có ý nghĩa (Ch. 3, 4, 5)}\\[2pt]
-        \scriptsize \textbf{Người thuyết trình: Người 1}
+        \scriptsize \textbf{Người thuyết trình: Trần Thị Mai Anh}
     };
 \end{tikzpicture}
 
@@ -205,7 +206,7 @@ minimum height=2.55cm,align=left] {
     \node[draw=navyMain, rounded corners=12pt, line width=1.1pt, inner xsep=14pt, inner ysep=8pt, minimum width=0.95\textwidth, text width=0.85\textwidth, align=left] {
         {\large \textbf{\color{navyMain} 02. Thiết Kế Biểu Đồ}}\\[3pt]
         \footnotesize \textcolor{navyMuted}{Cấu trúc đồ thị, Zero-baseline \& phối màu (Ch. 6)}\\[2pt]
-        \scriptsize \textbf{Người thuyết trình: Người 2}
+        \scriptsize \textbf{Người thuyết trình: Vũ Đức Quý}
     };
 \end{tikzpicture}
 \end{column}
@@ -215,7 +216,7 @@ minimum height=2.55cm,align=left] {
     \node[draw=navyMain, rounded corners=12pt, line width=1.1pt, inner xsep=14pt, inner ysep=8pt, minimum width=0.95\textwidth, text width=0.85\textwidth, align=left] {
         {\large \textbf{\color{navyMain} 03. Trực Quan Không Gian}}\\[3pt]
         \footnotesize \textcolor{navyMuted}{Bản đồ Choropleth, thang màu \& chuẩn hóa (Ch. 7)}\\[2pt]
-        \scriptsize \textbf{Người thuyết trình: Người 3}
+        \scriptsize \textbf{Người thuyết trình: Nguyễn Hữu Quyết}
     };
 \end{tikzpicture}
 
@@ -224,7 +225,7 @@ minimum height=2.55cm,align=left] {
     \node[draw=navyMain, rounded corners=12pt, line width=1.1pt, inner xsep=14pt, inner ysep=8pt, minimum width=0.95\textwidth, text width=0.85\textwidth, align=left] {
         {\large \textbf{\color{navyMain} 04. Đạo Đức \& Kể Chuyện}}\\[3pt]
         \footnotesize \textcolor{navyMuted}{Nhận diện lừa dối, Cartogram \& Tell-Show-Why (Ch. 14, 15)}\\[2pt]
-        \scriptsize \textbf{Người thuyết trình: Người 4}
+        \scriptsize \textbf{Người thuyết trình: Nguyễn Lê Tùng Dương}
     };
 \end{tikzpicture}
 \end{column}
@@ -244,7 +245,7 @@ minimum height=2.55cm,align=left] {
         {\fontsize{29pt}{33pt}\selectfont \textbf{\color{navyMain} NỀN TẢNG DỮ LIỆU}}\\[0.12cm]
         {\fontsize{20pt}{24pt}\selectfont \textbf{\color{navyMain} THU THẬP, LÀM SẠCH \& CHUẨN HÓA}}\\[0.35cm]
         \pillbox{\fontsize{9.5pt}{11.5pt}\selectfont Từ Dữ Liệu Thô Đến Phép So Sánh Công Bằng (Chương 3, 4, 5)}\\[0.45cm]
-        {\fontsize{8.5pt}{10.5pt}\selectfont \color{navyMuted} Thuyết trình: \textbf{Người 1} • Tác phẩm: \textit{Hands-On Data Visualization} (Jack Dougherty \& Ilya Ilyankou)}
+        {\fontsize{8.5pt}{10.5pt}\selectfont \color{navyMuted} Thuyết trình: \textbf{Trần Thị Mai Anh} • Tác phẩm: \textit{Hands-On Data Visualization} (Jack Dougherty \& Ilya Ilyankou)}
     };
 \end{tikzpicture}
 \slidenumber{01}
@@ -673,7 +674,8 @@ Khi chuyển đổi địa chỉ IP hoặc tọa độ thành điểm bản đ�
 {\fontsize{28pt}{32pt}\selectfont\bfseries\color{navyMain}TRỰC QUAN HÓA}\\[0.12cm]
 {\fontsize{28pt}{32pt}\selectfont\bfseries\color{navyMain}BIỂU ĐỒ}\\[0.18cm]
 {\fontsize{20pt}{24pt}\selectfont\bfseries\color{navyMain}CHART YOUR DATA}\\[0.35cm]
-{\fontsize{10pt}{13pt}\selectfont Chương 6\\[0.15cm]Chọn đúng dạng • Đọc đúng thang • Làm rõ dữ liệu}
+{\fontsize{10pt}{13pt}\selectfont Chương 6\\[0.15cm]Chọn đúng dạng • Đọc đúng thang • Làm rõ dữ liệu}\\[0.35cm]
+{\fontsize{8.5pt}{10.5pt}\selectfont \color{navyMuted} Thuyết trình: \textbf{Vũ Đức Quý} • Tác phẩm: \textit{Hands-On Data Visualization}}
 };
 \end{tikzpicture}
 \note{Chương 6 tập trung vào chọn loại biểu đồ theo dữ liệu và câu chuyện, đọc đúng thang đo và thiết kế rõ ràng. Nguồn: sách trang 121--126; \url{https://handsondataviz.org/chart.html}.}
@@ -854,7 +856,8 @@ Khi chuyển đổi địa chỉ IP hoặc tọa độ thành điểm bản đ�
 {\fontsize{28pt}{32pt}\selectfont\bfseries\color{navyMain}TRỰC QUAN HÓA}\\[0.12cm]
 {\fontsize{28pt}{32pt}\selectfont\bfseries\color{navyMain}KHÔNG GIAN}\\[0.18cm]
 {\fontsize{20pt}{24pt}\selectfont\bfseries\color{navyMain}MAP YOUR DATA}\\[0.35cm]
-{\fontsize{10pt}{13pt}\selectfont Chương 7\\[0.15cm]Chọn kiểu bản đồ • Thiết kế màu • So sánh đúng}
+{\fontsize{10pt}{13pt}\selectfont Chương 7\\[0.15cm]Chọn kiểu bản đồ • Thiết kế màu • So sánh đúng}\\[0.35cm]
+{\fontsize{8.5pt}{10.5pt}\selectfont \color{navyMuted} Thuyết trình: \textbf{Nguyễn Hữu Quyết} • Tác phẩm: \textit{Hands-On Data Visualization}}
 };
 \end{tikzpicture}
 \note{Giới thiệu Chương 7: chọn kiểu bản đồ, thiết kế bản đồ và so sánh dữ liệu có ý nghĩa. Không phải hướng dẫn thao tác từng công cụ. Nguồn: \url{https://handsondataviz.org/map.html}.}
@@ -1071,7 +1074,8 @@ Mỗi loại dùng màu phân biệt.\\[0.10cm]
         {\fontsize{13pt}{15pt}\selectfont \textbf{\color{navyMuted} PHẦN 4 • BÁO CÁO CHUYÊN ĐỀ}}\\[0.25cm]
         {\fontsize{28pt}{32pt}\selectfont \textbf{\color{navyMain} ĐẠO ĐỨC DỮ LIỆU \&}}\\[0.12cm]
         {\fontsize{20pt}{24pt}\selectfont \textbf{\color{navyMain} NGHỆ THUẬT KỂ CHUYỆN}}\\[0.35cm]
-        {\fontsize{10pt}{13pt}\selectfont Chương 14 \& 15\\[0.15cm] Nhận diện gây hiểu lầm • Giảm thiên lệch • Kể chuyện dữ liệu}
+        {\fontsize{10pt}{13pt}\selectfont Chương 14 \& 15\\[0.15cm] Nhận diện gây hiểu lầm • Giảm thiên lệch • Kể chuyện dữ liệu}\\[0.35cm]
+        {\fontsize{8.5pt}{10.5pt}\selectfont \color{navyMuted} Thuyết trình: \textbf{Nguyễn Lê Tùng Dương} • Tác phẩm: \textit{Hands-On Data Visualization}}
     };
 \end{tikzpicture}
 \slidenumber{01}

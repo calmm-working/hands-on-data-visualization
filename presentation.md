@@ -144,7 +144,9 @@ style: |
 <div class="badge">Kể chuyện Trực quan & Nguyên lý Thiết kế</div>
 
 **Tháng 10, 2026**  
-Thuyết trình bởi: **Nhóm 4 Thuyết Trình Viên**  
+Thuyết trình bởi: **Nhóm 20**
+
+**Thành viên:** Trần Thị Mai Anh (P1) • Vũ Đức Quý (P2) • Nguyễn Hữu Quyết (P3) • Nguyễn Lê Tùng Dương (P4)  
 *Dựa trên tác phẩm: Hands-On Data Visualization (Jack Dougherty & Ilya Ilyankou)*
 
 ---
