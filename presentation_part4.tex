@@ -14,10 +14,13 @@
 \setbeamertemplate{footline}{}
 
 \usepackage{fontspec}
-% Tự động dùng font dự phòng nếu không có Segoe UI.
-\IfFontExistsTF{Segoe UI}{\setsansfont{Segoe UI}\setmainfont{Segoe UI}}{%
-  \IfFontExistsTF{Carlito}{\setsansfont{Carlito}\setmainfont{Carlito}}{%
-    \setsansfont{DejaVu Sans Condensed}\setmainfont{DejaVu Sans Condensed}}}
+\IfFontExistsTF{Segoe UI}{
+    \setsansfont{Segoe UI}
+    \setmainfont{Segoe UI}
+}{
+    \setsansfont{segoeui}[Path=/Users/user/Library/Fonts/,Extension=.ttf,BoldFont=segoeuib,ItalicFont=segoeuii,BoldItalicFont=segoeuiz]
+    \setmainfont{segoeui}[Path=/Users/user/Library/Fonts/,Extension=.ttf,BoldFont=segoeuib,ItalicFont=segoeuii,BoldItalicFont=segoeuiz]
+}
 
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -109,7 +112,7 @@
 \newcommand{\conceptcard}[3]{%
     \begin{tikzpicture}
     \node[fill=boxBg,draw=navyMain,line width=0.7pt,rounded corners=4pt,
-      inner sep=8pt,align=left] {\parbox[t][3.45cm][t]{\dimexpr\linewidth-17pt\relax}{\raggedright%
+      inner sep=8pt,align=left] {\parbox[t][3.7cm][t]{\dimexpr\linewidth-17pt\relax}{\raggedright%
       {\fontsize{10pt}{12.5pt}\selectfont\bfseries #1}\\[0.18cm]
       {\fontsize{9pt}{12pt}\selectfont #2}\\[0.18cm]
       {\fontsize{9pt}{12pt}\selectfont #3}
@@ -128,22 +131,6 @@ minimum height=2.55cm,align=left] {
 };
 \end{tikzpicture}}
 
-% [SỬA LỖI] Thiếu file ảnh trong images/ -> vẽ khung giữ chỗ
-\pgfkeys{/ph/.is family, /ph,
-  width/.store in=\phw, height/.store in=\phh, .unknown/.code={}}
-\let\origincludegraphics\includegraphics
-\renewcommand{\includegraphics}[2][]{%
-  \IfFileExists{#2}{\origincludegraphics[#1]{#2}}{%
-    \begingroup
-    \pgfkeys{/ph, width=\linewidth, height=0.4\textheight, #1}%
-    \begin{tikzpicture}
-      \node[draw=navyMuted, dashed, line width=0.7pt, fill=white!55!bgBeige, rounded corners=3pt,
-            minimum width=\phw, minimum height={0.8*(\phh)}, text width={\phw-8pt}, align=center,
-            font=\fontsize{6pt}{7.5pt}\selectfont, text=navyMuted]
-        {\textbf{[Chèn ảnh]}\\\detokenize{#2}};
-    \end{tikzpicture}%
-    \endgroup}}
-
 \begin{document}
 
 % ==================== SLIDE 1 ====================
@@ -158,8 +145,7 @@ minimum height=2.55cm,align=left] {
         {\fontsize{13pt}{15pt}\selectfont \textbf{\color{navyMuted} PHẦN 4 • BÁO CÁO CHUYÊN ĐỀ}}\\[0.25cm]
         {\fontsize{28pt}{32pt}\selectfont \textbf{\color{navyMain} ĐẠO ĐỨC DỮ LIỆU \&}}\\[0.12cm]
         {\fontsize{20pt}{24pt}\selectfont \textbf{\color{navyMain} NGHỆ THUẬT KỂ CHUYỆN}}\\[0.35cm]
-        {\fontsize{10pt}{13pt}\selectfont Chương 14 \& 15\\[0.15cm] Nhận diện gây hiểu lầm • Giảm thiên lệch • Kể chuyện dữ liệu}\\[0.35cm]
-        {\fontsize{8.5pt}{10.5pt}\selectfont \color{navyMuted} Thuyết trình: \textbf{Nguyễn Lê Tùng Dương} • Tác phẩm: \textit{Hands-On Data Visualization}}
+        {\fontsize{10pt}{13pt}\selectfont Chương 14 \& 15\\[0.15cm] Nhận diện gây hiểu lầm • Giảm thiên kiến • Kể chuyện dữ liệu}
     };
 \end{tikzpicture}
 \slidenumber{01}
@@ -171,13 +157,13 @@ minimum height=2.55cm,align=left] {
 \vspace{0.35cm}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.315\textwidth}
-\conceptcard{1. Sai (Wrong)}{Sai số liệu hoặc vi phạm nguyên tắc biểu diễn.}{\textbf{Ví dụ:} Biểu đồ cột cắt gốc 0; các phần của biểu đồ tròn không cộng thành 100\%.}
+\conceptcard{1. Sai}{Biểu đồ thể hiện sai dữ liệu hoặc vi phạm quy tắc thiết kế bắt buộc.}{\textbf{Ví dụ:} Cột không bắt đầu từ 0; biểu đồ tròn có tổng tỷ lệ vượt 100\%.}
 \end{column}
 \begin{column}{0.315\textwidth}
-\conceptcard{2. Gây hiểu lầm}{Số liệu đúng nhưng thang đo hoặc khung hình làm lệch cảm nhận.}{\textbf{Ví dụ:} Kéo rộng biểu đồ đường để xu hướng trông phẳng hơn.}
+\conceptcard{2. Gây hiểu lầm}{Có thể đúng số liệu và quy tắc, nhưng cách trình bày gây hiểu sai bản chất.}{\textbf{Ví dụ:} Kéo rộng biểu đồ đường làm người xem đánh giá thấp mức tăng.}
 \end{column}
 \begin{column}{0.315\textwidth}
-\conceptcard{3. Trung thực}{Dữ liệu chính xác; cách biểu diễn phù hợp và ghi nhãn rõ.}{Cùng dữ liệu có thể có \textbf{nhiều cách nhìn trung thực}.}
+\conceptcard{3. Trung thực}{Biểu đồ phải thể hiện dữ liệu chính xác và tuân thủ các nguyên tắc thiết kế.}{Cùng dữ liệu có thể có \textbf{nhiều cách nhìn trung thực}.}
 \end{column}
 \end{columns}
 \slidenumber{02}
@@ -185,7 +171,7 @@ minimum height=2.55cm,align=left] {
 
 % ==================== SLIDE 3 ====================
 \begin{frame}[plain, t]
-\slideheader{01 • Nhận Diện Gây Hiểu Lầm}{Thang Đo \& Khung Hình Làm Lệch Cảm Nhận}
+\slideheader{01 • Nhận Diện Gây Hiểu Lầm}{Biểu Đồ Có Thể Đánh Lừa Người Xem Như Thế Nào?}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.50\textwidth}
 {\fontsize{9.5pt}{12.8pt}\selectfont
@@ -195,18 +181,19 @@ minimum height=2.55cm,align=left] {
 \item Trục tung cần bắt đầu từ \textbf{0} để chiều cao cột phản ánh đúng giá trị.
 \end{itemize}
 \vspace{0.12cm}
-\textbf{2. Kéo bẹt biểu đồ đường}
+\textbf{2. Kéo dãn biểu đồ theo chiều ngang}
 \begin{itemize}\setlength{\itemsep}{3pt}
-\item Kéo biểu đồ rộng ra làm đường trông phẳng hơn, dù dữ liệu không đổi.
-\item Đọc \textbf{giá trị và mốc thời gian trên trục} để biết tăng bao nhiêu, trong bao lâu; đừng chỉ nhìn độ dốc.
+\item Khung hình rộng hơn làm đường trông phẳng hơn, dù dữ liệu không đổi.
+\item \textbf{Thử nhiều tỷ lệ khung hình;} chọn cách không phóng đại hay thu nhỏ xu hướng.
 \end{itemize}
 }
 \end{column}
 \begin{column}{0.46\textwidth}
 \centering
-\includegraphics[width=\textwidth, height=0.31\textheight, keepaspectratio]{images/fig_14_1_truncated_gdp.png}\\[0.08cm]
+% Hình 14.1: hai biểu đồ so sánh trích trực tiếp từ HandsOnDataViz.pdf, trang PDF 396.
+\includegraphics[width=\textwidth, height=0.40\textheight, keepaspectratio]{images/fig_14_1_truncated_gdp.png}\\[0.08cm]
 {\fontsize{7pt}{9pt}\selectfont\textcolor{navyMuted}{\textit{Hình 14.1: Cắt trục phóng đại mức tăng GDP.}}}\\[0.18cm]\includegraphics[width=\textwidth, height=0.23\textheight, keepaspectratio]{images/fig_14_4_aspect_ratio_stretched.png}\\[0.08cm]
-{\fontsize{7pt}{9pt}\selectfont\textcolor{navyMuted}{\textit{Hình 14.4: Kéo rộng khung hình làm đường trông phẳng hơn.}}}
+{\fontsize{7pt}{9pt}\selectfont\textcolor{navyMuted}{\textit{Hình 14.4: Kéo dãn ngang làm đường trông phẳng hơn.}}}
 \end{column}
 \end{columns}
 \slidenumber{03}
@@ -214,148 +201,142 @@ minimum height=2.55cm,align=left] {
 
 % ==================== SLIDE 4 ====================
 \begin{frame}[plain,t]
-\slideheader{01 • Nhận Diện Gây Hiểu Lầm}{Một Bộ Dữ Liệu, Nhiều Cách Diễn Giải Đúng}
+\slideheader{01 • Nhận Diện Gây Hiểu Lầm}{Bản Đồ Có Thể Đánh Lừa Người Xem Như Thế Nào?}
 {\fontsize{8.5pt}{11pt}\selectfont
 \textbf{Tỷ trọng thu nhập quốc dân trước thuế của nhóm 1\% có thu nhập cao nhất:}\\
-Mỹ \textbf{20,5\%} (2018); Brazil \textbf{28,3\%} (2015).
+Mỹ \textbf{20,5\%}; Brazil \textbf{28,3\%}.
 }
 \vspace{0.15cm}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.48\textwidth}
 {\fontsize{9.5pt}{12pt}\selectfont\textbf{1. Thang màu liên tục}}\\[0.08cm]
 \centering
-\includegraphics[width=\linewidth,height=0.215\textheight,keepaspectratio]{images/fig_14_12_inequality_continuous.png}\\[0.06cm]
+\begin{minipage}[t]{0.88\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=0.41\textheight,keepaspectratio]{images/fig_14_12_inequality_continuous.png}\\[0.08cm]
 {\fontsize{7pt}{9pt}\selectfont\color{navyMuted}Hình 14.12}\\[0.02cm]
-\raggedright
-{\fontsize{9pt}{11.5pt}\selectfont Mỹ có \textbf{màu trung bình} trên thang 5\%--31\%.}
+\centering
+{\fontsize{9pt}{11.5pt}\selectfont Mỹ: \textbf{màu trung bình}\\(thang liên tục 5\%--31\%).\par}
+\end{minipage}
 \end{column}
 \begin{column}{0.48\textwidth}
 {\fontsize{9.5pt}{12pt}\selectfont\textbf{2. Chia ba nhóm theo Jenks}}\\[0.08cm]
 \centering
-\includegraphics[width=\linewidth,height=0.215\textheight,keepaspectratio]{images/fig_14_13_inequality_jenks.png}\\[0.06cm]
+\begin{minipage}[t]{0.88\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=0.41\textheight,keepaspectratio]{images/fig_14_13_inequality_jenks.png}\\[0.08cm]
 {\fontsize{7pt}{9pt}\selectfont\color{navyMuted}Hình 14.13}\\[0.02cm]
-\raggedright
-{\fontsize{9pt}{11.5pt}\selectfont Mỹ thuộc \textbf{nhóm màu đậm nhất} (từ 19\%), cùng Brazil.}
+\centering
+{\fontsize{9pt}{11.5pt}\selectfont Mỹ: \textbf{màu đậm nhất}\\(nhóm Jenks từ 19\%).\par}
+\end{minipage}
 \end{column}
 \end{columns}
-\vspace{0.05cm}
-\begin{columns}[c,onlytextwidth]
-\begin{column}{0.34\textwidth}\centering
-\includegraphics[width=\linewidth,height=0.16\textheight,keepaspectratio]{images/fig_14_14_inequality_histogram.png}\\[0.04cm]
-{\fontsize{7pt}{9pt}\selectfont\color{navyMuted}Hình 14.14 • Phân bố các quốc gia}
-\end{column}
-\begin{column}{0.62\textwidth}
-{\fontsize{9pt}{11.5pt}\selectfont
-\textbf{Vì sao Mỹ đổi màu?}\\[0.08cm]
-Histogram giúp hiểu cách chia nhóm. Số liệu của Mỹ vẫn là \textbf{20,5\%}. \textbf{Cần xem thang màu để hiểu đúng bản đồ.}
-}
-\end{column}
-\end{columns}
+\note{Hai bản đồ dùng cùng dữ liệu, nhưng Mỹ là số liệu năm 2018 và Brazil năm 2015; đây là ví dụ lịch sử, không phải so sánh đồng thời. Nguồn: \url{https://handsondataviz.org/how-to-lie-with-maps.html}.}
 \slidenumber{04}
+\end{frame}
+
+% ==================== HISTOGRAM AFTER SLIDE 4 ====================
+\begin{frame}[plain,t]
+\slideheader{01 • Nhận Diện Gây Hiểu Lầm}{Vì Sao Xem Histogram Trước Khi Chia Màu?}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.36\textwidth}
+{\fontsize{10pt}{13pt}\selectfont\raggedright
+\textbf{1. Hiểu phân bố}\par
+\vspace{0.10cm}
+Giá trị tập trung ở đâu? Có \textbf{ngoại lệ} hoặc \textbf{khoảng trống} nào?\par
+\vspace{0.32cm}
+\textbf{2. Cân nhắc cách tô màu}\par
+\vspace{0.10cm}
+Thử thang liên tục và chia nhóm để thấy khác biệt có ý nghĩa, tránh che khuất hoặc phóng đại.\par}
+\end{column}
+\begin{column}{0.60\textwidth}\centering
+{\fontsize{9.5pt}{12pt}\selectfont\bfseries Quay lại ví dụ • Hình 14.14\par}
+\vspace{0.08cm}
+\includegraphics[width=\linewidth,height=0.52\textheight,keepaspectratio]{images/fig_14_14_inequality_histogram.png}\\[0.08cm]
+{\fontsize{8pt}{10pt}\selectfont\color{navyMuted}Nhiều quốc gia ở khoảng 8\%--16\%; vài giá trị gần 30\%.\par}
+\end{column}
+\end{columns}
+\vspace{0.04cm}
+{\fontsize{9pt}{11pt}\selectfont\bfseries Histogram giúp hiểu phân phối dữ liệu, còn mục tiêu phân tích định hướng cách chia màu trung thực và phù hợp.\par}
+\note{Trình bày lý do xem histogram trước: nó cho biết tần suất giá trị theo các khoảng, nơi dữ liệu tập trung và các giá trị ngoại lệ; từ đó có cơ sở thử thang màu. Sau đó mới chỉ vào Hình 14.14: nhiều quốc gia có giá trị trong khoảng 8\%--16\%, một số ít gần 30\%; Mỹ ở 20,5\%. Hình không đánh dấu trung vị chính xác. Với thang liên tục 5\%--31\%, Mỹ có màu trung bình; với ba nhóm Jenks, Mỹ thuộc nhóm đậm nhất từ 19\%. Trong sách, tác giả cho xem hai bản đồ trước rồi dùng histogram để giải thích; slide này đảo thứ tự nói nhằm làm rõ lý do của thao tác. Histogram không tự quyết định một thang màu hay ngưỡng chia nhóm duy nhất; cả hai bản đồ trước đều có thể trung thực. Nguồn: \url{https://handsondataviz.org/how-to-lie-with-maps.html}.}
+\slidenumber{05}
 \end{frame}
 
 % ==================== SLIDE 5 ====================
 \begin{frame}[plain,t]
-\slideheader{02 • Giảm Thiên Lệch}{Thiên Lệch Khi Thu Thập Và Đọc Dữ Liệu}
-\vspace{0.20cm}
+\slideheader{02 • Nhận Diện Và Giảm Thiên Kiến Dữ Liệu}{Thiên Kiến Chọn Mẫu Và Nhận Thức}
+\vspace{0.35cm}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.48\textwidth}
 \begin{tikzpicture}
 \node[fill=boxBg,draw=navyMain,line width=0.7pt,rounded corners=4pt,
-inner sep=9pt,align=left] {\parbox[t][5.5cm][t]{\dimexpr\linewidth-20pt\relax}{\raggedright
-{\fontsize{11pt}{14pt}\selectfont\bfseries 1. Thiên lệch chọn mẫu}\\[0.18cm]
-{\fontsize{9pt}{12pt}\selectfont Cách thu thập làm mẫu không đại diện và kết quả lệch đi.}\\[0.14cm]
-{\fontsize{9pt}{12pt}\selectfont \textbf{Ví dụ:} Đo chiều cao người vừa tập bóng rổ, rồi suy rộng cho mọi người.}\\[0.15cm]
-{\centering
-\begin{tikzpicture}[>=Stealth]
-\node[draw=navyMain,fill=bgBeige,rounded corners=3pt,text width=3.7cm,align=center,inner sep=5pt,font=\fontsize{10pt}{12pt}\selectfont] (sample) {\textbf{Người vừa tập bóng rổ}};
-\node[draw=navyMain,fill=bgBeige,rounded corners=3pt,text width=3.7cm,align=center,inner sep=5pt,font=\fontsize{10pt}{12pt}\selectfont,below=0.65cm of sample] (population) {\textbf{Toàn bộ dân số}};
-\draw[->,accentRed,line width=1pt] (sample.south) -- (population.north)
-node[midway,fill=boxBg,text=accentRed,inner sep=2pt,font=\fontsize{8.5pt}{10pt}\selectfont] {Không thể suy rộng};
-\end{tikzpicture}
-\par}
-\vspace{0.05cm}
-{\fontsize{9pt}{12pt}\selectfont\color{navyMain}Kiểm tra tính đại diện của mẫu.}
+inner sep=10pt,align=left] {\parbox[t][5.2cm][t]{\dimexpr\linewidth-22pt\relax}{\raggedright
+{\fontsize{11pt}{14pt}\selectfont\bfseries 1. Thiên kiến chọn mẫu}\\[0.23cm]
+{\fontsize{8.5pt}{10pt}\selectfont\bfseries\color{navyMuted}KHÁI NIỆM}\\[0.06cm]
+{\fontsize{8.4pt}{10pt}\selectfont\color{navyMain} Thiên kiến chọn mẫu là sự sai lệch xảy ra khi mẫu dữ liệu không đại diện đúng cho tổng thể nghiên cứu do cách lựa chọn hoặc thu thập dữ liệu.\par}
+\vspace{0.23cm}
+{\fontsize{8.5pt}{10pt}\selectfont\bfseries\color{navyMuted}CÁCH GIẢM THIỂU}\\[0.06cm]
+{\fontsize{8.4pt}{10pt}\selectfont\color{navyMain} Đảm bảo tính đại diện và đa dạng của mẫu, kiểm tra quá trình thu thập dữ liệu và công khai các hạn chế chưa được khắc phục,...\par}
 }};
 \end{tikzpicture}
 \end{column}
 \begin{column}{0.48\textwidth}
 \begin{tikzpicture}
 \node[fill=boxBg,draw=navyMain,line width=0.7pt,rounded corners=4pt,
-inner sep=9pt,align=left] {\parbox[t][5.5cm][t]{\dimexpr\linewidth-20pt\relax}{\raggedright
-{\fontsize{11pt}{14pt}\selectfont\bfseries 2. Thiên lệch nhận thức}\\[0.18cm]
-{\fontsize{9pt}{12pt}\selectfont Cách suy nghĩ của con người làm lệch cách hiểu dữ liệu.}\\[0.14cm]
-{\fontsize{9pt}{12pt}\selectfont \textbf{Ví dụ:} hiệu ứng đóng khung}\\[0.25cm]
-{\centering
-\begin{tikzpicture}
-\node[align=center,text=accentRed] at (0,0) {{\fontsize{30pt}{34pt}\selectfont\bfseries 5\%}\\[0.10cm]{\fontsize{10pt}{12pt}\selectfont tử vong}};
-\node[align=center,text=navyMain] at (3.16,0) {{\fontsize{30pt}{34pt}\selectfont\bfseries 95\%}\\[0.10cm]{\fontsize{10pt}{12pt}\selectfont sống sót}};
-\node[font=\fontsize{11pt}{13pt}\selectfont,text=navyMuted] at (1.55,0.10) {$\longleftrightarrow$};
-\end{tikzpicture}
-\par}
-\vspace{0.10cm}
-{\fontsize{10pt}{13pt}\selectfont\color{navyMain}\bfseries Cùng số liệu, khác cảm nhận.}
+inner sep=10pt,align=left] {\parbox[t][5.2cm][t]{\dimexpr\linewidth-22pt\relax}{\raggedright
+{\fontsize{11pt}{14pt}\selectfont\bfseries 2. Thiên kiến nhận thức}\\[0.23cm]
+{\fontsize{8.5pt}{10pt}\selectfont\bfseries\color{navyMuted}KHÁI NIỆM}\\[0.06cm]
+{\fontsize{8.4pt}{10pt}\selectfont\color{navyMain} Thiên kiến nhận thức là sự sai lệch trong quá trình con người tiếp nhận, phân tích và diễn giải thông tin do ảnh hưởng của niềm tin, kỳ vọng hoặc cách trình bày dữ liệu.\par}
+\vspace{0.23cm}
+{\fontsize{8.5pt}{10pt}\selectfont\bfseries\color{navyMuted}CÁCH GIẢM THIỂU}\\[0.06cm]
+{\fontsize{8.4pt}{10pt}\selectfont\color{navyMain} Chủ động xem xét các quan điểm trái chiều, sử dụng cách trình bày trung lập và thường xuyên đánh giá lại các giả định cá nhân,...\par}
 }};
 \end{tikzpicture}
 \end{column}
 \end{columns}
+\note{\url{https://handsondataviz.org/data-bias.html}}
 \slidenumber{05}
 \end{frame}
 
 % ==================== SLIDE 6 ====================
 \begin{frame}[plain,t]
-\slideheader{02 • Giảm Thiên Lệch}{Thiên Lệch Thuật Toán Và Giữa Các Nhóm}
-\begin{columns}[c,onlytextwidth]
-\begin{column}{0.30\textwidth}
-{\fontsize{11pt}{14pt}\selectfont\bfseries 3. Thuật toán}\\[0.12cm]
-{\fontsize{10pt}{13pt}\selectfont Ưu tiên kết quả \textbf{có hệ thống}}\\[0.10cm]
-{\fontsize{9pt}{12pt}\selectfont\color{navyMuted}ProPublica • Dự báo tái phạm}
-\end{column}
-\begin{column}{0.66\textwidth}
+\slideheader{02 • Nhận Diện Và Giảm Thiên Kiến Dữ Liệu}{Thiên Kiến Thuật Toán Và Giữa Các Nhóm Xã Hội}
+\vspace{0.35cm}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
 \begin{tikzpicture}
-\node[fill=boxBg,draw=navyMain,rounded corners=4pt,inner sep=8pt,
-text width=\dimexpr\linewidth-18pt\relax,align=left] {
-{\fontsize{10pt}{13pt}\selectfont\bfseries Tỷ lệ dự báo sai: gần gấp đôi}\\[0.08cm]
-{\fontsize{9pt}{12pt}\selectfont Bị cáo da đen so với bị cáo da trắng}\\[0.08cm]
-{\fontsize{8.5pt}{11pt}\selectfont\color{navyMuted}Sai số dự báo $\neq$ tỷ lệ tái phạm thực}
-};
+\node[fill=boxBg,draw=navyMain,line width=0.7pt,rounded corners=4pt,
+inner sep=10pt,align=left] {\parbox[t][5.5cm][t]{\dimexpr\linewidth-22pt\relax}{\raggedright
+{\fontsize{11pt}{14pt}\selectfont\bfseries 3. Thiên kiến thuật toán}\\[0.15cm]
+{\fontsize{8.5pt}{10pt}\selectfont\bfseries\color{navyMuted}KHÁI NIỆM}\\[0.06cm]
+{\fontsize{8.4pt}{10pt}\selectfont\color{navyMain} Thiên kiến thuật toán là sự sai lệch có tính hệ thống trong kết quả xử lý hoặc ra quyết định của thuật toán, khiến một số nhóm đối tượng được ưu tiên hoặc chịu bất lợi không công bằng.\par}
+\vspace{0.15cm}
+{\fontsize{8.5pt}{10pt}\selectfont\bfseries\color{navyMuted}CÁCH GIẢM THIỂU}\\[0.06cm]
+{\fontsize{8.4pt}{10pt}\selectfont\color{navyMain} Kiểm tra tính đại diện của dữ liệu đầu vào, đánh giá sự công bằng giữa các nhóm, tăng tính minh bạch và thường xuyên giám sát, điều chỉnh thuật toán.\par}
+}};
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{tikzpicture}
+\node[fill=boxBg,draw=navyMain,line width=0.7pt,rounded corners=4pt,
+inner sep=10pt,align=left] {\parbox[t][5.5cm][t]{\dimexpr\linewidth-22pt\relax}{\raggedright
+{\fontsize{11pt}{14pt}\selectfont\bfseries 4. Thiên kiến giữa các nhóm xã hội}\\[0.15cm]
+{\fontsize{8.5pt}{10pt}\selectfont\bfseries\color{navyMuted}KHÁI NIỆM}\\[0.06cm]
+{\fontsize{8.4pt}{10pt}\selectfont\color{navyMain} Thiên kiến giữa các nhóm xã hội là sự thiên vị hoặc phân biệt đối xử dựa trên các đặc điểm xã hội, khiến một số nhóm được ưu tiên hoặc bị đánh giá bất công trong quá trình phân tích và trình bày dữ liệu.\par}
+\vspace{0.15cm}
+{\fontsize{8.5pt}{10pt}\selectfont\bfseries\color{navyMuted}CÁCH GIẢM THIỂU}\\[0.06cm]
+{\fontsize{8.4pt}{10pt}\selectfont\color{navyMain} Đảm bảo cách trình bày công bằng giữa các nhóm, tránh định kiến trong màu sắc và nhãn, không bỏ sót các nhóm xã hội, đồng thời cung cấp đầy đủ bối cảnh khi so sánh dữ liệu.\par}
+}};
 \end{tikzpicture}
 \end{column}
 \end{columns}
-\vspace{0.28cm}
-{\color{navyMuted!35}\hrule height 0.4pt}
-\vspace{0.30cm}
-\begin{columns}[c,onlytextwidth]
-\begin{column}{0.30\textwidth}
-{\fontsize{11pt}{14pt}\selectfont\bfseries 4. Giữa các nhóm}\\[0.12cm]
-{\fontsize{10pt}{13pt}\selectfont
-\textbf{Ưu ái / phân biệt đối xử}\\
-Chủng tộc • Giới • $\ldots$
-\begin{itemize}\setlength{\itemsep}{3pt}
-\item Thứ tự: White / Men
-\item Nhóm bị bỏ sót?
-\item Mốc so sánh?
-\end{itemize}
-}
-\end{column}
-\begin{column}{0.32\textwidth}\centering
-\parbox[c][3.25cm][c]{\linewidth}{\centering
-\includegraphics[width=\linewidth,height=3.25cm,keepaspectratio]{images/fig_14_15_deficit_chart.png}}\\[0.10cm]
-{\fontsize{8pt}{10pt}\selectfont\color{navyMuted}Hình 14.15 • Gộp nhóm\\\phantom{+ mốc tham chiếu}}
-\end{column}
-\begin{column}{0.32\textwidth}\centering
-\parbox[c][3.25cm][c]{\linewidth}{\centering
-\includegraphics[width=\linewidth,height=3.25cm,keepaspectratio]{images/fig_14_16_separate_panels.png}}\\[0.10cm]
-{\fontsize{8pt}{10pt}\selectfont\color{navyMuted}Hình 14.16 • Tách nhóm\\+ mốc tham chiếu}
-\end{column}
-\end{columns}
-\note{Thuật toán: sách dẫn điều tra ProPublica về tỷ lệ dự báo sai bị cáo da đen sẽ tái phạm gần gấp đôi bị cáo da trắng. Đây là sai số dự báo, không phải tỷ lệ tái phạm thực tế. Giữa các nhóm: cách sắp thứ tự, bỏ sót nhóm và chọn mốc so sánh có thể củng cố định kiến. Hình 14.15 và 14.16 minh họa cách gộp hoặc tách nhóm trong dữ liệu mất thu nhập việc làm. Schwabish và Feng đề xuất tách nhóm; Dougherty và Ilyankou chưa bị thuyết phục rằng cách này tất yếu tăng công bằng, vì có thể khó nhận ra rào cản cấu trúc.}
+\note{\url{https://handsondataviz.org/data-bias.html}}
 \slidenumber{06}
 \end{frame}
 
 % ==================== SLIDE 7 ====================
 \begin{frame}[plain, t]
-\slideheader{02 • Giảm Thiên Lệch}{Bản Đồ Có Thể Làm Ai Bị Lu Mờ?}
+\slideheader{02 • Giảm Thiên Kiến}{Bản Đồ Có Thể Làm Ai Bị Lu Mờ?}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.50\textwidth}
 {\fontsize{9.5pt}{12.8pt}\selectfont
@@ -395,7 +376,7 @@ Chủng tộc • Giới • $\ldots$
 \conceptcard{2. SHOW}{\textbf{Đưa bằng chứng}}{Dùng biểu đồ hoặc bản đồ trung thực để hỗ trợ thông điệp.}
 \end{column}
 \begin{column}{0.315\textwidth}
-\conceptcard{3. WHY}{\textbf{Giải thích ý nghĩa}}{Nêu phát hiện giúp người xem hiểu vấn đề hoặc cân nhắc hành động nào.}
+\conceptcard{3. WHY}{\textbf{Giải thích ý nghĩa}}{Nêu tại sao phát hiện quan trọng và người xem có thể rút ra kết luận hoặc quyết định gì từ đó.}
 \end{column}
 \end{columns}
 \slidenumber{08}
@@ -451,18 +432,15 @@ Chủng tộc • Giới • $\ldots$
 % ==================== SLIDE 11 ====================
 \begin{frame}[plain, t]
 \slideheader{Phần 4 • Tổng Kết}{Kể Chuyện Thuyết Phục \& Có Trách Nhiệm}
+\vspace{0.12cm}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.50\textwidth}
 {\fontsize{9.5pt}{12.8pt}\selectfont
-\begin{itemize}\setlength{\itemsep}{6pt}
+\begin{itemize}\setlength{\itemsep}{8pt}
 \item \textbf{Trung thực:} Chọn thang đo phù hợp; kết luận trong giới hạn bằng chứng.
 \item \textbf{Minh bạch:} Ghi nguồn, cách xử lý dữ liệu và những hạn chế.
 \item \textbf{Thừa nhận bất định:} Phân biệt số liệu quan sát với dự báo; ghi rõ giả định và mức độ chắc chắn.
 \end{itemize}
-\vspace{0.15cm}
-\calloutbox[\textwidth]{Thông điệp phần 4}{Kiểm tra cách biểu diễn, nhận diện thiên lệch và dùng Tell -- Show -- Why để dẫn dắt câu chuyện.}
-\vspace{0.18cm}
-{\color{navyMuted}\textbf{Cảm ơn \& Hỏi đáp}}
 }
 \end{column}
 \begin{column}{0.46\textwidth}
